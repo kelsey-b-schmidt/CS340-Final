@@ -8,7 +8,7 @@ export default function App() {
 
 	useEffect(() => {
         const getResponse = async() => {
-            const response = await fetch("/")
+            const response = await fetch("/api")
             const responseJson = await response.json()
 			setData(responseJson)
 			return responseJson
