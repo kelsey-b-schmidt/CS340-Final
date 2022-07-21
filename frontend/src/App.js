@@ -11,7 +11,6 @@ export default function App() {
             const response = await fetch("/api")
             const responseJson = await response.json()
 			setData(responseJson["data"])
-			return responseJson
         }
         getResponse()
 			.catch(console.error)
