@@ -10,7 +10,7 @@ export default function App() {
         const getResponse = async() => {
             const response = await fetch("/api")
             const responseJson = await response.json()
-			setData(responseJson)
+			setData(responseJson["data"])
 			return responseJson
         }
         getResponse()

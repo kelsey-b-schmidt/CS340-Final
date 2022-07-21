@@ -4,7 +4,7 @@ export default function Deploy (
     {data}){
 
     return(
-        <div>{data.tutorial}</div>
+        <div>{data}</div>
     )
 }
 
