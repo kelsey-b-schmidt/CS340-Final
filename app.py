@@ -8,7 +8,7 @@ cors = CORS(app)
 @app.route("/api", methods = ["GET"])
 @cross_origin()
 def index():
-    return {"tutorial": "Flask React Heroku"}
+    return {"tutorial": "Kelsey and Andy's CS340 Project"}
 
 @app.route("/")
 @cross_origin()
