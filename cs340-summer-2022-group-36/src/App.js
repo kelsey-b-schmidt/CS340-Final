@@ -4,21 +4,21 @@ import './App.css'
 
 export default function App() {
 
-	const [data, setData] = useState({})
-	const [test, setTest] = useState("Test")
+	const [data, setData] = useState("data")
+	const [test, setTest] = useState("test")
 
-	useEffect(() => {
-        const getResponse = async() => {
-            const response = await fetch("/api")
-            const responseJson = await response.json()
-			//setData(responseJson["tutorial"])
-			setData("data")
-			setTest("testing")
-        }
-        getResponse()
-			.catch(console.error)
-
-    }, [])
+	//useEffect(() => {
+	//    const getResponse = async() => {
+	//        const response = await fetch("/api")
+	//        const responseJson = await response.json()
+	//		//setData(responseJson["tutorial"])
+	//		setData("data")
+	//		setTest("testing")
+	//    }
+		//    getResponse()
+	//		.catch(console.error)
+//
+	//  }, [])
 
 
   
