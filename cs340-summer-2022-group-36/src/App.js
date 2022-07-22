@@ -10,23 +10,21 @@ export default function App() {
         const getResponse = async() => {
             const response = await fetch("/api")
             const responseJson = await response.json()
-			//setData(responseJson["text"])
+			setData(responseJson["text"])
         }
         getResponse()
 			.catch(console.error)
+
     }, [])
 
 
   
 	return (
 		<div className="App">
-
-			<h1>Hello?</h1>
+			<Deploy
+			data={data}
+			/>
 		</div>
 	)
 }
-
-//<Deploy
-// 			data={data}
-// 			/>
 
