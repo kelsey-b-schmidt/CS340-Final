@@ -23,8 +23,6 @@ export default function App() {
   
 	return (
 		<div className="App">
-			<h1>{title}</h1>
-			<h2>{text}</h2>
 			<MainComponent
 			title={title}
 			text={text}
