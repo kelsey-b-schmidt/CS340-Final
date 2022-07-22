@@ -19,7 +19,7 @@ mysql = MySQL(app)
 @cross_origin()
 def index():
     query2 = 'CREATE OR REPLACE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL);'
-    query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!")'
+    query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!");'
     query4 = 'SELECT * FROM diagnostic;'
     cur = mysql.connection.cursor()
     cur.execute(query2)
