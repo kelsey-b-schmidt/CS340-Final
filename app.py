@@ -29,8 +29,8 @@ def index():
     cur.execute(query4)
     results = cur.fetchall()
 
-    return results[0]
-    #return {"tutorial": "Kelsey and Andy's CS340 Project"}
+    #return results[0]
+    return {"tutorial": "Kelsey and Andy's CS340 Project"}
 
 @app.route("/")
 @cross_origin()
