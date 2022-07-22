@@ -13,7 +13,7 @@ export default function App() {
 	        const response = await fetch("/api")
 	        const responseJson = await response.json()
 			setJson(responseJson["tutorial"])
-			setData("data")
+			setData(responseJson["text"])
 			setTest("testing")
 	    }
 		    getResponse()
