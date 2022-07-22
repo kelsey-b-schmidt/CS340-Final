@@ -11,11 +11,9 @@ export default function App() {
             const response = await fetch("/api")
             const responseJson = await response.json()
 			setData(responseJson["text"])
-			return responseJson
         }
         getResponse()
 			.catch(console.error)
-
     }, [])
 
 
@@ -25,6 +23,7 @@ export default function App() {
 			<Deploy 
 			data={data}
 			/>
+			<p>Hello?</p>
 		</div>
 	)
 }
