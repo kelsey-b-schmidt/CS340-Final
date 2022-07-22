@@ -4,21 +4,22 @@ import './App.css'
 
 export default function App() {
 
+	const [json, setJson] = useState("data")
 	const [data, setData] = useState("data")
 	const [test, setTest] = useState("test")
 
-	//useEffect(() => {
-	//    const getResponse = async() => {
-	//        const response = await fetch("/api")
-	//        const responseJson = await response.json()
-	//		//setData(responseJson["tutorial"])
-	//		setData("data")
-	//		setTest("testing")
-	//    }
-		//    getResponse()
-	//		.catch(console.error)
-//
-	//  }, [])
+	useEffect(() => {
+	    const getResponse = async() => {
+	        const response = await fetch("/api")
+	        const responseJson = await response.json()
+			setJson(responseJson["tutorial"])
+			setData("data")
+			setTest("testing")
+	    }
+		    getResponse()
+			.catch(console.error)
+
+	  }, [])
 
 
   
@@ -27,6 +28,7 @@ export default function App() {
 			<h1>Hello?</h1>
 			<h2>{data}</h2>
 			<h2>{test}</h2>
+			<h2>{json}</h2>
 		</div>
 	)
 }
