@@ -18,10 +18,10 @@ mysql = MySQL(app)
 @app.route("/api", methods = ["GET"])
 @cross_origin()
 def index():
-    query1 = 'DROP TABLE IF EXISTS diagnostic;';
-    query2 = 'CREATE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL);';
-    query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!")';
-    query4 = 'SELECT * FROM diagnostic;';
+    query1 = 'DROP TABLE IF EXISTS diagnostic;'
+    query2 = 'CREATE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL);'
+    query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!");'
+    query4 = 'SELECT * FROM diagnostic;'
     cur = mysql.connection.cursor()
     cur.execute(query1)
     cur.execute(query2)
