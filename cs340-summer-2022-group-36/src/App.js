@@ -21,11 +21,11 @@ export default function App() {
   
 	return (
 		<div className="App">
-			<Deploy
-			data={data}
-			/>
 			<h1>Hello?</h1>
 		</div>
 	)
 }
 
+//<Deploy
+// 			data={data}
+// 			/>
