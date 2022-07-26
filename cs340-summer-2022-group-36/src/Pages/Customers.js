@@ -20,11 +20,7 @@ export default function Customers(
             <h2>List of Customers</h2>
             <CustomerListComponent
                 customers={customers}
-                setCustomers={setCustomers}
             />
         </div>
     )
 }
-
-//<CustomerListComponent customers={customers}/>
-//<p>{customers}</p>

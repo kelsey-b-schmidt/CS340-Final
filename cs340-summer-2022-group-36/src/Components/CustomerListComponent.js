@@ -2,33 +2,25 @@ import React from 'react'
 import CustomerComponent from "./CustomerComponent";
 
 export default function CustomerListComponent(
-    {customers, setCustomers}) {
+    {customers}) {
     return (
-        <div>
-            <h3>Table</h3>
-            <CustomerComponent/>
-        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th colSpan="4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {customers.map((customer, i) =>
+                    <CustomerComponent
+                        customer={customer}
+                        key={i}
+                    />)}
+            </tbody>
+        </table>
     )
 }
-
-//{ customers }
-//<tbody>
-//                 {customers.map((customer, i) =>
-//                 <CustomerComponent
-//                     customer={customer}
-//                     key={i} />)}
-//             </tbody>
-
-
-//<table>
-//             <thead>
-//             <tr>
-//                 <th>Customer ID</th>
-//                 <th>Name</th>
-//                 <th>Email</th>
-//                 <th>Phone Number</th>
-//                 <th colSpan="4">Actions</th>
-//             </tr>
-//             </thead>
-//
-//         </table>
