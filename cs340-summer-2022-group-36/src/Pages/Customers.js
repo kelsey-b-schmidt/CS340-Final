@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomerListComponent from '../Components/CustomerListComponent'
+//import CustomerListComponent from '../Components/CustomerListComponent'
 import { useState, useEffect } from 'react'
 
 export default function Customers() {
@@ -18,9 +18,9 @@ export default function Customers() {
     return (
         <div>
             <h2>List of Customers</h2>
-            <p>{customers}</p>
         </div>
     )
 }
 
 //<CustomerListComponent customers={customers}/>
+//<p>{customers}</p>
