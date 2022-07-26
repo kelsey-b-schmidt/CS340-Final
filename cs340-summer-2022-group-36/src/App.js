@@ -3,15 +3,13 @@ import './App.css'
 import Customers from "./Pages/Customers";
 import Home from "./Pages/Home";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import NavigationComponent from "./Components/NavigationComponent";
+import HeaderComponent from "./Components/HeaderComponent";
 
 export default function App() {
 
 	return (
-		<div className="App">
-			<header>
-				<h1>Kelsey and Andy's Project</h1>
-			</header>
+		<div>
+			<HeaderComponent/>
 			<Router>
 				<Routes>
 					<Route path="/" element={<Home/>}/>
