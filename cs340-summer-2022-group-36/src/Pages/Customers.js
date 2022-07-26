@@ -1,10 +1,10 @@
 import React from 'react'
 //import CustomerListComponent from '../Components/CustomerListComponent'
 import { useState, useEffect } from 'react'
+import CustomerListComponent from "../Components/CustomerListComponent";
 
-export default function Customers() {
-    const [customers, setCustomers] = useState([])
-
+export default function Customers(
+    {customers, setCustomers}) {
     useEffect(() => {
         const getResponse = async() => {
             const response = await fetch("/api")
@@ -18,6 +18,10 @@ export default function Customers() {
     return (
         <div>
             <h2>List of Customers</h2>
+            <CustomerListComponent
+                customers={customers}
+                setCustomers={setCustomers}
+            />
         </div>
     )
 }
