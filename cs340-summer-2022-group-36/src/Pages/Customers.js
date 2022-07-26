@@ -1,10 +1,11 @@
 import React from 'react'
-//import CustomerListComponent from '../Components/CustomerListComponent'
-import { useState, useEffect } from 'react'
+import {useState, useEffect } from 'react'
 import CustomerListComponent from "../Components/CustomerListComponent";
 
-export default function Customers(
-    {customers, setCustomers}) {
+export default function Customers() {
+
+    const [customers, setCustomers] = useState([])
+
     useEffect(() => {
         const getResponse = async() => {
             const response = await fetch("/api")
