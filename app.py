@@ -1,6 +1,8 @@
 from flask import Flask, send_from_directory
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
+import json
+import dml
 
 
 app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build", static_url_path="/")
@@ -18,18 +20,15 @@ mysql = MySQL(app)
 @app.route("/api", methods = ["GET"])
 @cross_origin()
 def index():
-    query4 = 'SELECT * FROM Orders;'
     cur = mysql.connection.cursor()
-    cur.execute(query4)
-    results = cur.fetchall()
-
-    return results[1]
+    cur.execute(dml.selectAllCustomers)
+    results = json.dumps(cur.fetchall())
+    return results
 
 @app.route("/")
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, "index.html")
-
 
 
 if __name__ == "__main__":

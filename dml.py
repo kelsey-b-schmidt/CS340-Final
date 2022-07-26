@@ -1,0 +1,1 @@
+selectAllCustomers = 'SELECT * FROM Customers;'
