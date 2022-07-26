@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import Customers from "./Pages/Customers";
 
 export default function App() {
 
@@ -8,6 +9,7 @@ export default function App() {
 			<header>
 				<h1>Kelsey and Andy's Project</h1>
 			</header>
+			<Customers/>
 		</div>
 	)
 }

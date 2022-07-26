@@ -18,7 +18,9 @@ export default function Customers() {
     return (
         <div>
             <h2>List of Customers</h2>
-            <CustomerListComponent customers={customers}/>
+            <p>{customers}</p>
         </div>
     )
 }
+
+//<CustomerListComponent customers={customers}/>
