@@ -1,4 +1,5 @@
 import React from 'react'
+import NavigationComponent from "../Components/NavigationComponent";
 
 export default function Home() {
 
@@ -7,7 +8,7 @@ export default function Home() {
             <h2>Home</h2>
             <h3>Welcome to the CoffeeBuzz Database</h3>
             <p>This site can be used to access the following databases and complete the listed actions for each:</p>
-            <p><strong>Customers</strong></p>
+            <p><strong><NavigationComponent link={"Customers"}></NavigationComponent></strong></p>
             <ul>
                 <li>View all customers</li>
                 <li>Search customers</li>
