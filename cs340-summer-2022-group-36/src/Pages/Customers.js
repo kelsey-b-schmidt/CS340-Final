@@ -18,10 +18,24 @@ export default function Customers() {
 
     return (
         <div>
-            <h2>List of Customers</h2>
-            <CustomerListComponent
-                customers={customers}
-            />
+            <h2>Customers</h2>
+            <div class="table">
+                <form id="search">
+                    <input type="text" placeholder="Search..."/>
+                    <input type="button" value="Submit"/>
+                    <input type="reset" id="search"/>
+                </form>
+                <fieldset>
+                    <legend><strong>Browse Customers</strong></legend>
+                    <CustomerListComponent
+                        customers={customers}
+                    />
+                </fieldset>
+            </div>
+            <br/>
+            <input type="button" value="Add New Customer"/>
+            <br/>
+            <br/>
         </div>
     )
 }
