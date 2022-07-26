@@ -9,7 +9,6 @@ export default function App() {
 
 	return (
 		<div>
-			<HeaderComponent/>
 			<Router>
 				<Routes>
 					<Route path="/" element={<Home/>}/>
