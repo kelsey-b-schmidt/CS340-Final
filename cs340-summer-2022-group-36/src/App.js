@@ -7,6 +7,9 @@ export default function App() {
 
 	return (
 		<div className="App">
+			<header>
+				<h1>Kelsey and Andy's Project</h1>
+			</header>
 			<Router>
 				<Routes>
 					<Route path="/" element={<Customers/>}/>

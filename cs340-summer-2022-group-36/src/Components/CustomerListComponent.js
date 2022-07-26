@@ -14,7 +14,7 @@ export default function CustomerListComponent({ customers }) {
             </tr>
             </thead>
             <tbody>
-            {customers.map((customer, i) =>
+                {customers.map((customer, i) =>
                 <CustomerComponent
                     customer={customer}
                     key={i} />)}
