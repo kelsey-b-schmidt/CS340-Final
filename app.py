@@ -6,16 +6,10 @@ from flask_mysqldb import MySQL
 app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build", static_url_path="/")
 cors = CORS(app)
 
-#app.config['MYSQL_HOST'] = 'us-cdbr-east-06.cleardb.net'
-#app.config['MYSQL_USER'] = 'b1608b1c5b84a7'
-#app.config['MYSQL_PASSWORD'] = 'f046df2a'
-#app.config['MYSQL_DB'] = 'heroku_ccf7f0c951cda7f'
-#app.config['MYSQL_CURSORCLASS'] = "DictCursor"
-
-app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_schmkels'
-app.config['MYSQL_PASSWORD'] = '0337' #last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_schmkels'
+app.config['MYSQL_HOST'] = 'cxmgkzhk95kfgbq4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'n1yj8shcuxjzwpjh'
+app.config['MYSQL_PASSWORD'] = 'r5gkratzpgjyqh9r'
+app.config['MYSQL_DB'] = 'utjfjcdn4jmf1grt'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
 mysql = MySQL(app)
@@ -29,9 +23,9 @@ def index():
     query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!");'
     query4 = 'SELECT * FROM diagnostic;'
     cur = mysql.connection.cursor()
-    cur.execute(query1)
-    cur.execute(query2)
-    cur.execute(query3)
+    #cur.execute(query1)
+    #cur.execute(query2)
+    #cur.execute(query3)
     cur.execute(query4)
     results = cur.fetchall()
     return {"text": results[0]["text"], "title": results[0]["title"]}
