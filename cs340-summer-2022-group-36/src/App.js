@@ -11,8 +11,6 @@ export default function App() {
 		<div className="App">
 			<header>
 				<h1>Kelsey and Andy's Project</h1>
-				<p><strong><NavigationComponent link={"Home"}></NavigationComponent></strong></p>
-				<p><strong><NavigationComponent link={"Customers"}></NavigationComponent></strong></p>
 			</header>
 			<Router>
 				<Routes>
