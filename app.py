@@ -18,17 +18,16 @@ mysql = MySQL(app)
 @app.route("/api", methods = ["GET"])
 @cross_origin()
 def index():
-    query1 = 'DROP TABLE IF EXISTS diagnostic;'
-    query2 = 'CREATE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255) NOT NULL);'
-    query3 = 'INSERT INTO diagnostic (text) VALUES ("MySQL is working!");'
+    query1 = 'CREATE OR REPLACE TABLE diagnostic(id INT PRIMARY KEY AUTO_INCREMENT, text VARCHAR(255), title VARCHAR(255));'
+    query2 = 'INSERT INTO diagnostic (text, title) VALUES ("MySQL is working maybe", "MySQL is working probably");'
     query4 = 'SELECT * FROM diagnostic;'
     cur = mysql.connection.cursor()
-    #cur.execute(query1)
-    #cur.execute(query2)
-    #cur.execute(query3)
+    cur.execute(query1)
+    cur.execute(query2)
     cur.execute(query4)
     results = cur.fetchall()
-    return {"text": results[0]["text"], "title": results[0]["title"]}
+
+    return results[0]
 
 @app.route("/")
 @cross_origin()
@@ -38,4 +37,4 @@ def serve():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
