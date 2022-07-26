@@ -3,7 +3,6 @@ import './App.css'
 import MainComponent from "./Components/MainComponent";
 
 export default function App() {
-
 	const [title, setTitle] = useState("title")
 	const [text, setText] = useState("text")
 
@@ -16,11 +15,8 @@ export default function App() {
 	    }
 		    getResponse()
 			.catch(console.error)
-
 	}, [])
 
-
-  
 	return (
 		<div className="App">
 			<MainComponent
@@ -30,7 +26,3 @@ export default function App() {
 		</div>
 	)
 }
-
-//<Deploy
-// 			data={data}
-// 			/>
