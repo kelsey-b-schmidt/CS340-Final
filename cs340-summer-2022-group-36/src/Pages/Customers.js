@@ -2,7 +2,7 @@ import React from 'react'
 import CustomerListComponent from '../Components/CustomerListComponent'
 import { useState, useEffect } from 'react'
 
-function Customers() {
+export default function Customers() {
     const [customers, setCustomers] = useState([])
 
     useEffect(() => {
@@ -22,5 +22,3 @@ function Customers() {
         </div>
     )
 }
-
-export default Customers
