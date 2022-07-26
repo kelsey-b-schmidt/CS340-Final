@@ -3,7 +3,6 @@ import './App.css'
 import Customers from "./Pages/Customers";
 import Home from "./Pages/Home";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import NavigationComponent from "./Components/NavigationComponent";
 
 export default function App() {
 
@@ -11,8 +10,6 @@ export default function App() {
 		<div className="App">
 			<header>
 				<h1>Kelsey and Andy's Project</h1>
-				<p><strong><NavigationComponent link={"Home"}></NavigationComponent></strong></p>
-				<p><strong><NavigationComponent link={"Customers"}></NavigationComponent></strong></p>
 			</header>
 			<Router>
 				<Routes>
