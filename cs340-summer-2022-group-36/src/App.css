@@ -13,11 +13,6 @@ th, td {
 }
 
 
-fieldset{
-  display: block;
-  text-align: center;
-}
-
 div.box {
   width: 240px;
 }
