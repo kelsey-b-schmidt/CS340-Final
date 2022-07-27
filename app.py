@@ -25,9 +25,19 @@ def index():
         cur.execute(dml.selectAllCustomers)
         results = json.dumps(cur.fetchall())
         return results
+    
     elif request.method == "POST":
         return {"request_received": "yes"}
 
+        
+
+    # Query for inserting Customers
+    # if request.method == "POST":
+        # if request.form.get('Add New Customer'):
+        
+        # customerName = request.form[]
+        # email = request.form[]
+        # phoneNumber = request.form[]
 
 
 
@@ -41,6 +51,8 @@ def index():
     #cur = mysql.connection.cursor()
     #cur.execute(dml.customersSearchFunction)
     #customerSearch = json.dumps(cur.fetchall())
+
+    
 
 
 # Customers Update
@@ -177,6 +189,15 @@ def index():
     # cur.execute(dml.updateProducts)
     # productUpdate = json.dumps(cur.fetchall())
 
+# Products Delete
+# @app.route("/ProductsDelete")
+# @cross_origin()
+# def productsDelete():
+
+    # # Query to delete Products
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.deleteProducts)
+    # mysql.connection.commit()
 
 
 
