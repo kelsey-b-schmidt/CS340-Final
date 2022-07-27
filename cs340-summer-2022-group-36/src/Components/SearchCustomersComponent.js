@@ -35,8 +35,8 @@ export default function SearchCustomersComponent (){
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 required/>
-            <button value="reset" onClick={() => setQuery("")}/>
-            <button value="Submit" onClick={handleSubmit}/>
+            <button onClick={() => setQuery("")}>Reset</button>
+            <button onClick={handleSubmit}>Submit</button>
         </div>
     )
 }
