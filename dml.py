@@ -1,4 +1,4 @@
-# Creating tables
+# Select all from each tables
 selectAllCustomers = 'SELECT * FROM Customers;'
 selectAllAddresses = 'SELECT * FROM Addresses;'
 selectAllOrders = 'SELECT * FROM Orders;'
