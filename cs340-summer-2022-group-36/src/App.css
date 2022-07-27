@@ -15,11 +15,14 @@ th, td {
 
 div.box {
   width: 240px;
+  text-align: center;
 }
 
 div.table {
   width: 1000px;
+  text-align: center;
 }
+
 
 .navigation {
   text-align: center;
