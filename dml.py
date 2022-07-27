@@ -37,6 +37,8 @@ deleteOrderID = 'DELETE FROM Orders WHERE :orderID_selected_from_orders_page;'
 # Allowing deletion of OrderDetails and does not affect Orders or Products entity table 
 deleteFromOrderDetails = 'DELETE FROM OrderDetails WHERE :orderID_selected_from_OrdersDetails_page;'
 
+deleteProducts = 'DELETE FROM Products WHERE :productID_is_selected;'
+
 # Update functions for entity tables
 
 # update a Products data based on submission of the Update product form 

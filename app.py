@@ -25,9 +25,19 @@ def get_customers():
         cur.execute(dml.selectAllCustomers)
         results = json.dumps(cur.fetchall())
         return results
+    
     elif request.method == "POST":
         return {"request_received": "yes"}
 
+        
+
+    # Query for inserting Customers
+    # if request.method == "POST":
+        # if request.form.get('Add New Customer'):
+        
+        # customerName = request.form[]
+        # email = request.form[]
+        # phoneNumber = request.form[]
 
 #Products table
 @app.route("/api/Products", methods = ["GET", "POST"])
@@ -72,6 +82,8 @@ def get_products():
     #cur = mysql.connection.cursor()
     #cur.execute(dml.customersSearchFunction)
     #customerSearch = json.dumps(cur.fetchall())
+
+    
 
 
 # Customers Update
@@ -182,6 +194,15 @@ def get_products():
     # mysql.connection.commit()
 
 
+# Products Delete
+# @app.route("/ProductsDelete")
+# @cross_origin()
+# def productsDelete():
+
+    # # Query to delete Products
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.deleteProducts)
+    # mysql.connection.commit()
 
 
 
