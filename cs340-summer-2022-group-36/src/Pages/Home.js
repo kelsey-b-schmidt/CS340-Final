@@ -1,5 +1,4 @@
 import React from 'react'
-import {pnk} from "react-router-dom";
 
 export default function Home() {
 
