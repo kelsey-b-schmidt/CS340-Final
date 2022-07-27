@@ -19,13 +19,13 @@ mysql = MySQL(app)
 @app.route("/api/Customers", methods = ["GET", "POST"])
 @cross_origin()
 def index():
-    if request.method == "GET"
+    if request.method == "GET":
         # Query to return all Customers
         cur = mysql.connection.cursor()
         cur.execute(dml.selectAllCustomers)
         results = json.dumps(cur.fetchall())
         return results
-    elif request.method == "POST"
+    elif request.method == "POST":
         query_terms = request.json["query"]
         return json.dumps({"search": query_terms})
 
