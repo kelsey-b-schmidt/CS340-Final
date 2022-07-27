@@ -28,17 +28,15 @@ export default function SearchCustomersComponent (){
             <h3>{query}</h3>
             <h3>Last search:</h3>
             <h3>{lastSearch}</h3>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    id="query"
-                    placeholder="Search..."
-                    value={query}
-                    onChange={e => setQuery(e.target.value)}
-                    required/>
-                <input type="reset" onClick={() => setQuery("")}/>
-                <input type="submit" />
-            </form>
+            <input
+                type="text"
+                id="query"
+                placeholder="Search..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                required/>
+            <button value="reset" onClick={() => setQuery("")}/>
+            <button value="Submit" onClick={handleSubmit}/>
         </div>
     )
 }
