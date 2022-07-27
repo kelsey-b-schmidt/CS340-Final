@@ -11,10 +11,7 @@ export default function App() {
 		<div>
 			<HeaderComponent/>
 			<Router>
-				<Routes>
-					<Route path="/" element={<Home/>}/>
-					<Route path="/Customers" element={<Customers/>}/>
-				</Routes>
+
 			</Router>
 		</div>
 	)
@@ -25,3 +22,10 @@ export default function App() {
 // 			<Customers
 // 				customers={customers}
 // 				setCustomers={setCustomers}/>
+
+
+
+//<Routes>
+// 					<Route path="/" element={<Home/>}/>
+// 					<Route path="/Customers" element={<Customers/>}/>
+// 				</Routes>
