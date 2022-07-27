@@ -26,8 +26,7 @@ def index():
         results = json.dumps(cur.fetchall())
         return results
     elif request.method == "POST":
-        query_terms = request.json["query"]
-        return json.dumps({"search": query_terms})
+        return request.json
 
 
 

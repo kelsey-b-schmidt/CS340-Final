@@ -7,16 +7,15 @@ export default function SearchCustomersComponent ({setLastSearch}){
 
     const handleSubmit = () => {
         const searchCustomers = async () => {
-            const newQuery = { query }
             const response = await fetch('/api/Customers', {
                 method: 'POST',
-                body: JSON.stringify(newQuery),
+                body: JSON.stringify({ query }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
             const responseJson = await response.json()
-            setLastSearch(responseJson.search)
+            setLastSearch(responseJson)
         }
         searchCustomers()
             .catch(console.error)
