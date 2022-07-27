@@ -1,10 +1,12 @@
 import React from 'react'
 import {useState, useEffect } from 'react'
 import CustomerListComponent from "../Components/CustomerListComponent";
+import SearchCustomersComponent from "../Components/SearchCustomersComponent";
 
 export default function Customers() {
 
     const [customers, setCustomers] = useState([])
+    const [lastSearch, setLastSearch] = useState("")
 
     useEffect(() => {
         const getResponse = async() => {
@@ -19,12 +21,11 @@ export default function Customers() {
     return (
         <div>
             <h2>Customers</h2>
+            <h3>Last search:</h3>
+            <h3>{lastSearch}</h3>
             <div class="table">
-                <form id="search">
-                    <input type="text" placeholder="Search..."/>
-                    <input type="button" value="Submit"/>
-                    <input type="reset" id="search"/>
-                </form>
+                <SearchCustomersComponent
+                    setLastSearch={setLastSearch}/>
                 <fieldset>
                     <legend><strong>Browse Customers</strong></legend>
                     <CustomerListComponent

@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
@@ -16,14 +16,23 @@ app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 mysql = MySQL(app)
 
 # Customers table
-@app.route("/api/Customers", methods = ["GET"])
+@app.route("/api/Customers", methods = ["GET", "POST"])
 @cross_origin()
 def index():
-    # Query to return all Customers
-    cur = mysql.connection.cursor()
-    cur.execute(dml.selectAllCustomers)
-    results = json.dumps(cur.fetchall())
-    
+    if request.method == "GET"
+        # Query to return all Customers
+        cur = mysql.connection.cursor()
+        cur.execute(dml.selectAllCustomers)
+        results = json.dumps(cur.fetchall())
+        return results
+    elif request.method == "POST"
+        query_terms = request.json["query"]
+        return json.dumps({"search": query_terms})
+
+
+
+
+
     # Query to grab Customers ID and name for dropdown selection
     #cur = mysql.connection.cursor()
     #cur.execute(dml.selectCustomersKeys)
@@ -34,8 +43,6 @@ def index():
     #cur.execute(dml.customersSearchFunction)
     #customerSearch = json.dumps(cur.fetchall())
 
-    # Query for inserting Customers
-    return results
 
 # Customers Update
 # @app.route("/CustomersUpdate", methods = ["POST", "GET"])
@@ -180,13 +187,14 @@ def index():
 
 
 
-
+# serve index.html for React rendering
 @app.route("/")
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, "index.html")
 
 
+# catch 404 errors, allows us to refresh any page and have it rendered
 @app.errorhandler(404)
 def not_found(e):
     return send_from_directory(app.static_folder, "index.html")
