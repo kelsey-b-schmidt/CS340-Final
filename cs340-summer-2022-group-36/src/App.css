@@ -1,4 +1,6 @@
-
+body {
+  text-align: center;
+}
 
 table {
   width: 100%;
@@ -10,16 +12,7 @@ th, td {
   border: 1px solid;
 }
 
-
-fieldset{
-  display: block;
-  text-align: center;
-}
-
-div.box {
-  width: 240px;
-}
-
-div.table {
-  width: 1000px;
+.navigation li {
+  display: inline-block;
+  padding: 20px;
 }

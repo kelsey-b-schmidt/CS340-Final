@@ -2,17 +2,20 @@ import React from 'react'
 import './App.css'
 import Customers from "./Pages/Customers";
 import Home from "./Pages/Home";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HeaderComponent from "./Components/HeaderComponent";
 
 export default function App() {
 
 	return (
 		<div>
-			<HeaderComponent/>
-			<Router>
-
-			</Router>
+			<BrowserRouter>
+				<HeaderComponent/>
+				<Routes>
+					<Route path="/" element={<Home/>}/>
+					<Route path="/Customers" element={<Customers/>}/>
+				</Routes>
+			</BrowserRouter>
 		</div>
 	)
 }
