@@ -23,3 +23,7 @@ div.box {
 div.table {
   width: 1000px;
 }
+
+div.inline-block {
+  display: inline-block;
+}
