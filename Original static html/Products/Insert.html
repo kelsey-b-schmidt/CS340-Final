@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="../index.html">Home</a>
+<a href="../Customers.html">Customers</a>
+<a href="../Addresses.html">Addresses</a>
+<a href="../Orders.html">Orders</a>
+<a href="../Products.html">Products</a>
+<br/>
+<h1>Sample Insert Product Page</h1>
+<div class="box">
+    <form id="insertProduct">
+        <fieldset>
+            <legend><strong>Insert Product</strong></legend>
+            <label for="product name">Product Name:</label>
+            <br/>
+            <input type="text" id="product name" name="product name" maxlength="100"/>
+            <br/>
+            <label for="description">Description:</label>
+            <br/>
+            <input type="text" id="description" name="description" maxlength="1000"/>
+            <br/>
+            <label for="brand">Brand:</label>
+            <br/>
+            <input type="text" id="brand" name="brand" maxlength="100"/>
+            <br/>
+            <label for="weigh val">Weight Value:</label>
+            <br/>
+            <input type="number" id="weight val" name="weight val"/>
+            <br/>
+            <label for="weight unit">Weight Unit:</label>
+            <br/>
+            <input type="text" id="weight unit" name="weight unit" maxlength="10"/>
+            <br/>
+            <label for="sell price">Sell Price:</label>
+            <br/>
+            <span>$</span>
+            <input type="number" id="sell price" name="sell price"/>
+            <br/>
+            <label for="replenish cost">Replenish Cost:</label>
+            <br/>
+            <span>$</span>
+            <input type="number" id="replenish cost" name="replenish cost"/>
+            <br/>
+            <label for="number in stock">Number in Stock:</label>
+            <br/>
+            <input type="number" id="number in stock" name="number in stock"/>
+            <br/>
+            <br/>
+            <input type="button" value="Submit" onclick='if(confirm("This will add a product with the given values.\nAre you sure you want to submit?")) window.location.href="../Products.html"'/>
+            <input type="reset" id="insertProduct"/>
+            <input type="button" value="Cancel" onclick='window.location.href="../Products.html"' />
+        </fieldset>
+    </form>
+</div>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>

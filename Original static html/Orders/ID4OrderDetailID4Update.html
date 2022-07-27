@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="index.html">Home</a>
+<a href="Customers.html">Customers</a>
+<a href="Addresses.html">Addresses</a>
+<a href="Orders.html">Orders</a>
+<a href="Products.html">Products</a>
+<br/>
+<h1>Sample Update Order Detail Page for Order ID: 4</h1>
+<div class="box">
+    <form id="updateOrderDetail">
+        <fieldset>
+            <legend><strong>Update Order Detail</strong></legend>
+            <label for="order ID">Order ID:</label>
+            <br/>
+            <input type="text" id="order ID" name="order ID" value="4" disabled/>
+            <br/>
+            <label for="product ID">Product ID:</label>
+            <br/>
+            <input type="text" id="product ID" name="product ID" value="3" disabled/>
+            <br/>
+            <label for="product quantity">Product Quantity:</label>
+            <br/>
+            <input type="number" id="product quantity" name="product quantity"/>
+            <br/>
+            <label for="unit price">Unit Price:</label>
+            <br/>
+            <span>$</span><input type="number" id="unit price" name="unit price"/>
+            <br/>
+            <br/>
+            <input type="button" value="Submit" onclick='if(confirm("This will update the selected Order Detail\nfor the selected order with the given values.\nAre you sure you want to submit?")) window.location.href="ID4OrderDetails.html"'/>
+            <input type="reset" id="updateOrderDetail"/>
+            <input type="button" value="Cancel" onclick='window.location.href="ID4OrderDetails.html"' />
+        </fieldset>
+    </form>
+</div>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>

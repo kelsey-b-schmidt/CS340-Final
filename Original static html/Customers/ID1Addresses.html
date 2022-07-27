@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="../index.html">Home</a>
+<a href="../Customers.html">Customers</a>
+<a href="../Addresses.html">Addresses</a>
+<a href="../Orders.html">Orders</a>
+<a href="../Products.html">Products</a>
+<br/>
+<h1>Sample Addresses Table for Customer ID: 1</h1>
+<div class="table">
+    <fieldset>
+        <legend><strong>Browse Addresses</strong></legend>
+        <table>
+            <thead>
+            <tr>
+                <th>Address ID</th>
+                <th>Customer ID</th>
+                <th>Recipient</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Active</th>
+                <th>Primary</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>Joann Coffeelover</td>
+                <td>3595 California St</td>
+                <td>San Francisco</td>
+                <td>CA</td>
+                <td>94118</td>
+                <td><input type="checkbox" id="primary" name="primary" checked disabled></td>
+                <td><input type="checkbox" id="primary" name="primary" checked disabled></td>
+                <td><input type="button" value="Update Address" onclick='window.location.href="ID1AddressID1Update.html"'></td>
+                <td><input type="button" value="Delete Address" onclick='confirm("This will delete the selected address.\nAre you sure you want to submit?")'></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1</td>
+                <td>Dotta Coffeelover</td>
+                <td>2701 University Dr</td>
+                <td>Auburn Hills</td>
+                <td>MI</td>
+                <td>48326</td>
+                <td><input type="checkbox" id="primary" name="primary" checked disabled></td>
+                <td><input type="checkbox" id="primary" name="primary" disabled></td>
+                <td><input type="button" value="Update Address" disabled></td>
+                <td><input type="button" value="Delete Address" disabled></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br/>
+<input type="button" value="Add New Address" onclick='window.location.href="ID1AddressesInsert.html"' />
+<input type="button" value="Back to Customers" onclick='window.location.href="../Customers.html"' />
+<br/>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>

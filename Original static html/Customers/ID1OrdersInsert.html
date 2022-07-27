@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="../index.html">Home</a>
+<a href="../Customers.html">Customers</a>
+<a href="../Addresses.html">Addresses</a>
+<a href="../Orders.html">Orders</a>
+<a href="../Products.html">Products</a>
+<br/>
+<h1>Sample Insert Order Page for Customer ID: 1</h1>
+<div class="box">
+    <form id="insertOrder">
+        <fieldset>
+            <legend><strong>Insert Order</strong></legend>
+            <label for="customer ID">Customer ID:</label>
+            <br/>
+            <input type="text" id="customer ID" name="customer ID" value="1" disabled/>
+            <br/>
+            <label for="address ID">Address ID:</label>
+            <select id="address ID" name="address ID">
+                <option value="1">ID 1: Joann Coffeelover, 3595 California St, San Francisco, CA 94118</option>
+                <option value="2">ID 2: Dotta Coffeelover, 2701 University Dr, Auburn Hills, MI 48326</option>
+            </select>
+            <br/>
+            <br/>
+            <input type="button" value="Submit" onclick='if(confirm("This will create an order\nfor the selected customer with the given values.\nAre you sure you want to submit?")) window.location.href="ID1Orders.html"'/>
+            <input type="reset" id="insertOrder"/>
+            <input type="button" value="Cancel" onclick='window.location.href="ID1Orders.html"' />
+        </fieldset>
+    </form>
+</div>
+<br/>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>
+

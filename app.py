@@ -18,7 +18,7 @@ mysql = MySQL(app)
 # Customers table
 @app.route("/api/Customers", methods = ["GET", "POST"])
 @cross_origin()
-def index():
+def get_customers():
     if request.method == "GET":
         # Query to return all Customers
         cur = mysql.connection.cursor()
@@ -28,6 +28,37 @@ def index():
     elif request.method == "POST":
         return {"request_received": "yes"}
 
+
+#Products table
+@app.route("/api/Products", methods = ["GET", "POST"])
+@cross_origin()
+def get_products():
+    if request.method == "GET":
+        # Query to return all Customers
+        cur = mysql.connection.cursor()
+        cur.execute(dml.selectAllProducts)
+        results = json.dumps(cur.fetchall())
+        return results
+    elif request.method == "POST":
+        return {"request_received": "yes"}
+
+
+#     # Query for Products search functionality
+#     cur = mysql.connection.cursor()
+#     cur.execute(dml.productsSearchFunction)
+#     productSearch = json.dumps(cur.fetchall())
+
+#     # Query for inserting Products
+
+# Products Update
+# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
+# @cross_origin()
+# def productsUpdate():
+
+    # # Query to update Products
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.updateProducts)
+    # productUpdate = json.dumps(cur.fetchall())
 
 
 
@@ -150,32 +181,6 @@ def index():
     # cur.execute(dml.deleteFromOrderDetails)
     # mysql.connection.commit()
 
-# Products Route
-# @app.route("/Products", methods = ["POST", "GET"])
-# @cross_origin()
-# def index():
-
-#     # Query to grab all Products
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.selectAllProducts)
-#     results = json.dumps(cur.fetchall())
-    
-#     # Query for Products search functionality
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.productsSearchFunction)
-#     productSearch = json.dumps(cur.fetchall())
-    
-#     # Query for inserting Products
-
-# Products Update
-# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def productsUpdate():
-
-    # # Query to update Products
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.updateProducts)
-    # productUpdate = json.dumps(cur.fetchall())
 
 
 
@@ -185,6 +190,7 @@ def index():
 
 
 
+# ------------------------------don't touch below here!-----------------------------------------
 
 # serve index.html for React rendering
 @app.route("/")
@@ -200,4 +206,4 @@ def not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

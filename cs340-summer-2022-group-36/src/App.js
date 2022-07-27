@@ -1,9 +1,13 @@
 import React from 'react'
 import './App.css'
-import Customers from "./Pages/Customers";
-import Home from "./Pages/Home";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HeaderComponent from "./Components/HeaderComponent";
+import Home from "./Pages/Home";
+import Customers from "./Pages/Customers";
+import Products from "./Pages/Products";
+
+
+
 
 export default function App() {
 
@@ -14,21 +18,10 @@ export default function App() {
 				<Routes>
 					<Route path="/" element={<Home/>}/>
 					<Route path="/Customers" element={<Customers/>}/>
+					<Route path="/Products" element={<Products/>}/>
 				</Routes>
 			</BrowserRouter>
 		</div>
 	)
 }
 
-//<a href="Customers">Customers</a>
-// 			<Home/>
-// 			<Customers
-// 				customers={customers}
-// 				setCustomers={setCustomers}/>
-
-
-
-//<Routes>
-// 					<Route path="/" element={<Home/>}/>
-// 					<Route path="/Customers" element={<Customers/>}/>
-// 				</Routes>

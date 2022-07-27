@@ -17,6 +17,7 @@ export default function SearchCustomersComponent (){
             })
             const responseJson = await response.json()
             setLastSearch(responseJson.request_received)
+            setQuery("")
         }
         searchCustomers()
             .catch(console.error)

@@ -21,7 +21,6 @@ export default function Customers() {
         <div>
             <h2>Customers</h2>
             <div class="table">
-                <SearchCustomersComponent/>
                 <fieldset>
                     <legend><strong>Browse Customers</strong></legend>
                     <CustomerListComponent
@@ -36,3 +35,5 @@ export default function Customers() {
         </div>
     )
 }
+
+//<SearchCustomersComponent/>
