@@ -15,7 +15,7 @@ app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
 mysql = MySQL(app)
 
-# Customers table
+# ----------------------------------- Customers -------------------------------------
 @app.route("/api/Customers", methods = ["GET", "POST"])
 @cross_origin()
 def get_customers():
@@ -29,8 +29,7 @@ def get_customers():
     elif request.method == "POST":
         return {"request_received": "yes"}
 
-        
-
+    
     # Query for inserting Customers
     # if request.method == "POST":
         # if request.form.get('Add New Customer'):
@@ -38,39 +37,6 @@ def get_customers():
         # customerName = request.form[]
         # email = request.form[]
         # phoneNumber = request.form[]
-
-#Products table
-@app.route("/api/Products", methods = ["GET", "POST"])
-@cross_origin()
-def get_products():
-    if request.method == "GET":
-        # Query to return all Customers
-        cur = mysql.connection.cursor()
-        cur.execute(dml.selectAllProducts)
-        results = json.dumps(cur.fetchall())
-        return results
-    elif request.method == "POST":
-        return {"request_received": "yes"}
-
-
-#     # Query for Products search functionality
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.productsSearchFunction)
-#     productSearch = json.dumps(cur.fetchall())
-
-#     # Query for inserting Products
-
-# Products Update
-# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def productsUpdate():
-
-    # # Query to update Products
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.updateProducts)
-    # productUpdate = json.dumps(cur.fetchall())
-
-
 
 
     # Query to grab Customers ID and name for dropdown selection
@@ -82,9 +48,6 @@ def get_products():
     #cur = mysql.connection.cursor()
     #cur.execute(dml.customersSearchFunction)
     #customerSearch = json.dumps(cur.fetchall())
-
-    
-
 
 # Customers Update
 # @app.route("/CustomersUpdate", methods = ["POST", "GET"])
@@ -101,6 +64,65 @@ def get_products():
 #     cur.execute(dml.selectCustomersKeys)
 #     customerIDs = json.dumps(cur.fetchall())
 
+# ----------------------------------- Products -------------------------------------
+
+#Products table
+@app.route("/api/Products", methods = ["GET", "POST"])
+@cross_origin()
+def get_products():
+    if request.method == "GET":
+        # Query to return all Customers
+        cur = mysql.connection.cursor()
+        cur.execute(dml.selectAllProducts)
+        results = json.dumps(cur.fetchall())
+        return results
+    elif request.method == "POST":
+        return {"request_received": "yes"}
+
+
+    # # Query for Products search functionality
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.productsSearchFunction)
+    # productSearch = json.dumps(cur.fetchall())
+
+    # # Query for inserting Products
+
+
+    # if request.method == "POST":
+
+    #     if request.form.get("Add New Product"):
+
+    #         productName = request.form[]
+    #         productDescription = request.form[]
+    #         productBrand = request.form[]
+    #         weightVal = request.form[]
+    #         weightValUnit = request.form[]
+    #         sellPrice = request.form[]
+    #         replenishCost = request.form[]
+    #         numberInStock = request.form[]
+
+# Products Update
+# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
+# @cross_origin()
+# def productsUpdate():
+
+    # # Query to update Products
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.updateProducts)
+    # productUpdate = json.dumps(cur.fetchall())
+
+# Products Delete
+# @app.route("/ProductsDelete")
+# @cross_origin()
+# def productsDelete():
+
+    # # Query to delete Products
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.deleteProducts)
+    # mysql.connection.commit()
+
+
+# ----------------------------------- Addresses -------------------------------------
 
 # # Addresses Route
 # @app.route("/Addresses", methods = ["POST", "GET"])
@@ -141,6 +163,11 @@ def get_products():
 #     cur.execute(dml.updateAddresses)
 #     addressUpdate = json.dumps(cur.fetchall())
 
+
+# ----------------------------------- Orders -------------------------------------
+
+
+
 # Orders Route
 # @app.route("/Orders", methods = ["POST", "GET"])
 # @cross_origin()
@@ -178,6 +205,8 @@ def get_products():
 #     cur = mysql.connection.cursor()
 #     cur.execute(dml.updateOrders)
 #     orderUpdate = json.dumps(cur.fetchall())
+
+# ----------------------------------- OrderDetails -------------------------------------
 
 
 # # OrderDetails Route
@@ -223,65 +252,8 @@ def get_products():
     # cur.execute(dml.deleteFromOrderDetails)
     # mysql.connection.commit()
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Products Route
-@app.route("/Products", methods = ["POST", "GET"])
-@cross_origin()
-def index():
-
-    # Query to grab all Products
-    cur = mysql.connection.cursor()
-    cur.execute(dml.selectAllProducts)
-    results = json.dumps(cur.fetchall())
-    
-    # Query for Products search functionality
-    cur = mysql.connection.cursor()
-    cur.execute(dml.productsSearchFunction)
-    productSearch = json.dumps(cur.fetchall())
-    
-    # Query for inserting Products
-
-    # if request.method == "POST":
-
-    #     if request.form.get("Add New Product"):
-
-    #         productName = request.form[]
-    #         productDescription = request.form[]
-    #         productBrand = request.form[]
-    #         weightVal = request.form[]
-    #         weightValUnit = request.form[]
-    #         sellPrice = request.form[]
-    #         replenishCost = request.form[]
-    #         numberInStock = request.form[]
 
 
-
-
-
-# Products Update
-# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def productsUpdate():
-
-    # # Query to update Products
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.updateProducts)
-    # productUpdate = json.dumps(cur.fetchall())
-=======
->>>>>>> 4ee06acd9def11780ed0b6452f14c30f87592ed2
-=======
->>>>>>> 69f2b6572c88750d3825f2a26293a550509b2ed1
-
-# Products Delete
-# @app.route("/ProductsDelete")
-# @cross_origin()
-# def productsDelete():
-
-    # # Query to delete Products
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.deleteProducts)
-    # mysql.connection.commit()
 
 
 
