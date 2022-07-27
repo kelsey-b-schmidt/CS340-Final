@@ -182,7 +182,7 @@ def index():
 
 
 @app.route("/")
-@app.errorhandler(404)
+@app.route("/Customers")
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, "index.html")
