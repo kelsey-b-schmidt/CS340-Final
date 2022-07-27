@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import Customers from "./Pages/Customers";
 import Home from "./Pages/Home";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HeaderComponent from "./Components/HeaderComponent";
 
 export default function App() {
@@ -10,8 +10,11 @@ export default function App() {
 	return (
 		<div>
 			<BrowserRouter>
-				<h1>Andy and Kelsey's Project</h1>
 				<HeaderComponent/>
+				<Routes>
+					<Route path="/" element={<Home/>}/>
+					<Route path="/Customers" element={<Customers/>}/>
+				</Routes>
 			</BrowserRouter>
 		</div>
 	)

@@ -7,11 +7,8 @@ export default function HeaderComponent () {
     return (
         <div>
             <h1>Andy and Kelsey's Project</h1>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-            </ul>
+            <Link to="/">Home</Link>
+            <Link to="/Customers">Customers</Link>
         </div>
     )
 }
