@@ -224,6 +224,7 @@ def get_products():
     # mysql.connection.commit()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Products Route
 @app.route("/Products", methods = ["POST", "GET"])
 @cross_origin()
@@ -269,6 +270,8 @@ def index():
     # productUpdate = json.dumps(cur.fetchall())
 =======
 >>>>>>> 4ee06acd9def11780ed0b6452f14c30f87592ed2
+=======
+>>>>>>> 69f2b6572c88750d3825f2a26293a550509b2ed1
 
 # Products Delete
 # @app.route("/ProductsDelete")
