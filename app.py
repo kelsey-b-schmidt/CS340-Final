@@ -26,7 +26,7 @@ def index():
         results = json.dumps(cur.fetchall())
         return results
     elif request.method == "POST":
-        return {"request_received": "request_received"}
+        return {"request_received": "yes"}
 
 
 

@@ -10,7 +10,7 @@ export default function SearchCustomersComponent (){
         const searchCustomers = async () => {
             const response = await fetch('/api/Customers', {
                 method: 'POST',
-                body: JSON.stringify({ query }),
+                body: JSON.stringify({a: 1, b: 'Text'}),
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -24,7 +24,8 @@ export default function SearchCustomersComponent (){
 
 
     return (
-        <div>
+        <div><h3>Query:</h3>
+            <h3>{query}</h3>
             <h3>Last search:</h3>
             <h3>{lastSearch}</h3>
             <form onSubmit={handleSubmit}>
