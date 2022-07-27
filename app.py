@@ -118,6 +118,18 @@ def get_products():
 #     addressSearch = json.dumps(cur.fetchall())
     
 #     # Query for inserting Addresses
+#     if request.method == "POST":
+
+#         if request.form.get("Add New Address"):
+
+#             customerID = request.form[]
+#             recipient = request.form[]
+#             street = request.form[]
+#             city = request.form[]
+#             state = request.form[]
+#             zip = request.form[]
+#             isActive = request.form[]
+#             isPrimary = request.form[]
 
 # # Addresses Update
 # @app.route("/AddressesUpdate", methods = ["POST", "GET"])
@@ -145,6 +157,13 @@ def get_products():
 #     orderSearch = json.dumps(cur.fetchall())
     
 #     # Query for inserting Orders
+#     if request.method == "POST":
+
+#         if request.form.get("Add Order"):
+
+#             addressID = request.form[]
+#             customerID = request.form[]
+#             shipDateTime = request.form[]
 
 #     # Query for creating order invoices
 
@@ -173,6 +192,17 @@ def get_products():
     
 #     # Query for inserting OrderDetails
 
+#     # if request.method == "POST":
+
+#         if request.form.get("Add Order Detail"):
+
+#             orderID = request.form[]
+#             productID = request.form[]
+#             productQuantity = request.form[]
+#             unitPrice = request.form[]
+
+
+
 # OrderDetails Update
 # @app.route("/OrderDetailsUpdate", methods = ["POST", "GET"])
 # @cross_origin()
@@ -193,6 +223,55 @@ def get_products():
     # cur.execute(dml.deleteFromOrderDetails)
     # mysql.connection.commit()
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+# Products Route
+@app.route("/Products", methods = ["POST", "GET"])
+@cross_origin()
+def index():
+
+    # Query to grab all Products
+    cur = mysql.connection.cursor()
+    cur.execute(dml.selectAllProducts)
+    results = json.dumps(cur.fetchall())
+    
+    # Query for Products search functionality
+    cur = mysql.connection.cursor()
+    cur.execute(dml.productsSearchFunction)
+    productSearch = json.dumps(cur.fetchall())
+    
+    # Query for inserting Products
+
+    # if request.method == "POST":
+
+    #     if request.form.get("Add New Product"):
+
+    #         productName = request.form[]
+    #         productDescription = request.form[]
+    #         productBrand = request.form[]
+    #         weightVal = request.form[]
+    #         weightValUnit = request.form[]
+    #         sellPrice = request.form[]
+    #         replenishCost = request.form[]
+    #         numberInStock = request.form[]
+
+
+
+
+
+# Products Update
+# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
+# @cross_origin()
+# def productsUpdate():
+
+    # # Query to update Products
+    # cur = mysql.connection.cursor()
+    # cur.execute(dml.updateProducts)
+    # productUpdate = json.dumps(cur.fetchall())
+=======
+>>>>>>> 4ee06acd9def11780ed0b6452f14c30f87592ed2
+=======
+>>>>>>> 69f2b6572c88750d3825f2a26293a550509b2ed1
 
 # Products Delete
 # @app.route("/ProductsDelete")
