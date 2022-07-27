@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function ProductComponent(
     {product}) {
+
     return (
         <tr>
             <td>{product.productID}</td>
