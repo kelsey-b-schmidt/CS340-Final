@@ -8,10 +8,14 @@ export default function ProductListComponent(
             <thead>
             <tr>
                 <th>Product ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th colSpan="4">Actions</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Brand</th>
+                <th colSpan="2">Weight</th>
+                <th>Sell Price</th>
+                <th>Replenish Cost</th>
+                <th>Number in Stock</th>
+                <th colSpan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
