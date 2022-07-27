@@ -59,8 +59,7 @@ updateOrderDetails = 'UPDATE OrderDetails SET productQuantity = :productQuantity
 
 # update command for update shipdate time when button is clicked from null to a set date 
 # Need to implement
-
-# updateShipdateTime
+updateShipdateTime = 'UPDATE Orders SET shipDateTime = :dateVariable'
 
 
 # Inserts for entity tables
