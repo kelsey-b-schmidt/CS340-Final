@@ -22,6 +22,7 @@ export default function SearchCustomersComponent ({setLastSearch}){
             .catch(console.error)
     }
 
+
     return (
         <form onSubmit={handleSubmit}>
             <input
