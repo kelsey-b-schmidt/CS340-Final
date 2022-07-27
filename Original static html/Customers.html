@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="index.html">Home</a>
+<a href="Customers.html">Customers</a>
+<a href="Addresses.html">Addresses</a>
+<a href="Orders.html">Orders</a>
+<a href="Products.html">Products</a>
+<br/>
+<h1>Sample Customers Table</h1>
+<div class="table">
+    <form id="search">
+        <input type="text" placeholder="Search...">
+        <input type="button" value="Submit">
+        <input type="reset" id="search"/>
+    </form>
+    <fieldset>
+        <legend><strong>Browse Customers</strong></legend>
+        <table>
+            <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th colspan="4">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Joann Coffeelover</td>
+                <td>joanncoffeelover@gmail.com</td>
+                <td>415-387-2249</td>
+                <td><input type="button" value="Update Info" onclick='window.location.href="Customers/ID1Update.html"'></td>
+                <td><input type="button" value="Delete Customer" onclick='confirm("This will delete the selected customer.\nAre you sure you want to submit?")'></td>
+                <td><input type="button" value="See Addresses" onclick='window.location.href="Customers/ID1Addresses.html"'></td>
+                <td><input type="button" value="See Orders" onclick='window.location.href="Customers/ID1Orders.html"'></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>General Koffobi's</td>
+                <td>generalkoffobis@mail.com</td>
+                <td>249-499-7546</td>
+                <td><input type="button" value="Update Info" disabled></td>
+                <td><input type="button" value="Delete Customer" disabled></td>
+                <td><input type="button" value="See Addresses" disabled></td>
+                <td><input type="button" value="See Orders" disabled></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Peet's Coffee</td>
+                <td>peet1@peets.com</td>
+                <td>617-492-1844</td>
+                <td><input type="button" value="Update Info" disabled></td>
+                <td><input type="button" value="Delete Customer" disabled></td>
+                <td><input type="button" value="See Addresses" disabled></td>
+                <td><input type="button" value="See Orders" disabled></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Biggby Smith</td>
+                <td>biggby1@biggbycoffee.com</td>
+                <td>732-372-7683</td>
+                <td><input type="button" value="Update Info" disabled></td>
+                <td><input type="button" value="Delete Customer" disabled></td>
+                <td><input type="button" value="See Addresses" disabled></td>
+                <td><input type="button" value="See Orders" disabled></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Anetta NameHere</td>
+                <td>anettanamehere@gmail.com</td>
+                <td>773-743-0417</td>
+                <td><input type="button" value="Update Info" disabled></td>
+                <td><input type="button" value="Delete Customer" disabled></td>
+                <td><input type="button" value="See Addresses" disabled></td>
+                <td><input type="button" value="See Orders" disabled></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br/>
+<input type="button" value="Add New Customer" onclick='window.location.href="Customers/Insert.html"' />
+<br/>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>

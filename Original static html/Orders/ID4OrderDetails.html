@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="../index.html">Home</a>
+<a href="../Customers.html">Customers</a>
+<a href="../Addresses.html">Addresses</a>
+<a href="../Orders.html">Orders</a>
+<a href="../Products.html">Products</a>
+<br/>
+<h1>Sample Order Details Table for Order ID: 4</h1>
+<div class="table">
+    <fieldset>
+        <legend><strong>Browse Order Details</strong></legend>
+        <table>
+            <thead>
+            <tr>
+                <th>Order Detail ID</th>
+                <th>Order ID</th>
+                <th>Product ID</th>
+                <th>Product Quantity</th>
+                <th>Unit Price</th>
+                <th>Line Total</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>3</td>
+                <td>300</td>
+                <td>$32</td>
+                <td>$9600</td>
+                <td><input type="button" value="Update Order Detail" onclick='window.location.href="ID4OrderDetailID4Update.html"'></td>
+                <td><input type="button" value="Delete" onclick='confirm("This will delete the selected Order Detail.\nAre you sure you want to submit?")'></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br/>
+<input type="button" value="Add Order Detail"onclick='window.location.href="ID4OrderDetailsInsert.html"'/>
+<input type="button" value="Back to Orders" onclick='window.location.href="../Orders.html"' />
+<br/>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>

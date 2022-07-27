@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="../index.html">Home</a>
+<a href="../Customers.html">Customers</a>
+<a href="../Addresses.html">Addresses</a>
+<a href="../Orders.html">Orders</a>
+<a href="../Products.html">Products</a>
+<br/>
+<h1>Sample Orders Table for Customer ID: 1</h1>
+<div class="table">
+    <fieldset>
+        <legend><strong>Browse Orders</strong></legend>
+        <table>
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Address ID</th>
+                <th>Ship Date and Time</th>
+                <th colspan="4">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>4</th>
+                <td>1</td>
+                <td>2</td>
+                <td>Not Yet Shipped</td>
+                <td><input type="button" value="See Order Details" onclick='window.location.href="ID1OrderID4OrderDetails.html"'></td>
+                <td><input type="button" value="Update Address" onclick='window.location.href="ID1OrderID4AddressUpdate.html"'></td>
+                <td><input type="button" value="Mark Shipped" onclick='confirm("This will mark the selected order as shipped\nwith the current Date and Time.\nAre you sure you want to submit?")'></td>
+                <td><input type="button" value="Delete" onclick='confirm("This will delete the selected order.\nAre you sure you want to submit?")'></td>
+            </tr>
+            <tr>
+                <td>5</th>
+                <td>1</td>
+                <td>1</td>
+                <td>Not Yet Shipped</td>
+                <td><input type="button" value="See Order Details" disabled></td>
+                <td><input type="button" value="Update Address" disabled></td>
+                <td><input type="button" value="Mark Shipped" disabled></td>
+                <td><input type="button" value="Delete" disabled></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br/>
+<input type="button" value="Add Order" onclick='window.location.href="ID1OrdersInsert.html"'/>
+<input type="button" value="Back to Customers" onclick='window.location.href="../Customers.html"' />
+<br/>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>

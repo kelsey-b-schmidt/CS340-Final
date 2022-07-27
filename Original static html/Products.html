@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CS340 Project - Group 36</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+<a href="index.html">Home</a>
+<a href="Customers.html">Customers</a>
+<a href="Addresses.html">Addresses</a>
+<a href="Orders.html">Orders</a>
+<a href="Products.html">Products</a>
+<br/>
+<h1>Sample Products Table</h1>
+<div class="table">
+    <form id="search">
+        <input type="text" placeholder="Search...">
+        <input type="button" value="Submit">
+        <input type="reset" id="search"/>
+    </form>
+    <fieldset>
+        <legend><strong>Browse Products</strong></legend>
+        <table>
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Brand</th>
+                <th colspan="2">Weight</th>
+                <th>Sell Price</th>
+                <th>Replenish Cost</th>
+                <th>Number in Stock</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Light Roast Coffee</td>
+                <td>Light roast coffee</td>
+                <td>Starbucks</td>
+                <td>5</td>
+                <td>lbs</td>
+                <td>$25.00</td>
+                <td>$17.00</td>
+                <td>1500</td>
+                <td><input type="button" value="Update" onclick='window.location.href="Products/ID1Update.html"'></td>
+                <td><input type="button" value="Delete" onclick='confirm("This will delete the selected address.\nAre you sure you want to submit?")'></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Dark Roast Coffee</td>
+                <td>Dark roast coffee</td>
+                <td>Starbucks</td>
+                <td>5</td>
+                <td>lbs</td>
+                <td>$25.00</td>
+                <td>$17.00</td>
+                <td>2000</td>
+                <td><input type="button" value="Update" disabled></td>
+                <td><input type="button" value="Delete" disabled></td>
+            </tr>
+            <tr>
+                <td>3</td>
+
+                <td>Medium Roast Coffee</td>
+                <td>Medium roast coffee</td>
+                <td>Starbucks</td>
+                <td>7</td>
+                <td>lbs</td>
+                <td>$32.00</td>
+                <td>$22.00</td>
+                <td>2000</td>
+                <td><input type="button" value="Update" disabled></td>
+                <td><input type="button" value="Delete" disabled></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Super Rare Beans</td>
+                <td>The most rare, probably</td>
+                <td>BeanStalk</td>
+                <td>24</td>
+                <td>oz</td>
+                <td>$25.00</td>
+                <td>$16.00</td>
+                <td>1781</td>
+                <td><input type="button" value="Update" disabled></td>
+                <td><input type="button" value="Delete" disabled></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Less Rare Beans</td>
+                <td>Less rare than you'd think</td>
+                <td>BeanStalk</td>
+                <td>24</td>
+                <td>oz</td>
+                <td>$24.00</td>
+                <td>$15.00</td>
+                <td>4000</td>
+                <td><input type="button" value="Update" disabled></td>
+                <td><input type="button" value="Delete" disabled></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<br/>
+<input type="button" value="Add New Product" onclick='window.location.href="Products/Insert.html"' />
+<br/>
+<br/>
+<p>(The forms and prompts are not live, so you won't actually see the data update in the table.)</p>
+</body>
+</html>
