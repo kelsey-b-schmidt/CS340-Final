@@ -1,15 +1,18 @@
 import React from "react";
-import NavigationComponent from "./NavigationComponent";
+import {Link} from "react-router-dom";
 
 
 export default function HeaderComponent () {
 
     return (
-        <header>
-            <h1>Kelsey and Andy's Project</h1>
-        </header>
+        <div>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+            </ul>
+        </div>
     )
 }
 
-//<p><strong><NavigationComponent link={"Home"}></NavigationComponent></strong></p>
-// <p><strong><NavigationComponent link={"Customers"}></NavigationComponent></strong></p>
+//<Link to="/Customers">Customers</Link>

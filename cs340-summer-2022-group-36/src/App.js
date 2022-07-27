@@ -1,20 +1,15 @@
 import React from 'react'
 import './App.css'
-import Customers from "./Pages/Customers";
-import Home from "./Pages/Home";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import HeaderComponent from "./Components/HeaderComponent";
 
 export default function App() {
 
 	return (
 		<div>
-			<HeaderComponent/>
 			<Router>
-				<Routes>
-					<Route path="/" element={<Home/>}/>
-					<Route path="/Customers" element={<Customers/>}/>
-				</Routes>
+				<h1>Kelsey and Andy's Project</h1>
+				<HeaderComponent/>
 			</Router>
 		</div>
 	)
