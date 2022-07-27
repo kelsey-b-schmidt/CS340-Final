@@ -8,7 +8,7 @@ export default function Customers() {
 
     useEffect(() => {
         const getResponse = async() => {
-            const response = await fetch("/api")
+            const response = await fetch("/api/Customers")
             const responseJson = await response.json()
             setCustomers(responseJson)
         }

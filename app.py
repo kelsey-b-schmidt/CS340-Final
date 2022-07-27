@@ -4,8 +4,6 @@ from flask_mysqldb import MySQL
 import json
 import dml
 
-
-
 app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build", static_url_path="/")
 cors = CORS(app)
 
@@ -18,7 +16,7 @@ app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 mysql = MySQL(app)
 
 # Customers table
-@app.route("/api", methods = ["GET"])
+@app.route("/api/Customers", methods = ["GET"])
 @cross_origin()
 def index():
     # Query to return all Customers
@@ -184,6 +182,7 @@ def index():
 
 
 @app.route("/")
+@app.route("/Customers")
 @cross_origin()
 def serve():
     return send_from_directory(app.static_folder, "index.html")
