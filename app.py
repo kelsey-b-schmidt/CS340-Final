@@ -18,30 +18,25 @@ app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 mysql = MySQL(app)
 
 # Customers table
-@app.route("/api", methods = ["POST", "GET"])
+@app.route("/api", methods = ["GET"])
 @cross_origin()
 def index():
-
-    
-    # Query to grab all Customers
+    # Query to return all Customers
     cur = mysql.connection.cursor()
     cur.execute(dml.selectAllCustomers)
     results = json.dumps(cur.fetchall())
     
     # Query to grab Customers ID and name for dropdown selection
-    cur = mysql.connection.cursor()
-    cur.execute(dml.selectCustomersKeys)
-    customerIDs = json.dumps(cur.fetchall())
+    #cur = mysql.connection.cursor()
+    #cur.execute(dml.selectCustomersKeys)
+    #customerIDs = json.dumps(cur.fetchall())
 
     # Query for Customers search function
-    cur = mysql.connection.cursor()
-    cur.execute(dml.customersSearchFunction)
-    customerSearch = json.dumps(cur.fetchall())
+    #cur = mysql.connection.cursor()
+    #cur.execute(dml.customersSearchFunction)
+    #customerSearch = json.dumps(cur.fetchall())
 
     # Query for inserting Customers
-
-    
-    
     return results
 
 # Customers Update
