@@ -10,6 +10,7 @@ export default function HeaderComponent () {
             <ul class="navigation">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/Customers">Customers</Link></li>
+                <li><Link to="/Products">Products</Link></li>
             </ul>
         </div>
     )
