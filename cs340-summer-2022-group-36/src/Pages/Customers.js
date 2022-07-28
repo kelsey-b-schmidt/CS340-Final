@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect } from 'react'
 import CustomerListComponent from "../Components/CustomerListComponent";
-import SearchCustomersComponent from "../Components/SearchCustomersComponent";
+import CustomerSearchComponent from "../Components/CustomerSearchComponent";
 
 export default function Customers() {
 
@@ -36,4 +36,4 @@ export default function Customers() {
     )
 }
 
-//<SearchCustomersComponent/>
+//<CustomerSearchComponent/>
