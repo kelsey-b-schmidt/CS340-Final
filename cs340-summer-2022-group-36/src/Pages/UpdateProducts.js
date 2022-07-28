@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import ProductComponent from './ProductComponent';
+import ProductComponent from '../Components/ProductComponent';
 
-export const UpdateProductsPage = () => {
+export const UpdateProductsPage = ({updatedProducts}) => {
 
     const [productName, setProductName] = useState(updatedProducts.productName);
     const [description, setDescription] = useState(updatedProducts.description);
@@ -86,3 +86,4 @@ export const UpdateProductsPage = () => {
     );
 }
 
+export default UpdateProductsPage;

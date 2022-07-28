@@ -117,10 +117,11 @@ def products():
 # @cross_origin()
 # def productsUpdate():
 
-    # # Query to update Products
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.updateProducts)
-    # productUpdate = json.dumps(cur.fetchall())
+#     # Query to update Products
+#     cur = mysql.connection.cursor()
+#     cur.execute(dml.updateProducts)
+#     productUpdate = json.dumps(cur.fetchall())
+#     return productUpdate
 
 # Products Delete
 # @app.route("/ProductsDelete")
@@ -302,4 +303,4 @@ def not_found(e):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

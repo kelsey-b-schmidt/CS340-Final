@@ -43,6 +43,8 @@ deleteProducts = 'DELETE FROM Products WHERE :productID_is_selected;'
 
 # update a Products data based on submission of the Update product form 
 updateProducts = '''UPDATE Products SET sellPrice = :sellPriceInput, replenishCost = :replenishCostInput, numberInStock = :numberInStockInput WHERE productID = :productID_from_update_form'''
+# updateProducts = '''UPDATE Products SET sellPrice = 2, replenishCost = 3, numberInStock = 1 WHERE productID = 1'''
+
 
 # update Customers data based on submission from Update customers form
 updateCustomers = 'UPDATE Customers SET customerName = :customerNameInput, email = :emailInput, phoneNumber = :phoneNumberInput WHERE customerID = :customerID_from_update_form'
