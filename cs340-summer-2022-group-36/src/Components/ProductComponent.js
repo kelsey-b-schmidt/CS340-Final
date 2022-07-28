@@ -6,8 +6,13 @@ export default function ProductComponent(
         <tr>
             <td>{product.productID}</td>
             <td>{product.productName}</td>
-            <td>{product.email}</td>
-            <td>{product.phoneNumber}</td>
+            <td>{product.description}</td>
+            <td>{product.brand}</td>
+            <td>{product.weightVal}</td>
+            <td>{product.weightUnit}</td>
+            <td>{product.sellPrice}</td>
+            <td>{product.replenishCost}</td>
+            <td>{product.numberInStock}</td>
             <td>
                 <input type="button" value="Update"/>
             </td>
