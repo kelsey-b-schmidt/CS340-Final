@@ -14,8 +14,8 @@ export default function ProductListComponent(
                 <th>Weight</th>
                 <th>Sell Price</th>
                 <th>Replenish Cost</th>
-                <th>Number In Stock</th>
-                <th colSpan="4">Actions</th>
+                <th>Number in Stock</th>
+                <th colSpan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>

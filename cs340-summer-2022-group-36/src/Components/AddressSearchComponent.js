@@ -1,14 +1,14 @@
 import React from 'react'
 import {useState} from 'react'
 
-export default function SearchCustomersComponent (){
+export default function AddressSearchComponent (){
 
     const [query, setQuery] = useState("")
     const [lastSearch, setLastSearch] = useState("Testing")
 
     const handleSubmit = () => {
-        const searchCustomers = async () => {
-            const response = await fetch('/api/Customers', {
+        const searchAddresses = async () => {
+            const response = await fetch('/api/Addresses', {
                 method: 'POST',
                 body: JSON.stringify({a: 1, b: 'Text'}),
                 headers: {
@@ -19,7 +19,7 @@ export default function SearchCustomersComponent (){
             setLastSearch(responseJson.request_received)
             setQuery("")
         }
-        searchCustomers()
+        searchAddresses()
             .catch(console.error)
     }
 

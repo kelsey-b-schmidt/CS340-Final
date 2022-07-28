@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState, useEffect } from 'react'
 import ProductListComponent from "../Components/ProductListComponent";
+import ProductSearchComponent from "../Components/ProductSearchComponent";
 
 export default function Products() {
 
@@ -34,3 +35,5 @@ export default function Products() {
         </div>
     )
 }
+
+//<ProductSearchComponent/>

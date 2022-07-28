@@ -2,23 +2,35 @@ from flask import Flask, send_from_directory, request
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
+import decimal
 import dml
 
 app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build", static_url_path="/")
 cors = CORS(app)
-
 app.config['MYSQL_HOST'] = 'cxmgkzhk95kfgbq4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'n1yj8shcuxjzwpjh'
 app.config['MYSQL_PASSWORD'] = 'r5gkratzpgjyqh9r'
 app.config['MYSQL_DB'] = 'utjfjcdn4jmf1grt'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
-
 mysql = MySQL(app)
+
+class json_encoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, decimal.Decimal): return str(obj)
+
+# for testing, "proxy" in the package.json file should be "http://localhost:5000"
+# this needs to be changed back to "https://cs340-summer-2022-group-36.herokuapp.com/" when finished for the live site!
+# also, change app.run to (debug=True) at the bottom of this file, and change back to app.run() when finished.
+# this allows live updating for React and Flask both in your browser
+
+# ------------------------------don't touch above here!-----------------------------------------
+
+
 
 # ----------------------------------- Customers -------------------------------------
 @app.route("/api/Customers", methods = ["GET", "POST"])
 @cross_origin()
-def get_customers():
+def customers():
     if request.method == "GET":
         # Query to return all Customers
         cur = mysql.connection.cursor()
@@ -65,17 +77,16 @@ def get_customers():
 #     customerIDs = json.dumps(cur.fetchall())
 
 # ----------------------------------- Products -------------------------------------
-
-#Products table
 @app.route("/api/Products", methods = ["GET", "POST"])
 @cross_origin()
-def get_products():
+def products():
     if request.method == "GET":
-        # Query to return all Customers
+        # Query to return all Products
         cur = mysql.connection.cursor()
         cur.execute(dml.selectAllProducts)
-        results = json.dumps(cur.fetchall())
+        results = json.dumps(cur.fetchall(), cls=json_encoder)
         return results
+
     elif request.method == "POST":
         return {"request_received": "yes"}
 
@@ -124,10 +135,18 @@ def get_products():
 
 # ----------------------------------- Addresses -------------------------------------
 
-# # Addresses Route
-# @app.route("/Addresses", methods = ["POST", "GET"])
-# @cross_origin()
-# def index():
+@app.route("/api/Addresses", methods = ["GET", "POST"])
+@cross_origin()
+def addresses():
+    if request.method == "GET":
+        # Query to return all Addresses
+        cur = mysql.connection.cursor()
+        cur.execute(dml.selectAllAddresses)
+        results = json.dumps(cur.fetchall())
+        return results
+
+    elif request.method == "POST":
+        return {"request_received": "yes"}
 
 #     # Query to grab all Addresses
 #     cur = mysql.connection.cursor()
@@ -165,13 +184,18 @@ def get_products():
 
 
 # ----------------------------------- Orders -------------------------------------
+@app.route("/api/Orders", methods = ["GET", "POST"])
+@cross_origin()
+def orders():
+    if request.method == "GET":
+        # Query to return all Orders
+        cur = mysql.connection.cursor()
+        cur.execute(dml.selectAllOrders)
+        results = json.dumps(cur.fetchall())
+        return results
 
-
-
-# Orders Route
-# @app.route("/Orders", methods = ["POST", "GET"])
-# @cross_origin()
-# def index():
+    elif request.method == "POST":
+        return {"request_received": "yes"}
 
 #     # Query to grab all Orders
 #     cur = mysql.connection.cursor()
