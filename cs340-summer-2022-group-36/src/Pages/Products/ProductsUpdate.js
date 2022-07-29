@@ -7,7 +7,7 @@ export default function Products({productToEdit}) {
     const navigate = useNavigate()
 
     const [productNameUpdate, setProductNameUpdate] = useState(productToEdit.productName)
-    const [descriptionUpdate, setDescriptionUpdate] = useState(productToEdit.productDescription)
+    const [descriptionUpdate, setDescriptionUpdate] = useState(productToEdit.description)
     const [brandUpdate, setBrandUpdate] = useState(productToEdit.brand)
     const [weightValUpdate, setWeightValUpdate] = useState(productToEdit.weightVal)
     const [weightUnitUpdate, setWeightUnitUpdate] = useState(productToEdit.weightUnit)
@@ -17,7 +17,7 @@ export default function Products({productToEdit}) {
 
     const handleReset = () => {
         setProductNameUpdate(productToEdit.productName)
-        setDescriptionUpdate(productToEdit.productDescription)
+        setDescriptionUpdate(productToEdit.description)
         setBrandUpdate(productToEdit.brand)
         setWeightValUpdate(productToEdit.weightVal)
         setWeightUnitUpdate(productToEdit.weightUnit)
