@@ -1,11 +1,9 @@
 import React from 'react'
-import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 
 export default function ProductRowComponent(
     {product}) {
 
-    const navigate = useNavigate()
     const productID = product.productID
 
     const [action, setAction] = useState("Delete")
@@ -23,7 +21,7 @@ export default function ProductRowComponent(
             const responseJson = await response.json()
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the Product!\nThe page will now refresh.")
-                navigate("/Products")
+                window.reload()
             } else {
                 alert("Failed to delete Product, please try again!")
             }
