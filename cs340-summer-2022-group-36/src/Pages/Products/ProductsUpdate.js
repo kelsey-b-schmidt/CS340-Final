@@ -2,49 +2,51 @@ import React from 'react'
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
-export default function ProductsUpdate() {
+export default function Products({productToEdit}) {
 
     const navigate = useNavigate()
 
-    const [productName, setProductName] = useState('')
-    const [description, setDescription] = useState('')
-    const [brand, setBrand] = useState('')
-    const [weightVal, setWeightVal] = useState('')
-    const [weightUnit, setWeightUnit] = useState('')
-    const [sellPrice, setSellPrice] = useState('')
-    const [replenishCost, setReplenishCost] = useState('')
-    const [numberInStock, setNumberInStock] = useState('')
+    const [productNameUpdate, setProductNameUpdate] = useState(productToEdit.productName)
+    const [descriptionUpdate, setDescriptionUpdate] = useState(productToEdit.productDescription)
+    const [brandUpdate, setBrandUpdate] = useState(productToEdit.brand)
+    const [weightValUpdate, setWeightValUpdate] = useState(productToEdit.weightVal)
+    const [weightUnitUpdate, setWeightUnitUpdate] = useState(productToEdit.weightUnit)
+    const [sellPriceUpdate, setSellPriceUpdate] = useState(productToEdit.sellPrice)
+    const [replenishCostUpdate, setReplenishCostUpdate] = useState(productToEdit.replenishCost)
+    const [numberInStockUpdate, setNumberInStockUpdate] = useState(productToEdit.numberInStock)
 
     const handleReset = () => {
-        setProductName('')
-        setDescription('')
-        setBrand('')
-        setWeightVal('')
-        setWeightUnit('')
-        setSellPrice('')
-        setReplenishCost('')
-        setNumberInStock('')
+        setProductNameUpdate(productToEdit.productName)
+        setDescriptionUpdate(productToEdit.productDescription)
+        setBrandUpdate(productToEdit.brand)
+        setWeightValUpdate(productToEdit.weightVal)
+        setWeightUnitUpdate(productToEdit.weightUnit)
+        setSellPriceUpdate(productToEdit.sellPrice)
+        setReplenishCostUpdate(productToEdit.replenishCost)
+        setNumberInStockUpdate(productToEdit.numberInStock)
     }
 
     const handleSubmit = () => {
-        if (productName === '' || description === ''|| brand === ''
-            || weightVal === ''|| weightUnit === ''|| sellPrice === ''
-            || replenishCost === ''|| numberInStock === '') {
+        if (productNameUpdate === '' || descriptionUpdate === ''|| brandUpdate === ''
+            || weightValUpdate === ''|| weightUnitUpdate === ''|| sellPriceUpdate === ''
+            || replenishCostUpdate === ''|| numberInStockUpdate === '') {
             alert("Please enter values!")
         }
         else {
-            const action = "Add"
+            const action = "Update"
+            const productID = productToEdit.productID
             const newProduct = async () => {
                 const newProductValues = {
                     action,
-                    productName,
-                    description,
-                    brand,
-                    weightVal,
-                    weightUnit,
-                    sellPrice,
-                    replenishCost,
-                    numberInStock
+                    productNameUpdate,
+                    descriptionUpdate,
+                    brandUpdate,
+                    weightValUpdate,
+                    weightUnitUpdate,
+                    sellPriceUpdate,
+                    replenishCostUpdate,
+                    numberInStockUpdate,
+                    productID
                 }
                 const response = await fetch('/api/Products', {
                     method: 'POST',
@@ -53,13 +55,13 @@ export default function ProductsUpdate() {
                 })
                 const responseJson = await response.json()
                 if (responseJson.request_received === "success") {
-                    alert("Successfully added the Product!\nYou will now be redirected to the Products Page.")
+                    alert("Successfully updated the Product!\nYou will now be redirected to the Products Page.")
                     navigate("/Products")
                 } else {
-                    alert("Failed to add Product, please check the input and try again!")
+                    alert("Failed to update Product, please check the input and try again!")
                 }
             }
-            const answer = window.confirm("This will create a new Product with the entered values.\nDo you wish to proceed?")
+            const answer = window.confirm("This will update this Product with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newProduct()
                     .catch(console.error)
@@ -71,25 +73,29 @@ export default function ProductsUpdate() {
 
     return (
         <fieldset class="form">
-            <legend><strong>Update a Product</strong></legend>
+            <legend><strong>Update Product</strong></legend>
+            <label>Product ID:</label>
+            <input type="text"
+                   id="productID"
+                   value={productToEdit.productID} disabled/>
             <label>Product Name:</label>
             <input type="text"
                    id="productName"
                    maxLength="100"
-                   value={productName}
-                   onChange={e => setProductName(e.target.value)}/>
+                   value={productNameUpdate}
+                   onChange={e => setProductNameUpdate(e.target.value)}/>
             <label>Description:</label>
             <input type="text"
                    id="description"
                    maxLength="1000"
-                   value={description}
-                   onChange={e => setDescription(e.target.value)}/>
+                   value={descriptionUpdate}
+                   onChange={e => setDescriptionUpdate(e.target.value)}/>
             <label>Brand:</label>
             <input type="text"
                    id="brand"
                    maxLength="100"
-                   value={brand}
-                   onChange={e => setBrand(e.target.value)}/>
+                   value={brandUpdate}
+                   onChange={e => setBrandUpdate(e.target.value)}/>
 
 
             <label>Weight Value:</label>
@@ -99,13 +105,13 @@ export default function ProductsUpdate() {
                    step='0.01'
                    min="0"
                    max="10000"
-                   value={weightVal}
-                   onChange={e => setWeightVal(e.target.value)}/>
+                   value={weightValUpdate}
+                   onChange={e => setWeightValUpdate(e.target.value)}/>
             <br/>
             <label>Weight Unit:</label>
             <br/>
-            <select id="weightUnit" onChange={e => setWeightUnit(e.target.value)}>
-                <option value="none" selected disabled hidden>Select</option>
+            <select id="weightUnit" onChange={e => setWeightUnitUpdate(e.target.value)}>
+                <option value={weightUnitUpdate} selected hidden>Select</option>
                 <option value="lbs">lbs</option>
                 <option value="oz">oz</option>
             </select>
@@ -118,8 +124,8 @@ export default function ProductsUpdate() {
                    step='0.01'
                    min="0"
                    max="10000"
-                   value={sellPrice}
-                   onChange={e => setSellPrice(e.target.value)}/>
+                   value={sellPriceUpdate}
+                   onChange={e => setSellPriceUpdate(e.target.value)}/>
             <br/>
             <label>Replenish Cost:</label>
             <br/>
@@ -129,16 +135,16 @@ export default function ProductsUpdate() {
                    step='0.01'
                    min="0"
                    max="10000"
-                   value={replenishCost}
-                   onChange={e => setReplenishCost(e.target.value)}/>
+                   value={replenishCostUpdate}
+                   onChange={e => setReplenishCostUpdate(e.target.value)}/>
             <br/>
             <label>Number in Stock:</label>
             <input type="number"
                    id="number in stock"
                    min="0"
                    max="10000"
-                   value={numberInStock}
-                   onChange={e => setNumberInStock(e.target.value)}/>
+                   value={numberInStockUpdate}
+                   onChange={e => setNumberInStockUpdate(e.target.value)}/>
             <br/>
             <br/>
             <button onClick={handleSubmit}>Submit</button>

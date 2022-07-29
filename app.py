@@ -116,6 +116,26 @@ def products():
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}
 
+        elif request.json["action"] == "Update":
+            table = "PRODUCTS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            update_stmt = (
+              "UPDATE Products SET productName = %s, description = %s, brand = %s, "
+              "weightVal = %s, weightUnit = %s, sellPrice = %s, replenishCost = %s, numberInStock = %s"
+              "WHERE productID = %s"
+            )
+            data = tuple(new_list)
+            cur.execute(insert_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
 
         elif request.json["action"] == "Delete":
              table = "PRODUCTS"
