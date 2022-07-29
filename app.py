@@ -105,6 +105,7 @@ def products():
                     new_list.append(request.json[item])
             cur = mysql.connection.cursor()
 
+
             insert_stmt = (
               "INSERT INTO Products (productName, description, brand, weightVal, weightUnit, sellPrice, replenishCost, numberInStock) "
               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
