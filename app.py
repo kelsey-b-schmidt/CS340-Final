@@ -113,6 +113,7 @@ def products():
 
             data = ("aaaaaaaaaaa", "description", "brand", 1, "lbs", 2, 3, 4)
             cur.execute(insert_stmt, data)
+            mysql.connection.commit()
             return {"request_received": "success"}
 
         return {"request_received": "error"}
