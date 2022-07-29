@@ -21,7 +21,7 @@ export default function ProductRowComponent(
             const responseJson = await response.json()
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the Product!\nThe page will now refresh.")
-                window.reload()
+                window.location.reload()
             } else {
                 alert("Failed to delete Product, please try again!")
             }
