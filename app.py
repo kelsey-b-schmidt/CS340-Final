@@ -110,7 +110,8 @@ def products():
               "INSERT INTO Products (productName, description, brand, weightVal, weightUnit, sellPrice, replenishCost, numberInStock) "
               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             )
-            data = tuple(new_list)
+
+            data = ("aaaaaaaaaaa", "description", "brand", 1, "lbs", 2, 3, 4)
             cur.execute(insert_stmt, data)
             return {"request_received": "success"}
 
