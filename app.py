@@ -110,8 +110,7 @@ def products():
               "INSERT INTO Products (productName, description, brand, weightVal, weightUnit, sellPrice, replenishCost, numberInStock) "
               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             )
-
-            data = ("test2", "description", "brand", 1, "lbs", 2, 3, 4)
+            data = tuple(new_list)
             cur.execute(insert_stmt, data)
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}
