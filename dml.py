@@ -124,18 +124,6 @@ VALUES
 # Products
 
 
-def insert(table, dictionary):
-    keys = dictionary.keys()
-    query = "INSERT INTO " + table + " ("
-    for item in keys:
-        query = query + str(item) + ", "
-    query = query + ") VALUES ("
-    for item in keys:
-        query = query + str(dictionary[item]) + ", "
-    query = query + ");"
-    return query
-
-
 insertProducts = '''Insert
 INSERT INTO Products (
     productName,

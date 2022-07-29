@@ -37,14 +37,15 @@ class json_encoder(json.JSONEncoder):
 @cross_origin()
 def customers():
     if request.method == "GET":
-        # Query to return all Customers
-        cur = mysql.connection.cursor()
-        cur.execute(dml.selectAllCustomers)
-        results = json.dumps(cur.fetchall())
-        return results
+            # Query to return all Customers
+            cur = mysql.connection.cursor()
+            cur.execute(dml.selectAllCustomers)
+            mysql.connection.commit()
+            return json.dumps(cur.fetchall(), cls=json_encoder)
 
-    elif request.method == "POST":
-        return {"request_received": "yes"}
+        elif request.method == "POST":
+        # insert other code later for C, U, D functions
+            return {"request_received": "error"}
 
     
     # Query for inserting Customers
@@ -104,7 +105,6 @@ def products():
                 else:
                     new_list.append(request.json[item])
             cur = mysql.connection.cursor()
-
 
             insert_stmt = (
               "INSERT INTO Products (productName, description, brand, weightVal, weightUnit, sellPrice, replenishCost, numberInStock) "
@@ -170,11 +170,12 @@ def addresses():
         # Query to return all Addresses
         cur = mysql.connection.cursor()
         cur.execute(dml.selectAllAddresses)
-        results = json.dumps(cur.fetchall())
-        return results
+        mysql.connection.commit()
+        return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-        return {"request_received": "yes"}
+    # insert other code later for C, U, D functions
+        return {"request_received": "error"}
 
 #     # Query to grab all Addresses
 #     cur = mysql.connection.cursor()
@@ -219,11 +220,12 @@ def orders():
         # Query to return all Orders
         cur = mysql.connection.cursor()
         cur.execute(dml.selectAllOrders)
-        results = json.dumps(cur.fetchall())
-        return results
+        mysql.connection.commit()
+        return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-        return {"request_received": "yes"}
+    # insert other code later for C, U, D functions
+        return {"request_received": "error"}
 
 #     # Query to grab all Orders
 #     cur = mysql.connection.cursor()
