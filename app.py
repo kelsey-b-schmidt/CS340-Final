@@ -43,9 +43,9 @@ def customers():
             mysql.connection.commit()
             return json.dumps(cur.fetchall(), cls=json_encoder)
 
-        elif request.method == "POST":
-        # insert other code later for C, U, D functions
-            return {"request_received": "error"}
+    elif request.method == "POST":
+    # insert other code later for C, U, D functions
+        return {"request_received": "error"}
 
     
     # Query for inserting Customers
