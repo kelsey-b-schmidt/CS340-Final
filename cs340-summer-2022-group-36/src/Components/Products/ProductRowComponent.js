@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function ProductRowComponent(
     {product}) {
@@ -26,7 +27,7 @@ export default function ProductRowComponent(
                 alert("Failed to delete Product, please try again!")
             }
         }
-        const answer = window.confirm("This will delete the selected Product.\nDo You wish to proceed?")
+        const answer = window.confirm("This will delete the selected Product.\nDo you wish to proceed?")
         if (answer) {
             deleteProduct()
                 .catch(console.error)
@@ -45,7 +46,7 @@ export default function ProductRowComponent(
             <td>${product.replenishCost}</td>
             <td>{product.numberInStock}</td>
             <td>
-                <input type="button" value="Update"/>
+                <input type="button" value="Update" onClick="navigate(/ProductsUpdate)"/>
             </td>
             <td>
                 <input type="button" value="Delete"
