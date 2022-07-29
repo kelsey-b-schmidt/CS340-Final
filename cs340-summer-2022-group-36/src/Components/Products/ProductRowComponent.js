@@ -17,6 +17,7 @@ export default function ProductRowComponent(
     const onDelete = () => {
         const deleteProduct = async () => {
             const action = "Delete"
+
             const newProductValues = {
                 action, productID
             }
