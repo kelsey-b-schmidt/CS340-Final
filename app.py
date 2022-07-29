@@ -115,6 +115,18 @@ def products():
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}
 
+
+        elif if request.json["action"] == "Delete":
+             table = "PRODUCTS"
+             cur = mysql.connection.cursor()
+             delete_stmt = (
+               "DELETE FROM Products WHERE productID = %s"
+             )
+             data = (request.json["productID"],)
+             cur.execute(delete_stmt, data)
+             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+             return {"request_received": "success"}
+
         return {"request_received": "error"}
 
 

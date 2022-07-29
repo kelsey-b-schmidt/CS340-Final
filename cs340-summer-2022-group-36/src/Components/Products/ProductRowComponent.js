@@ -1,7 +1,40 @@
 import React from 'react'
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 export default function ProductRowComponent(
     {product}) {
+
+    const navigate = useNavigate()
+    const productID = product.productID
+
+    const [action, setAction] = useState("Delete")
+
+    const handleSubmit = () => {
+        const deleteProduct = async () => {
+            const newProductValues = {
+                action, productID
+            }
+            const response = await fetch('/api/Products', {
+                method: 'POST',
+                body: JSON.stringify(newProductValues),
+                headers: {'Content-Type': 'application/json'},
+            })
+            const responseJson = await response.json()
+            if (responseJson.request_received === "success") {
+                alert("Successfully deleted the Product!\nThe page will now refresh.")
+                navigate("/Products")
+            } else {
+                alert("Failed to delete Product, please try again!")
+            }
+        }
+        const answer = window.confirm("This will delete the selected Product.\nDo You wish to proceed?")
+        if (answer) {
+            deleteProduct()
+                .catch(console.error)
+        }
+    }
+
     return (
         <tr>
             <td>{product.productID}</td>
@@ -18,7 +51,7 @@ export default function ProductRowComponent(
             </td>
             <td>
                 <input type="button" value="Delete"
-                       onClick='confirm("This will delete the selected product.\nAre you sure you want to submit?")'
+                       onClick={handleSubmit}
                 />
             </td>
         </tr>

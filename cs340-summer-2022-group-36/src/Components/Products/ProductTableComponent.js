@@ -22,6 +22,7 @@ export default function ProductTableComponent(
                 {products.map((product, i) =>
                     <ProductRowComponent
                         product={product}
+
                         key={i}
                     />)}
             </tbody>
