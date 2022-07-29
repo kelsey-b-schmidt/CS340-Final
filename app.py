@@ -10,6 +10,7 @@ import json
 import decimal
 import dml
 
+
 app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build", static_url_path="/")
 cors = CORS(app)
 app.config['MYSQL_HOST'] = 'cxmgkzhk95kfgbq4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
