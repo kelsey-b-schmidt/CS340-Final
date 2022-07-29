@@ -33,10 +33,10 @@ export default function Products() {
             alert("Please enter values!")
         }
         else {
-            const add = "add"
+            const action = "add"
             const newProduct = async () => {
                 const newProductValues = {
-                    add,
+                    action,
                     productName,
                     description,
                     brand,
