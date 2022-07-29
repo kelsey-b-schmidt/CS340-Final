@@ -117,7 +117,7 @@ def products():
             return {"request_received": "success"}
 
 
-        elif if request.json["action"] == "Delete":
+        elif request.json["action"] == "Delete":
              table = "PRODUCTS"
              cur = mysql.connection.cursor()
              delete_stmt = (
