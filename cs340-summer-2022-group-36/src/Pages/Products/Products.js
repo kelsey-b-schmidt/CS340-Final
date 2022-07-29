@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import ProductBrowseComponent from "../../Components/Products/ProductBrowseComponent";
 //import ProductSearchComponent from "../Components/ProductSearchComponent";
 
-export default function Products({setProductToEdit, action, setAction}) {
+export default function Products({setProductToEdit}) {
 
     return (
         <div>
@@ -12,8 +12,6 @@ export default function Products({setProductToEdit, action, setAction}) {
             <br/>
             <br/>
             <ProductBrowseComponent
-                action={action}
-                setAction={setAction}
                 setProductToEdit={setProductToEdit}/>
         </div>
     )

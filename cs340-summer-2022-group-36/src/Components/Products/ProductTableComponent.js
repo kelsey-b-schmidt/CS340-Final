@@ -2,7 +2,7 @@ import React from 'react'
 import ProductRowComponent from "./ProductRowComponent";
 
 export default function ProductTableComponent(
-    {products, setProductToEdit, action, setAction}) {
+    {products, setProductToEdit}) {
     return (
         <table>
             <thead>
@@ -23,8 +23,6 @@ export default function ProductTableComponent(
                     <ProductRowComponent
                         product={product}
                         key={i}
-                        action={action}
-                        setAction={setAction}
                         setProductToEdit={setProductToEdit}
                     />)}
             </tbody>

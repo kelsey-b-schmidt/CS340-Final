@@ -2,7 +2,7 @@ import React from 'react'
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
-export default function Products( {action, setAction}) {
+export default function Products() {
 
     const navigate = useNavigate()
 
@@ -33,10 +33,10 @@ export default function Products( {action, setAction}) {
             alert("Please enter values!")
         }
         else {
-            setAction("Add")
+            const add = "add"
             const newProduct = async () => {
                 const newProductValues = {
-                    action,
+                    add,
                     productName,
                     description,
                     brand,

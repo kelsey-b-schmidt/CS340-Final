@@ -18,7 +18,6 @@ import FooterComponent from "./Components/Header-Footer/FooterComponent";
 export default function App() {
 
 	const [productToEdit, setProductToEdit] = useState();
-	const [action, setAction] = useState('')
 
 	return (
 		<div>
@@ -31,15 +30,10 @@ export default function App() {
 					<Route path="/Orders" element={<Orders/>}/>
 					<Route path="/Products" element={<Products
 						productToEdit={productToEdit}
-						setProductToEdit={setProductToEdit}
-						action={action}
-						setAction={setAction}/>}/>
-					<Route path="/ProductsAdd" element={<ProductsAdd
-						action={action}
-						setAction={setAction}/>}/>
+						setProductToEdit={setProductToEdit}/>}/>
+					<Route path="/ProductsAdd" element={<ProductsAdd/>}/>
 					<Route path="/ProductsUpdate" element={<ProductsUpdate
-						productToEdit={productToEdit}
-						action={action}/>}/>
+						productToEdit={productToEdit}/>}/>
 				</Routes>
 				<FooterComponent/>
 			</BrowserRouter>
