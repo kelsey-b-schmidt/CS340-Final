@@ -2,7 +2,7 @@
 selectAllCustomers = 'SELECT * FROM Customers;'
 selectAllAddresses = 'SELECT * FROM Addresses;'
 selectAllOrders = 'SELECT * FROM Orders;'
-selectAllProducts = 'SELECT * FROM Products;'
+selectAllProducts = 'SELECT * FROM Products'
 selectAllOrderDetails = 'SELECT * FROM OrderDetails;'
 
 # Get primary and foreign keys
@@ -122,6 +122,19 @@ VALUES
 ),'''
 
 # Products
+
+
+def insert(table, dictionary):
+    keys = dictionary.keys()
+    query = "INSERT INTO " + table + " ("
+    for item in keys:
+        query = query + str(item) + ", "
+    query = query + ") VALUES ("
+    for item in keys:
+        query = query + str(dictionary[item]) + ", "
+    query = query + ");"
+    return query
+
 
 insertProducts = '''Insert
 INSERT INTO Products (

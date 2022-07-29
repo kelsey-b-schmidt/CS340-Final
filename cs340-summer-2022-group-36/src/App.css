@@ -21,6 +21,15 @@ th, td {
   padding: 20px;
 }
 
+.form {
+  width: 200px;
+  margin:auto;
+}
+
+button {
+  cursor: pointer;
+}
+
 footer {
   position: fixed;
   left: 0;

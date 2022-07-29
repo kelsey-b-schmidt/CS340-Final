@@ -1,3 +1,8 @@
+# referenced FLASK Starter App code from course modules
+# referenced heroku setup code from this tutorial https://www.youtube.com/watch?v=h96KP3JMX7Q
+# referenced 404 error handler from this post https://stackoverflow.com/questions/48060556/flask-serving-a-react-application-cannot-refresh-pages
+# referenced code snippets from previous coursework in CS290 from both authors, Andy Chen and Kelsey Schmidt
+
 from flask import Flask, send_from_directory, request
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
@@ -18,7 +23,7 @@ class json_encoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, decimal.Decimal): return str(obj)
 
-# for testing, "proxy" in the package.json file should be "http://localhost:5000"
+# for testing, "proxy" in the package.json file should be "http://127.0.0.1:5000"
 # this needs to be changed back to "https://cs340-summer-2022-group-36.herokuapp.com/" when finished for the live site!
 # also, change app.run to (debug=True) at the bottom of this file, and change back to app.run() when finished.
 # this allows live updating for React and Flask both in your browser
@@ -37,7 +42,7 @@ def customers():
         cur.execute(dml.selectAllCustomers)
         results = json.dumps(cur.fetchall())
         return results
-    
+
     elif request.method == "POST":
         return {"request_received": "yes"}
 
@@ -83,12 +88,40 @@ def products():
     if request.method == "GET":
         # Query to return all Products
         cur = mysql.connection.cursor()
-        cur.execute(dml.selectAllProducts)
-        results = json.dumps(cur.fetchall(), cls=json_encoder)
-        return results
+        cur.execute('SELECT * FROM Products;')
+        mysql.connection.commit()
+        return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-        return {"request_received": "yes"}
+        query = request.json
+        print(query)
+        if request.json["action"] == "Add":
+            table = "PRODUCTS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+
+            insert_stmt = (
+              "INSERT INTO Products (productName, description, brand, weightVal, weightUnit, sellPrice, replenishCost, numberInStock) "
+              "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            )
+
+            data = ("aaaaaaaaaaa", "description", "brand", 1, "lbs", 2, 3, 4)
+            cur.execute(insert_stmt, data)
+
+            select_stmt = "SELECT * FROM Products"
+            cur.execute(select_stmt)
+            results = json.dumps(cur.fetchall(), cls=json_encoder)
+            mysql.connection.commit()
+            print(results)
+            return {"request_received": "success"}
+
+        return {"request_received": "error"}
 
 
     # # Query for Products search functionality
