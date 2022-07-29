@@ -129,7 +129,7 @@ def products():
             update_stmt = (
               "UPDATE Products SET productName = %s, description = %s, brand = %s, "
               "weightVal = %s, weightUnit = %s, sellPrice = %s, replenishCost = %s, numberInStock = %s"
-              "WHERE productID = %s"
+              "WHERE (productID = %s)"
             )
             data = tuple(new_list)
             cur.execute(update_stmt, data)
