@@ -2,7 +2,7 @@ import React from 'react'
 import ProductTableComponent from "./ProductTableComponent";
 import {useEffect, useState} from "react";
 
-export default function ProductBrowseComponent() {
+export default function ProductBrowseComponent( {setProductToEdit, action, setAction} ) {
 
     const [products, setProducts] = useState([])
 
@@ -21,6 +21,9 @@ export default function ProductBrowseComponent() {
             <legend><strong>Browse Products</strong></legend>
             <ProductTableComponent
                 products={products}
+                action={action}
+                setAction={setAction}
+                setProductToEdit={setProductToEdit}
             />
         </fieldset>
     )

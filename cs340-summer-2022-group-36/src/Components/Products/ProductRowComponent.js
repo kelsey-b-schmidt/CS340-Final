@@ -3,14 +3,20 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function ProductRowComponent(
-    {product}) {
+    {product, setProductToEdit, action, setAction}) {
+
+    const navigate = useNavigate()
 
     const productID = product.productID
 
-    const [action, setAction] = useState("Delete")
+    const onUpdate = () => {
+        setProductToEdit(product)
+        navigate("/ProductsUpdate")
+    }
 
-    const handleSubmit = () => {
+    const onDelete = () => {
         const deleteProduct = async () => {
+            setAction("Delete")
             const newProductValues = {
                 action, productID
             }
@@ -34,6 +40,10 @@ export default function ProductRowComponent(
         }
     }
 
+
+
+
+
     return (
         <tr>
             <td>{product.productID}</td>
@@ -44,13 +54,13 @@ export default function ProductRowComponent(
             <td>{product.weightUnit}</td>
             <td>${product.sellPrice}</td>
             <td>${product.replenishCost}</td>
-            <td>{product.numberInStock}</td>
+            <td>{product.numberInStock}, {action}</td>
             <td>
-                <input type="button" value="Update" onClick="navigate(/ProductsUpdate)"/>
+                <input type="button" value="Update" onClick={onUpdate}/>
             </td>
             <td>
                 <input type="button" value="Delete"
-                       onClick={handleSubmit}
+                       onClick={onDelete}
                 />
             </td>
         </tr>
