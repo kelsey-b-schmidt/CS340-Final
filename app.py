@@ -132,7 +132,7 @@ def products():
               "WHERE productID = %s"
             )
             data = tuple(new_list)
-            cur.execute(insert_stmt, data)
+            cur.execute(update_stmt, data)
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}
 
@@ -358,7 +358,7 @@ def serve():
     return send_from_directory(app.static_folder, "index.html")
 
 
-# catch 404 errors, allows us to refresh any page and have it rendered
+# catch 404 errors, allows us to refresh any main page and have it rendered
 @app.errorhandler(404)
 def not_found(e):
     return send_from_directory(app.static_folder, "index.html")
