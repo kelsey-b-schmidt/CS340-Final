@@ -2,7 +2,7 @@ import React from 'react'
 import CustomerRowComponent from "./CustomerRowComponent";
 
 export default function CustomerTableComponent(
-    {customers}) {
+    {customers, setCustomerToEdit}) {
     return (
         <table>
             <thead>
@@ -19,6 +19,7 @@ export default function CustomerTableComponent(
                     <CustomerRowComponent
                         customer={customer}
                         key={i}
+                        setCustomerToEdit={setCustomerToEdit}
                     />)}
             </tbody>
         </table>

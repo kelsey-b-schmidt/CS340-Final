@@ -1,13 +1,13 @@
 import React from 'react'
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import AddressTableComponent from "./AddressTableComponent";
 
-export default function AddressBrowseComponent() {
+export default function AddressBrowseComponent({ setAddressToEdit }) {
 
     const [addresses, setAddresses] = useState([])
 
     useEffect(() => {
-        const getResponse = async() => {
+        const getResponse = async () => {
             const response = await fetch("/api/Addresses")
             const responseJson = await response.json()
             setAddresses(responseJson)
@@ -21,6 +21,7 @@ export default function AddressBrowseComponent() {
             <legend><strong>Browse Addresses</strong></legend>
             <AddressTableComponent
                 addresses={addresses}
+                setAddressToEdit={setAddressToEdit}
             />
         </fieldset>
     )

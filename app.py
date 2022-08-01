@@ -11,7 +11,8 @@ import decimal
 import dml
 
 
-app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build", static_url_path="/")
+app = Flask(__name__, static_folder="cs340-summer-2022-group-36/build",
+            static_url_path="/")
 cors = CORS(app)
 app.config['MYSQL_HOST'] = 'cxmgkzhk95kfgbq4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'n1yj8shcuxjzwpjh'
@@ -19,6 +20,7 @@ app.config['MYSQL_PASSWORD'] = 'r5gkratzpgjyqh9r'
 app.config['MYSQL_DB'] = 'utjfjcdn4jmf1grt'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 mysql = MySQL(app)
+
 
 class json_encoder(json.JSONEncoder):
     def default(self, obj):
@@ -32,9 +34,8 @@ class json_encoder(json.JSONEncoder):
 # ------------------------------don't touch above here!-----------------------------------------
 
 
-
 # ----------------------------------- Customers -------------------------------------
-@app.route("/api/Customers", methods = ["GET", "POST"])
+@app.route("/api/Customers", methods=["GET", "POST"])
 @cross_origin()
 def customers():
     if request.method == "GET":
@@ -45,43 +46,69 @@ def customers():
             return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-    # insert other code later for C, U, D functions
+        if request.json["action"] == "Add":
+            table = "CUSTOMERS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            insert_stmt = (
+              "INSERT INTO Customers (customerName, email, phoneNumber) "
+              "VALUES (%s, %s, %s)"
+            )
+            data = tuple(new_list)
+            cur.execute(insert_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
+        elif request.json["action"] == "Update":
+            table = "CUSTOMERS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            update_stmt = (
+                "UPDATE Customers SET customerName = %s, email = %s, phoneNumber = %s"
+                "WHERE customerID = %s"
+            )
+            data = tuple(new_list)
+            cur.execute(update_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
+
+        elif request.json["action"] == "Delete":
+            table = "CUSTOMERS"
+            cur = mysql.connection.cursor()
+            delete_stmt = (
+            "DELETE FROM Customers WHERE customerID = %s"
+            )
+            data = (request.json["customerID"],)
+            cur.execute(delete_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
         return {"request_received": "error"}
 
-    
-    # Query for inserting Customers
-    # if request.method == "POST":
-        # if request.form.get('Add New Customer'):
-        
-        # customerName = request.form[]
-        # email = request.form[]
-        # phoneNumber = request.form[]
+        # Query to grab Customers ID and name for dropdown selection
+        # cur = mysql.connection.cursor()
+        # cur.execute(dml.selectCustomersKeys)
+        # customerIDs = json.dumps(cur.fetchall())
+
+        # Query for Customers search function
+        # cur = mysql.connection.cursor()
+        # cur.execute(dml.customersSearchFunction)
+        # customerSearch = json.dumps(cur.fetchall())
 
 
-    # Query to grab Customers ID and name for dropdown selection
-    #cur = mysql.connection.cursor()
-    #cur.execute(dml.selectCustomersKeys)
-    #customerIDs = json.dumps(cur.fetchall())
-
-    # Query for Customers search function
-    #cur = mysql.connection.cursor()
-    #cur.execute(dml.customersSearchFunction)
-    #customerSearch = json.dumps(cur.fetchall())
-
-# Customers Update
-# @app.route("/CustomersUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def updateCustomers():
-
-#     # Query to update Customers
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.updateCustomers)
-#     customerUpdate = json.dumps(cur.fetchall())
-
-#     # Query to grab Customers ID and name for dropdown selection
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.selectCustomersKeys)
-#     customerIDs = json.dumps(cur.fetchall())
 
 # ----------------------------------- Products -------------------------------------
 @app.route("/api/Products", methods = ["GET", "POST"])
@@ -155,44 +182,6 @@ def products():
     # cur.execute(dml.productsSearchFunction)
     # productSearch = json.dumps(cur.fetchall())
 
-    # # Query for inserting Products
-
-
-    # if request.method == "POST":
-
-    #     if request.form.get("Add New Product"):
-
-    #         productName = request.form[]
-    #         productDescription = request.form[]
-    #         productBrand = request.form[]
-    #         weightVal = request.form[]
-    #         weightValUnit = request.form[]
-    #         sellPrice = request.form[]
-    #         replenishCost = request.form[]
-    #         numberInStock = request.form[]
-
-# Products Update
-# @app.route("/ProductsUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def productsUpdate():
-
-#     # Query to update Products
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.updateProducts)
-#     productUpdate = json.dumps(cur.fetchall())
-#     return productUpdate
-
-# Products Delete
-# @app.route("/ProductsDelete")
-# @cross_origin()
-# def productsDelete():
-
-    # # Query to delete Products
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.deleteProducts)
-    # mysql.connection.commit()
-
-
 # ----------------------------------- Addresses -------------------------------------
 
 @app.route("/api/Addresses", methods = ["GET", "POST"])
@@ -206,7 +195,56 @@ def addresses():
         return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-    # insert other code later for C, U, D functions
+
+        if request.json['action'] == 'Add':
+            table = "ADDRESSES"
+            new_list = list()
+            for item in request.json:
+                if item == 'action':
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            insert_stmt = (
+              "INSERT INTO Addresses (customerID, recipient, street, city, state, zip, isActive, isPrimary) "
+              "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            )
+            data = tuple(new_list)
+            cur.execute(insert_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
+        elif request.json["action"] == "Update":
+            table = "ADDRESSES"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            update_stmt = (
+              "UPDATE Addresses SET recipient = %s, street = %s, city = %s, state = %s, zip = %s, isActive = %s, isPrimary = %s "
+              "WHERE addressID = %s"
+            )
+            data = tuple(new_list)
+            cur.execute(update_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
+        elif request.json["action"] == "Delete":
+             table = "ADDRESSES"
+             cur = mysql.connection.cursor()
+             delete_stmt = (
+               "DELETE FROM Addresses WHERE addressID = %s"
+             )
+             data = (request.json["addressID"],)
+             cur.execute(delete_stmt, data)
+             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+             return {"request_received": "success"}
+
         return {"request_received": "error"}
 
 #     # Query to grab all Addresses
@@ -218,30 +256,6 @@ def addresses():
 #     cur = mysql.connection.cursor()
 #     cur.execute(dml.addressesSearchFunction)
 #     addressSearch = json.dumps(cur.fetchall())
-    
-#     # Query for inserting Addresses
-#     if request.method == "POST":
-
-#         if request.form.get("Add New Address"):
-
-#             customerID = request.form[]
-#             recipient = request.form[]
-#             street = request.form[]
-#             city = request.form[]
-#             state = request.form[]
-#             zip = request.form[]
-#             isActive = request.form[]
-#             isPrimary = request.form[]
-
-# # Addresses Update
-# @app.route("/AddressesUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def addressUpdate():
-
-#     # Query to update Addresses
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.updateAddresses)
-#     addressUpdate = json.dumps(cur.fetchall())
 
 
 # ----------------------------------- Orders -------------------------------------
@@ -256,7 +270,36 @@ def orders():
         return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-    # insert other code later for C, U, D functions
+        if request.json["action"] == "Add":
+            table = "ORDERS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            insert_stmt = (
+                "INSERT INTO Orders (addressID, customerID, shipDateTime) "
+                "VALUES (%s, %s, %s)"
+            )
+            data = tuple(new_list)
+            cur.execute(insert_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
+        elif request.json["action"] == "Delete":
+                table = "ORDERS"
+                cur = mysql.connection.cursor()
+                delete_stmt = (
+                "DELETE FROM Orders WHERE orderID = %s"
+                )
+                data = (request.json["orderID"],)
+                cur.execute(delete_stmt, data)
+                mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+                return {"request_received": "success"}
+            
         return {"request_received": "error"}
 
 #     # Query to grab all Orders
@@ -268,75 +311,81 @@ def orders():
 #     cur = mysql.connection.cursor()
 #     cur.execute(dml.ordersSearchFunction)
 #     orderSearch = json.dumps(cur.fetchall())
-    
-#     # Query for inserting Orders
-#     if request.method == "POST":
 
-#         if request.form.get("Add Order"):
-
-#             addressID = request.form[]
-#             customerID = request.form[]
-#             shipDateTime = request.form[]
 
 #     # Query for creating order invoices
 
 #     # Query for updating shipdatetime
 
-# # Orders Update
-# @app.route("/OrderUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def orderUpdate():
-
-#     # Query to update Orders
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.updateOrders)
-#     orderUpdate = json.dumps(cur.fetchall())
 
 # ----------------------------------- OrderDetails -------------------------------------
 
 
-# # OrderDetails Route
-# @app.route("/OrderDetails", methods = ["POST", "GET"])
-# @cross_origin()
-# def index():
+# OrderDetails Route
+@app.route("/api/OrderDetails", methods = ["POST", "GET"])
+@cross_origin()
+def orderDetails():
 
-#     # Query to grab all OrderDetails
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.selectAllOrderDetails)
-#     results = json.dumps(cur.fetchall())
-    
-#     # Query for inserting OrderDetails
+    if request.method == "GET":
+        # Query to grab all OrderDetails
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM OrderDetails;')
+        mysql.connection.commit()
+        return json.dumps(cur.fetchall(), cls=json_encoder)
 
-#     # if request.method == "POST":
+    elif request.method == "POST":
+        if request.json["action"] == "Add":
+            table = "ORDERDETAILS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
 
-#         if request.form.get("Add Order Detail"):
+            insert_stmt = (
+              "INSERT INTO OrderDetails (orderID, productID, productQuantity, unitPrice) "
+              "VALUES (%s, %s, %s, %s)"
+            )
+            data = tuple(new_list)
+            cur.execute(insert_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
 
-#             orderID = request.form[]
-#             productID = request.form[]
-#             productQuantity = request.form[]
-#             unitPrice = request.form[]
+        elif request.json["action"] == "Update":
+            table = "ORDERDETAILS"
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            update_stmt = (
+              "UPDATE OrderDetails SET productID = %s, productQuantity = %s, unitPrice = %s"
+              "WHERE odID = %s"
+            )
+            data = tuple(new_list)
+            cur.execute(update_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
 
 
+        elif request.json["action"] == "Delete":
+             table = "ORDERDETAILS"
+             cur = mysql.connection.cursor()
+             delete_stmt = (
+               "DELETE FROM OrderDetails WHERE odID = %s"
+             )
+             data = (request.json["odID"],)
+             cur.execute(delete_stmt, data)
+             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+             return {"request_received": "success"}
 
-# OrderDetails Update
-# @app.route("/OrderDetailsUpdate", methods = ["POST", "GET"])
-# @cross_origin()
-# def orderDetailsUpdate():
+        return {"request_received": "error"}
 
-#     # Query to update OrderDetails
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.updateOrderDetails)
-#     orderDetailUpdate = json.dumps(cur.fetchall())
-
-# OrderDetails Delete
-# @app.route("/OrderDetailsDelete")
-# @cross_origin()
-# def orderDetailsDelete():
-
-    # # Query to delete OrderDetails
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.deleteFromOrderDetails)
-    # mysql.connection.commit()
 
 
 

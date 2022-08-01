@@ -2,7 +2,7 @@ import React from 'react'
 import CustomerTableComponent from "./CustomerTableComponent";
 import {useEffect, useState} from "react";
 
-export default function CustomerBrowseComponent() {
+export default function CustomerBrowseComponent({setCustomerToEdit}) {
 
     const [customers, setCustomers] = useState([])
 
@@ -21,6 +21,7 @@ export default function CustomerBrowseComponent() {
             <legend><strong>Browse Customers</strong></legend>
             <CustomerTableComponent
                 customers={customers}
+                setCustomerToEdit={setCustomerToEdit}
             />
         </fieldset>
     )

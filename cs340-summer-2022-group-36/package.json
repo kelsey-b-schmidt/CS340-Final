@@ -2,7 +2,7 @@
   "name": "cs340-summer-2022-group-36",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://cs340-summer-2022-group-36.herokuapp.com/",
+  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

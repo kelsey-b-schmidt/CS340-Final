@@ -1,13 +1,13 @@
 import React from 'react'
 import OrderTableComponent from "./OrderTableComponent";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-export default function OrderBrowseComponent() {
+export default function OrderBrowseComponent({ setOrderToEdit }) {
 
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
-        const getResponse = async() => {
+        const getResponse = async () => {
             const response = await fetch("/api/Orders")
             const responseJson = await response.json()
             setOrders(responseJson)
@@ -21,6 +21,7 @@ export default function OrderBrowseComponent() {
             <legend><strong>Browse Orders</strong></legend>
             <OrderTableComponent
                 orders={orders}
+                setOrderToEdit={setOrderToEdit}
             />
         </fieldset>
     )

@@ -32,12 +32,16 @@ productsSearchFunction = 'SELECT * FROM Products WHERE productID = :productIDInp
 # Delete functions for entity tables
 
 # Does not allow deletion of an Order if OrderDetails have already been made. M-M Relationship 
-deleteOrderID = 'DELETE FROM Orders WHERE :orderID_selected_from_orders_page;'
+deleteOrders = 'DELETE FROM Orders WHERE :orderID_selected_from_orders_page;'
 
 # Allowing deletion of OrderDetails and does not affect Orders or Products entity table 
 deleteFromOrderDetails = 'DELETE FROM OrderDetails WHERE :orderID_selected_from_OrdersDetails_page;'
 
 deleteProducts = 'DELETE FROM Products WHERE :productID_is_selected;'
+
+deleteCustomers = "DELETE FROM Customers WHERE customerID = :customerID_is_selected"
+
+deleteAddresses = "DELETE FROM Addresses WHERE addressID = :addressID_is_selected"
 
 # Update functions for entity tables
 
@@ -59,7 +63,7 @@ updateOrders = 'UPDATE Orders SET shipDateTime = :shipDateTimeMarkedShipped WHER
 
 # update OrderDetails data based on submission from Update orderdetails form
 
-updateOrderDetails = 'UPDATE OrderDetails SET productQuantity = :productQuantityInput, unitPrice = :unitPriceInput WHERE odID = :odID_from_update_form'
+updateOrderDetails = 'UPDATE OrderDetails SET productID = :productIDInput, productQuantity = :productQuantityInput, unitPrice = :unitPriceInput WHERE odID = :odID_from_update_form'
 
 # update command for update shipdate time when button is clicked from null to a set date 
 # Need to implement
