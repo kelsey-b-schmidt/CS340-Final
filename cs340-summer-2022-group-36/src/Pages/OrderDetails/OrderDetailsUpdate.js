@@ -78,7 +78,7 @@ export default function OrderDetails({ orderDetailsToEdit }) {
                 id="productQuantity"
                 min="0"
                 max="10000"
-                value={productQuantityUpdate}
+                value={productQuantityUpdate && Math.max(0, productQuantityUpdate)}
                 onChange={e => setProductQuantityUpdate(e.target.value)} />
             <br />
             <label>Unit Price:</label>
@@ -87,7 +87,7 @@ export default function OrderDetails({ orderDetailsToEdit }) {
                 id="unitPrice"
                 min="0"
                 max="10000"
-                value={unitPriceUpdate}
+                value={unitPriceUpdate && Math.max(0, unitPriceUpdate)}
                 onChange={e => setUnitPriceUpdate(e.target.value)} />
             <br />
             <br />

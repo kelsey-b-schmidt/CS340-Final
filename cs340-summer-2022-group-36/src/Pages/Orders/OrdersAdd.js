@@ -8,7 +8,7 @@ export default function Orders() {
 
     const [addressID, setAddressID] = useState('')
     const [customerID, setCustomerID] = useState('')
-    const [shipDateTime, setShipDateTime] = useState('')
+    const [shipDateTime, setShipDateTime] = useState(null)
 
 
     const handleReset = () => {

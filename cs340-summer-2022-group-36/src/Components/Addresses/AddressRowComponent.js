@@ -38,7 +38,7 @@ export default function AddressRowComponent(
         if (answer) {
             deleteAddress()
                 .catch(console.error)
-        }
+        } 
     }
 
     const handleBoolean = (input) => {

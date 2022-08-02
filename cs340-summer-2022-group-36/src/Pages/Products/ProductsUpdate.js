@@ -105,7 +105,8 @@ export default function Products({productToEdit}) {
                    step='0.01'
                    min="0"
                    max="10000"
-                   value={weightValUpdate}
+                   title="How much product there is"
+                   value={weightValUpdate && Math.max(0, weightValUpdate)}
                    onChange={e => setWeightValUpdate(e.target.value)}/>
             <br/>
             <label>Weight Unit:</label>
@@ -124,7 +125,8 @@ export default function Products({productToEdit}) {
                    step='0.01'
                    min="0"
                    max="10000"
-                   value={sellPriceUpdate}
+                   title="The selling price of the product to the consumer"
+                   value={sellPriceUpdate && Math.max(0, sellPriceUpdate)}
                    onChange={e => setSellPriceUpdate(e.target.value)}/>
             <br/>
             <label>Replenish Cost:</label>
@@ -135,7 +137,8 @@ export default function Products({productToEdit}) {
                    step='0.01'
                    min="0"
                    max="10000"
-                   value={replenishCostUpdate}
+                   title="How much it cost CoffeeBuzz to pay to refill"
+                   value={replenishCostUpdate && Math.max(0, replenishCostUpdate)}
                    onChange={e => setReplenishCostUpdate(e.target.value)}/>
             <br/>
             <label>Number in Stock:</label>
@@ -143,7 +146,7 @@ export default function Products({productToEdit}) {
                    id="number in stock"
                    min="0"
                    max="10000"
-                   value={numberInStockUpdate}
+                   value={numberInStockUpdate && Math.max(0, numberInStockUpdate)}
                    onChange={e => setNumberInStockUpdate(e.target.value)}/>
             <br/>
             <br/>
