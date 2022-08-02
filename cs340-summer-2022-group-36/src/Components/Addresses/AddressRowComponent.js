@@ -37,8 +37,10 @@ export default function AddressRowComponent(
         const answer = window.confirm("This will delete the selected Address.\nDo you wish to proceed?")
         if (answer) {
             deleteAddress()
-                .catch(console.error)
-        } 
+                .catch(error => {
+                    alert('This Address is in use with an Order. You cannot delete. Please try another Address')
+                }
+        )}
     }
 
     const handleBoolean = (input) => {

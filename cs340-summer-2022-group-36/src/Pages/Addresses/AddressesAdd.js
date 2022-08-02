@@ -6,13 +6,14 @@ export default function Address() {
 
     const navigate = useNavigate()
 
+    const [customerID, setCustomerID] = useState('')
     const [recipient, setRecipientName] = useState('')
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
-    const [isActive, setIsActive] = useState('')
-    const [isPrimary, setIsPrimary] = useState('')
+    const [isActive, setIsActive] = useState(0)
+    const [isPrimary, setIsPrimary] = useState(1)
 
     const handleReset = () => {
         setRecipientName('')
@@ -31,12 +32,10 @@ export default function Address() {
 
     const handleActiveChange = (e) => {
         let isChecked = e.target.checked
-        
-        // console.log(e.target.value)
-        if (isChecked){
+        if (isChecked) {
             e.target.value = 1
             setIsActive(e.target.value)
-        } else{
+        } else {
             e.target.value = 0
             setIsActive(e.target.value)
         }
@@ -44,17 +43,17 @@ export default function Address() {
 
     const handlePrimaryChange = (e) => {
         let isChecked = e.target.checked
-        if (isChecked){
+        if (isChecked) {
             e.target.value = 1
             setIsPrimary(e.target.value)
-        } else{
+        } else {
             e.target.value = 0
             setIsPrimary(e.target.value)
         }
     };
 
     const handleSubmit = () => {
-        if (recipient === '' || street === '' || city === ''
+        if (customerID == '' || recipient === '' || street === '' || city === ''
             || state === '' || zip === '') {
             alert("Please enter values!")
         }
@@ -63,6 +62,7 @@ export default function Address() {
             const newAddress = async () => {
                 const newAddressValues = {
                     action,
+                    customerID,
                     recipient,
                     street,
                     city,
@@ -97,6 +97,12 @@ export default function Address() {
     return (
         <fieldset class="form">
             <legend><strong>Add a new Address</strong></legend>
+            <label>Customer ID:</label>
+            <input type="text"
+                id="customerID"
+                maxLength="100"
+                value={customerID}
+                onChange={e => setCustomerID(e.target.value)} />
             <label>Recipient:</label>
             <input type="text"
                 id="recipient"
@@ -138,7 +144,6 @@ export default function Address() {
             <br />
             <input type="checkbox"
                 id="isActive"
-                // checked={0}
                 value={isActive}
                 onChange={e => handleActiveChange(e)} />
             <br />
@@ -146,7 +151,7 @@ export default function Address() {
             <br />
             <input type="checkbox"
                 id="isPrimary"
-                // checked={0}
+                defaultChecked={true}
                 value={isPrimary}
                 onChange={e => handlePrimaryChange(e)} />
             <br />

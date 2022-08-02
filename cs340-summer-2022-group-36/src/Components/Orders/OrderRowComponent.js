@@ -40,7 +40,9 @@ export default function OrderRowComponent(
         const answer = window.confirm("This will delete the selected Order.\nDo you wish to proceed?")
         if (answer) {
             deleteOrders()
-                .catch(console.error)
+                .catch(error => {
+                    alert('This Order is in use with an Order Detail. You cannot delete. Please try another Order')
+                })
         }
     }
 

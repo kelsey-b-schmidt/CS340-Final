@@ -52,6 +52,7 @@ export default function Products() {
                     headers: {'Content-Type': 'application/json'},
                 })
                 const responseJson = await response.json()
+                console.log(newProductValues)
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Product!\nYou will now be redirected to the Products Page.")
                     navigate("/Products")

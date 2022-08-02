@@ -29,11 +29,25 @@ export default function Address({ addressToEdit }) {
         setZipUpdate(value);
     };
 
-    const handleCheckActiveChange = (checkValue) => {
-        if (checkValue.checked) {
-            return setIsActiveUpdate(1)
-        } else if (!checkValue.checked) {
-            return setIsActiveUpdate(0)
+    const handleActiveChange = (e) => {
+        let isChecked = e.target.checked
+        if (isChecked) {
+            e.target.value = 1
+            setIsActiveUpdate(e.target.value)
+        } else {
+            e.target.value = 0
+            setIsActiveUpdate(e.target.value)
+        }
+    };
+
+    const handlePrimaryChange = (e) => {
+        let isChecked = e.target.checked
+        if (isChecked) {
+            e.target.value = 1
+            setIsPrimaryUpdate(e.target.value)
+        } else {
+            e.target.value = 0
+            setIsPrimaryUpdate(e.target.value)
         }
     };
 
@@ -93,6 +107,7 @@ export default function Address({ addressToEdit }) {
                 maxLength="100"
                 value={recipientUpdate}
                 onChange={e => setRecipientNameUpdate(e.target.value)} />
+             <br />
             <label>Street:</label>
             <input type="text"
                 id="street"
@@ -129,14 +144,14 @@ export default function Address({ addressToEdit }) {
             <input type="checkbox"
                 id="isActive"
                 value={isActiveUpdate}
-                onChange={e => setIsActiveUpdate(e.target)} />
+                onChange={e => handleActiveChange(e)} />
             <br />
             <label>isPrimary:</label>
             <br />
             <input type="checkbox"
                 id="isPrimary"
                 value={isPrimaryUpdate}
-                onChange={e => setIsPrimaryUpdate(e.target.value)} />
+                onChange={e => handlePrimaryChange(e)} />
             <br />
             <br />
             <button onClick={handleSubmit}>Submit</button>
