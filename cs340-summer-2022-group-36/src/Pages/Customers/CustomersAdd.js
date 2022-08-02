@@ -16,6 +16,15 @@ export default function Customers() {
         setPhoneNumber('')
     }
 
+    const validatePhoneNumber = (input) =>{
+        if (Number(input) === Number(input)){
+            const correctInput = input.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
+            setPhoneNumber(correctInput)
+        } else {
+            return false
+        }
+    }
+
     const handleSubmit = () => {
         if (customerName === '' || email === '' || phoneNumber === '') {
             alert("Please enter values!")
@@ -68,14 +77,16 @@ export default function Customers() {
                 id="email"
                 maxLength="100"
                 value={email}
+                placeholder='example@example.com'
                 onChange={e => setEmail(e.target.value)} />
             <br />
             <label>Phone Number:</label>
-            <input type="tel"
+            <input type="text"
                 id="phoneNumber"
-                maxLength="13"
                 value={phoneNumber}
-                onChange={e => setPhoneNumber(e.target.value)} />
+                maxLength="12"
+                placeholder='123-456-1254'
+                onChange={e => validatePhoneNumber(e.target.value)} />
             <br />
             <br />
             <button onClick={handleSubmit}>Submit</button>
