@@ -2,8 +2,19 @@ import React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CustomerIDDynamicSelectAddComponent from "../../Components/Customers/CustomerIDDynamicSelectAddComponent";
+import {useEffect} from "react";
 
-export default function Address( {customers} ) {
+export default function Address( {customers, setCustomers} ) {
+
+    useEffect(() => {       // load customers for selection
+        const getCustomers = async() => {
+            const response = await fetch("/api/Customers")
+            const responseJson = await response.json()
+            setCustomers(responseJson)
+        }
+        getCustomers()
+            .catch(console.error)
+    }, [])
 
     const navigate = useNavigate()
 

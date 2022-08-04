@@ -3,6 +3,7 @@ import CustomerIDDynamicSelectAddOptionComponent from "./CustomerIDDynamicSelect
 
 export default function CustomerIDDynamicSelectAddComponent(
     {customers, setCustomerID}) {
+
     return (
         <select id="customerID" onChange={e => setCustomerID(e.target.value)}>
             <option value="none" selected disabled hidden>Select</option>

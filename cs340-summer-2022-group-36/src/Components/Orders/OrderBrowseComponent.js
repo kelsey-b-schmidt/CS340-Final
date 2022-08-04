@@ -1,20 +1,7 @@
 import React from 'react'
 import OrderTableComponent from "./OrderTableComponent";
-import { useEffect, useState } from "react";
 
-export default function OrderBrowseComponent({ setOrderToEdit }) {
-
-    const [orders, setOrders] = useState([])
-
-    useEffect(() => {
-        const getResponse = async () => {
-            const response = await fetch("/api/Orders")
-            const responseJson = await response.json()
-            setOrders(responseJson)
-        }
-        getResponse()
-            .catch(console.error)
-    }, [])
+export default function OrderBrowseComponent({ orders, setOrderToEdit }) {
 
     return (
         <fieldset>

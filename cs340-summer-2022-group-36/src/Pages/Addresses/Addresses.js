@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import AddressBrowseComponent from "../../Components/Addresses/AddressBrowseComponent";
 import {useEffect} from "react";
-//import AddressSearchComponent from "../Components/AddressSearchComponent";
+//import AddressSearchComponent from "../../Components/Addresses/AddressSearchComponent";
 
 export default function Addresses({addresses, setAddresses, setAddressToEdit }) {
 

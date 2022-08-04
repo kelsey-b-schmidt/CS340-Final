@@ -4,7 +4,6 @@ import {useState} from 'react'
 export default function AddressSearchComponent (){
 
     const [query, setQuery] = useState("")
-    const [lastSearch, setLastSearch] = useState("Testing")
 
     const handleSubmit = () => {
         const searchAddresses = async () => {
@@ -16,7 +15,6 @@ export default function AddressSearchComponent (){
                 },
             })
             const responseJson = await response.json()
-            setLastSearch(responseJson.request_received)
             setQuery("")
         }
         searchAddresses()
@@ -25,10 +23,7 @@ export default function AddressSearchComponent (){
 
 
     return (
-        <div><h3>Query:</h3>
-            <h3>{query}</h3>
-            <h3>Last search:</h3>
-            <h3>{lastSearch}</h3>
+        <div>
             <input
                 type="text"
                 id="query"

@@ -31,6 +31,7 @@ export default function App() {
 	const [products, setProducts] = useState([])
 	const [addresses, setAddresses] = useState([])
 	const [customers, setCustomers] = useState([])
+	const [orders, setOrders] = useState([])
 
 
 
@@ -44,25 +45,7 @@ export default function App() {
 				<HeaderComponent />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/Customers" element={<Customers
-						customers={customers}
-						setCustomers={setCustomers}
-						setCustomerToEdit={setCustomerToEdit} />} />
-					<Route path="/CustomersAdd" element={<CustomersAdd/>} />
-					<Route path="/CustomersUpdate" element={<CustomersUpdate
-						customerToEdit={customerToEdit} />} />
-					<Route path="/Addresses" element={<Addresses
-						addresses={addresses}
-						setAddresses={setAddresses}
-						setAddressToEdit={setAddressToEdit} />} />
-					<Route path="/AddressesAdd" element={<AddressesAdd
-						customers={customers} />} />
-					<Route path="/AddressesUpdate" element={<AddressesUpdate
-						addressToEdit={addressToEdit} />} />
-					<Route path="/Orders" element={<Orders
-						orderToEdit={orderToEdit}
-						setOrderToEdit={setOrderToEdit} />} />
-					<Route path="/OrdersAdd" element={<OrdersAdd />} />
+
 					<Route path="/Products" element={<Products
 						products={products}
 						setProducts={setProducts}
@@ -71,6 +54,38 @@ export default function App() {
 					<Route path="/ProductsUpdate" element={<ProductsUpdate
 						productToEdit={productToEdit}
 					/>} />
+
+					<Route path="/Addresses" element={<Addresses
+						addresses={addresses}
+						setAddresses={setAddresses}
+						setAddressToEdit={setAddressToEdit} />} />
+					<Route path="/AddressesAdd" element={<AddressesAdd
+						customers={customers}
+						setCustomers={setCustomers}
+					/>} />
+					<Route path="/AddressesUpdate" element={<AddressesUpdate
+						addressToEdit={addressToEdit} />} />
+
+					<Route path="/Customers" element={<Customers
+						customers={customers}
+						setCustomers={setCustomers}
+						setCustomerToEdit={setCustomerToEdit} />} />
+					<Route path="/CustomersAdd" element={<CustomersAdd/>} />
+					<Route path="/CustomersUpdate" element={<CustomersUpdate
+						customerToEdit={customerToEdit} />} />
+
+					<Route path="/Orders" element={<Orders
+						orders={orders}
+						setOrders={setOrders}
+						setOrderToEdit={setOrderToEdit} />} />
+					<Route path="/OrdersAdd" element={<OrdersAdd
+						addresses={addresses}
+						setAddresses={setAddresses}
+						customers={customers}
+						setCustomers={setCustomers}/>} />
+
+
+
 					<Route path="/OrderDetails" element={<OrderDetails
 						orderDetailsToEdit={orderDetailsToEdit}
 						setOrderDetailsToEdit={setOrderDetailsToEdit} />} />

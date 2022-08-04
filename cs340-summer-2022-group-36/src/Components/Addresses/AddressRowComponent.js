@@ -38,8 +38,8 @@ export default function AddressRowComponent(
             deleteAddress()
                 .catch(error => {
                     alert('This Address is in use with an Order and cannot be deleted. Please try another Address')
-                }
-        )}
+                })
+        }
     }
 
     const handleBoolean = (input) => {

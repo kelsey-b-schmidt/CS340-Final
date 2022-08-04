@@ -50,8 +50,8 @@ export default function Address({ addressToEdit }) {
                     cityUpdate,
                     stateUpdate,
                     zipUpdate,
-                    isActiveUpdate,
                     isPrimaryUpdate,
+                    isActiveUpdate,
                     addressID
                 }
                 const response = await fetch('/api/Addresses', {
