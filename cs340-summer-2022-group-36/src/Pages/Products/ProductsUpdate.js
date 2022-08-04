@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 
 export default function Products({productToEdit}) {
 
+
     const navigate = useNavigate()
 
     const [productNameUpdate, setProductNameUpdate] = useState(productToEdit.productName)
@@ -28,9 +29,15 @@ export default function Products({productToEdit}) {
 
     const handleSubmit = () => {
         if (productNameUpdate === '' || descriptionUpdate === ''|| brandUpdate === ''
-            || weightValUpdate === ''|| weightUnitUpdate === ''|| sellPriceUpdate === ''
+            || weightValUpdate === ''|| weightUnitUpdate=== ''|| sellPriceUpdate === ''
             || replenishCostUpdate === ''|| numberInStockUpdate === '') {
-            alert("Please enter values!")
+            alert("Error: Missing fields. Please enter all values.")
+        }
+        else if (weightValUpdate < 0 || sellPriceUpdate < 0 || replenishCostUpdate < 0 || numberInStockUpdate < 0) {
+            alert("Error: Numeric values cannot be less than 0. Please enter new values.")
+        }
+        else if (weightValUpdate > 10000 || sellPriceUpdate > 10000 || replenishCostUpdate > 10000 || numberInStockUpdate > 10000) {
+            alert("Error: Numeric values cannot be more than than 10,000. Please enter new values.")
         }
         else {
             const action = "Update"
@@ -63,93 +70,89 @@ export default function Products({productToEdit}) {
             }
             const answer = window.confirm("This will update this Product with the entered values.\nDo you wish to proceed?")
             if (answer) {
-                newProduct()
+                newProduct()    // the new data has already loaded into the component
                     .catch(console.error)
             }
         }
     }
 
-
-
     return (
         <fieldset class="form">
             <legend><strong>Update Product</strong></legend>
             <label>Product ID:</label>
-            <input type="text"
-                   id="productID"
-                   value={productToEdit.productID} disabled/>
+                <input type="text"
+                       id="productID"
+                       value={productToEdit.productID} disabled/>
             <label>Product Name:</label>
-            <input type="text"
-                   id="productName"
-                   maxLength="100"
-                   value={productNameUpdate}
-                   onChange={e => setProductNameUpdate(e.target.value)}/>
+                <input type="text"
+                       id="productName"
+                       maxLength="100"
+                       value={productNameUpdate}
+                       onChange={e => setProductNameUpdate(e.target.value)}/>
             <label>Description:</label>
-            <input type="text"
-                   id="description"
-                   maxLength="1000"
-                   value={descriptionUpdate}
-                   onChange={e => setDescriptionUpdate(e.target.value)}/>
+                <input type="text"
+                       id="description"
+                       maxLength="1000"
+                       value={descriptionUpdate}
+                       onChange={e => setDescriptionUpdate(e.target.value)}/>
             <label>Brand:</label>
-            <input type="text"
-                   id="brand"
-                   maxLength="100"
-                   value={brandUpdate}
-                   onChange={e => setBrandUpdate(e.target.value)}/>
-
-
+                <input type="text"
+                       id="brand"
+                       maxLength="100"
+                       value={brandUpdate}
+                       onChange={e => setBrandUpdate(e.target.value)}/>
             <label>Weight Value:</label>
-            <br/>
-            <input type="number"
-                   id="weightVal"
-                   step='0.01'
-                   min="0"
-                   max="10000"
-                   title="How much product there is"
-                   value={weightValUpdate && Math.max(0, weightValUpdate)}
-                   onChange={e => setWeightValUpdate(e.target.value)}/>
-            <br/>
+                <br/>
+                <input type="number"
+                       id="weightVal"
+                       title="The numeric weight of an item, example: 100. The unit is selected in the next box (lbs or oz)."
+                       step='0.01'
+                       min="0"
+                       max="10000"
+                       value={weightValUpdate}
+                       onChange={e => setWeightValUpdate(e.target.value)}/>
+                <br/>
             <label>Weight Unit:</label>
-            <br/>
-            <select id="weightUnit" onChange={e => setWeightUnitUpdate(e.target.value)}>
-                <option value={weightUnitUpdate} selected disabled hidden>{weightUnitUpdate}</option>
-                <option value="lbs">lbs</option>
-                <option value="oz">oz</option>
-            </select>
-            <br/>
+                <br/>
+                <select id="weightUnit" onChange={e => setWeightUnitUpdate(e.target.value)}>
+                    <option value={weightUnitUpdate} selected disabled hidden>{weightUnitUpdate}</option>
+                    <option value="lbs">lbs</option>
+                    <option value="oz">oz</option>
+                </select>
+                <br/>
             <label>Sell Price:</label>
-            <br/>
-            <span>$ </span>
-            <input type="number"
-                   id="sellPrice"
-                   step='0.01'
-                   min="0"
-                   max="10000"
-                   title="The selling price of the product to the consumer"
-                   value={sellPriceUpdate && Math.max(0, sellPriceUpdate)}
-                   onChange={e => setSellPriceUpdate(e.target.value)}/>
-            <br/>
+                <br/>
+                <span>$ </span>
+                <input type="number"
+                       id="sellPrice"
+                       title="What the customer pays for the product"
+                       step='0.01'
+                       min="0"
+                       max="10000"
+                       value={sellPriceUpdate}
+                       onChange={e => setSellPriceUpdate(e.target.value)}/>
+                <br/>
             <label>Replenish Cost:</label>
-            <br/>
-            <span>$ </span>
-            <input type="number"
-                   id="replenish cost"
-                   step='0.01'
-                   min="0"
-                   max="10000"
-                   title="How much it cost CoffeeBuzz to pay to refill"
-                   value={replenishCostUpdate && Math.max(0, replenishCostUpdate)}
-                   onChange={e => setReplenishCostUpdate(e.target.value)}/>
-            <br/>
+                <br/>
+                <span>$ </span>
+                <input type="number"
+                       id="replenish cost"
+                       title="How much it costs CoffeeBuzz to purchase the item from the manufacturer"
+                       step='0.01'
+                       min="0"
+                       max="10000"
+                       value={replenishCostUpdate}
+                       onChange={e => setReplenishCostUpdate(e.target.value)}/>
+                <br/>
             <label>Number in Stock:</label>
-            <input type="number"
-                   id="number in stock"
-                   min="0"
-                   max="10000"
-                   value={numberInStockUpdate && Math.max(0, numberInStockUpdate)}
-                   onChange={e => setNumberInStockUpdate(e.target.value)}/>
-            <br/>
-            <br/>
+                <input type="number"
+                       id="number in stock"
+                       min="0"
+                       max="10000"
+                       value={numberInStockUpdate}
+                       onChange={e => setNumberInStockUpdate(e.target.value)}/>
+                <br/>
+                <br/>
             <button onClick={handleSubmit}>Submit</button>
             <button onClick={handleReset}>Reset</button>
             <Link to="/Products"><button>Cancel</button></Link>

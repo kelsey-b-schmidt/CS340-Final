@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState} from "react";
 import HeaderComponent from "./Components/Header-Footer/HeaderComponent";
 import Home from "./Pages/Home";
 import Customers from "./Pages/Customers/Customers";
@@ -23,11 +23,20 @@ import OrderDetailsUpdate from "./Pages/OrderDetails/OrderDetailsUpdate";
 
 export default function App() {
 
-	const [productToEdit, setProductToEdit] = useState();
-	const [addressToEdit, setAddressToEdit] = useState();
-	const [customerToEdit, setCustomerToEdit] = useState();
-	const [orderToEdit, setOrderToEdit] = useState();
-	const [orderDetailsToEdit, setOrderDetailsToEdit] = useState();
+	const [productToEdit, setProductToEdit] = useState("");
+	const [addressToEdit, setAddressToEdit] = useState("");
+	const [customerToEdit, setCustomerToEdit] = useState("");
+	const [orderToEdit, setOrderToEdit] = useState("");
+	const [orderDetailsToEdit, setOrderDetailsToEdit] = useState("");
+	const [products, setProducts] = useState([])
+	const [addresses, setAddresses] = useState([])
+	const [customers, setCustomers] = useState([])
+
+
+
+
+
+
 
 	return (
 		<div>
@@ -36,15 +45,18 @@ export default function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/Customers" element={<Customers
-						customerToEdit={customerToEdit}
+						customers={customers}
+						setCustomers={setCustomers}
 						setCustomerToEdit={setCustomerToEdit} />} />
-					<Route path="/CustomersAdd" element={<CustomersAdd />} />
+					<Route path="/CustomersAdd" element={<CustomersAdd/>} />
 					<Route path="/CustomersUpdate" element={<CustomersUpdate
 						customerToEdit={customerToEdit} />} />
 					<Route path="/Addresses" element={<Addresses
-						addressToEdit={addressToEdit}
+						addresses={addresses}
+						setAddresses={setAddresses}
 						setAddressToEdit={setAddressToEdit} />} />
-					<Route path="/AddressesAdd" element={<AddressesAdd />} />
+					<Route path="/AddressesAdd" element={<AddressesAdd
+						customers={customers} />} />
 					<Route path="/AddressesUpdate" element={<AddressesUpdate
 						addressToEdit={addressToEdit} />} />
 					<Route path="/Orders" element={<Orders
@@ -52,11 +64,13 @@ export default function App() {
 						setOrderToEdit={setOrderToEdit} />} />
 					<Route path="/OrdersAdd" element={<OrdersAdd />} />
 					<Route path="/Products" element={<Products
-						productToEdit={productToEdit}
+						products={products}
+						setProducts={setProducts}
 						setProductToEdit={setProductToEdit} />} />
-					<Route path="/ProductsAdd" element={<ProductsAdd />} />
+					<Route path="/ProductsAdd" element={<ProductsAdd/>} />
 					<Route path="/ProductsUpdate" element={<ProductsUpdate
-						productToEdit={productToEdit} />} />
+						productToEdit={productToEdit}
+					/>} />
 					<Route path="/OrderDetails" element={<OrderDetails
 						orderDetailsToEdit={orderDetailsToEdit}
 						setOrderDetailsToEdit={setOrderDetailsToEdit} />} />

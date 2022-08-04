@@ -1,9 +1,20 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import CustomerBrowseComponent from "../../Components/Customers/CustomerBrowseComponent";
+import {useEffect} from "react";
 //import CustomerSearchComponent from "../Components/CustomerSearchComponent";
 
-export default function Customers({ setCustomerToEdit }) {
+export default function Customers({ customers, setCustomers, setCustomerToEdit }) {
+
+    useEffect(() => {
+        const getCustomers = async() => {
+            const response = await fetch("/api/Customers")
+            const responseJson = await response.json()
+            setCustomers(responseJson)
+        }
+        getCustomers()
+            .catch(console.error)
+    }, [])
 
     return (
         <div>
@@ -12,7 +23,9 @@ export default function Customers({ setCustomerToEdit }) {
             <br />
             <br />
             <CustomerBrowseComponent
-                setCustomerToEdit={setCustomerToEdit} />
+                customers={customers}
+                setCustomerToEdit={setCustomerToEdit}
+            />
         </div>
     )
 }
