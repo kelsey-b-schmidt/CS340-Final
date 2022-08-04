@@ -8,6 +8,7 @@ from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
 import decimal
+import datetime
 import dml
 
 
@@ -25,6 +26,7 @@ mysql = MySQL(app)
 class json_encoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, decimal.Decimal): return str(obj)
+        elif isinstance(obj, datetime.datetime): return str(obj)
 
 # for testing, "proxy" in the package.json file should be "http://127.0.0.1:5000"
 # this needs to be changed back to "https://cs340-summer-2022-group-36.herokuapp.com/" when finished for the live site!
@@ -46,8 +48,9 @@ def customers():
             return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
+        query = request.json
+        print(query)
         if request.json["action"] == "Add":
-            table = "CUSTOMERS"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -66,7 +69,6 @@ def customers():
             return {"request_received": "success"}
 
         elif request.json["action"] == "Update":
-            table = "CUSTOMERS"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -86,7 +88,6 @@ def customers():
 
 
         elif request.json["action"] == "Delete":
-            table = "CUSTOMERS"
             cur = mysql.connection.cursor()
             delete_stmt = (
             "DELETE FROM Customers WHERE customerID = %s"
@@ -125,7 +126,6 @@ def products():
         query = request.json
         print(query)
         if request.json["action"] == "Add":
-            table = "PRODUCTS"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -144,7 +144,8 @@ def products():
             return {"request_received": "success"}
 
         elif request.json["action"] == "Update":
-            table = "PRODUCTS"
+            query = request.json
+            print(query)
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -164,15 +165,16 @@ def products():
 
 
         elif request.json["action"] == "Delete":
-             table = "PRODUCTS"
-             cur = mysql.connection.cursor()
-             delete_stmt = (
-               "DELETE FROM Products WHERE productID = %s"
-             )
-             data = (request.json["productID"],)
-             cur.execute(delete_stmt, data)
-             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
-             return {"request_received": "success"}
+            query = request.json
+            print(query)
+            cur = mysql.connection.cursor()
+            delete_stmt = (
+            "DELETE FROM Products WHERE productID = %s"
+            )
+            data = (request.json["productID"],)
+            cur.execute(delete_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
 
         return {"request_received": "error"}
 
@@ -195,9 +197,9 @@ def addresses():
         return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
-
+        query = request.json
+        print(query)
         if request.json['action'] == 'Add':
-            table = "ADDRESSES"
             new_list = list()
             for item in request.json:
                 if item == 'action':
@@ -216,7 +218,6 @@ def addresses():
             return {"request_received": "success"}
 
         elif request.json["action"] == "Update":
-            table = "ADDRESSES"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -235,15 +236,31 @@ def addresses():
             return {"request_received": "success"}
 
         elif request.json["action"] == "Delete":
-             table = "ADDRESSES"
-             cur = mysql.connection.cursor()
-             delete_stmt = (
-               "DELETE FROM Addresses WHERE addressID = %s"
-             )
-             data = (request.json["addressID"],)
-             cur.execute(delete_stmt, data)
-             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
-             return {"request_received": "success"}
+            cur = mysql.connection.cursor()
+            delete_stmt = (
+            "DELETE FROM Addresses WHERE addressID = %s"
+            )
+            data = (request.json["addressID"],)
+            cur.execute(delete_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
+        elif request.json["action"] == "Search":
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            search_stmt = (
+                "SELECT * FROM Addresses WHERE customerID = %s"
+            )
+            data = tuple(new_list)
+            cur.execute(search_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return json.dumps(cur.fetchall(), cls=json_encoder)
 
         return {"request_received": "error"}
 
@@ -270,8 +287,9 @@ def orders():
         return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
+        query = request.json
+        print(query)
         if request.json["action"] == "Add":
-            table = "ORDERS"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -289,11 +307,31 @@ def orders():
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}
 
+        elif request.json["action"] == "Update":
+            query = request.json
+            print(query)
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    new_list.append(request.json[item])
+            cur = mysql.connection.cursor()
+
+            update_stmt = (
+              "UPDATE Orders SET addressID = %s, shipDateTime = %s "
+              "WHERE orderID = %s;"
+            )
+            data = tuple(new_list)
+            print("data", data)
+            cur.execute(update_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return {"request_received": "success"}
+
         elif request.json["action"] == "Delete":
-                table = "ORDERS"
                 cur = mysql.connection.cursor()
                 delete_stmt = (
-                "DELETE FROM Orders WHERE orderID = %s"
+                "DELETE FROM Orders WHERE orderID = %s;"
                 )
                 data = (request.json["orderID"],)
                 cur.execute(delete_stmt, data)
@@ -334,8 +372,9 @@ def orderDetails():
         return json.dumps(cur.fetchall(), cls=json_encoder)
 
     elif request.method == "POST":
+        query = request.json
+        print(query)
         if request.json["action"] == "Add":
-            table = "ORDERDETAILS"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -354,7 +393,6 @@ def orderDetails():
             return {"request_received": "success"}
 
         elif request.json["action"] == "Update":
-            table = "ORDERDETAILS"
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -374,7 +412,6 @@ def orderDetails():
 
 
         elif request.json["action"] == "Delete":
-             table = "ORDERDETAILS"
              cur = mysql.connection.cursor()
              delete_stmt = (
                "DELETE FROM OrderDetails WHERE odID = %s"
@@ -414,3 +451,5 @@ def not_found(e):
 
 if __name__ == "__main__":
     app.run()
+
+# debug=True

@@ -1,5 +1,4 @@
 import React from 'react'
-import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function ProductRowComponent(
@@ -28,8 +27,8 @@ export default function ProductRowComponent(
             })
             const responseJson = await response.json()
             if (responseJson.request_received === "success") {
-                alert("Successfully deleted the Product!\nThe page will now refresh.")
-                window.location.reload()
+                alert("Successfully deleted the Product!\nThe page will now reload.")
+                window.location.reload(false)
             } else {
                 alert("Failed to delete Product, please try again!")
             }
@@ -40,10 +39,6 @@ export default function ProductRowComponent(
                 .catch(console.error)
         }
     }
-
-
-
-
 
     return (
         <tr>

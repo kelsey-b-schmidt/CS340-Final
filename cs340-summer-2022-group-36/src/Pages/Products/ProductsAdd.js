@@ -30,7 +30,13 @@ export default function Products() {
         if (productName === '' || description === ''|| brand === ''
             || weightVal === ''|| weightUnit === ''|| sellPrice === ''
             || replenishCost === ''|| numberInStock === '') {
-            alert("Please enter values!")
+            alert("Error: Missing fields. Please enter all values.")
+        }
+        else if (weightVal < 0 || sellPrice < 0 || replenishCost < 0 || numberInStock < 0) {
+            alert("Error: Numeric values cannot be less than 0. Please enter new values.")
+        }
+        else if (weightVal > 10000 || sellPrice > 10000 || replenishCost > 10000 || numberInStock > 10000) {
+            alert("Error: Numeric values cannot be more than than 10,000. Please enter new values.")
         }
         else {
             const action = "Add"
@@ -52,7 +58,6 @@ export default function Products() {
                     headers: {'Content-Type': 'application/json'},
                 })
                 const responseJson = await response.json()
-                console.log(newProductValues)
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Product!\nYou will now be redirected to the Products Page.")
                     navigate("/Products")
@@ -62,13 +67,11 @@ export default function Products() {
             }
             const answer = window.confirm("This will create a new Product with the entered values.\nDo you wish to proceed?")
             if (answer) {
-                newProduct()
+                newProduct()    // the new data has already loaded into the component
                     .catch(console.error)
             }
         }
     }
-
-
 
     return (
         <fieldset class="form">
@@ -91,17 +94,15 @@ export default function Products() {
                        maxLength="100"
                        value={brand}
                        onChange={e => setBrand(e.target.value)}/>
-
-
             <label>Weight Value:</label>
                 <br/>
                 <input type="number"
                        id="weightVal"
+                       title="The numeric weight of an item, example: 100. The unit is selected in the next box (lbs or oz)."
                        step='0.01'
                        min="0"
                        max="10000"
-                       title="How much product there is"
-                       value={weightVal && Math.max(0, weightVal)}
+                       value={weightVal}
                        onChange={e => setWeightVal(e.target.value)}/>
                 <br/>
             <label>Weight Unit:</label>
@@ -117,11 +118,11 @@ export default function Products() {
                 <span>$ </span>
                 <input type="number"
                        id="sellPrice"
+                       title="What the customer pays for the product"
                        step='0.01'
                        min="0"
                        max="10000"
-                       title="The selling price of the product to the consumer"
-                       value={sellPrice && Math.max(0, sellPrice)}
+                       value={sellPrice}
                        onChange={e => setSellPrice(e.target.value)}/>
                 <br/>
             <label>Replenish Cost:</label>
@@ -129,11 +130,11 @@ export default function Products() {
                 <span>$ </span>
                 <input type="number"
                        id="replenish cost"
+                       title="How much it costs CoffeeBuzz to purchase the item from the manufacturer"
                        step='0.01'
                        min="0"
                        max="10000"
-                       title="How much it cost CoffeeBuzz to pay to refill"
-                       value={replenishCost && Math.max(0, replenishCost)}
+                       value={replenishCost}
                        onChange={e => setReplenishCost(e.target.value)}/>
                 <br/>
             <label>Number in Stock:</label>
@@ -141,7 +142,7 @@ export default function Products() {
                        id="number in stock"
                        min="0"
                        max="10000"
-                       value={numberInStock && Math.max(0, numberInStock)}
+                       value={numberInStock}
                        onChange={e => setNumberInStock(e.target.value)}/>
                 <br/>
                 <br/>

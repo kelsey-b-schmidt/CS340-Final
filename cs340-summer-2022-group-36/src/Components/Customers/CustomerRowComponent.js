@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CustomerRowComponent(
@@ -8,14 +7,6 @@ export default function CustomerRowComponent(
     const navigate = useNavigate()
 
     const customerID = customer.customerID
-
-    const seeAddresses = () => {
-        navigate("/Addresses")
-    }
-
-    const seeOrders = () => {
-        navigate("/Orders")
-    }
 
     const onUpdate = () => {
         setCustomerToEdit(customer)
@@ -37,7 +28,7 @@ export default function CustomerRowComponent(
             const responseJson = await response.json()
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the Customer!\nThe page will now refresh.")
-                window.location.reload()
+                window.location.reload(false)
             } else {
                 alert("Failed to delete Customer, please try again!")
             }
@@ -61,12 +52,6 @@ export default function CustomerRowComponent(
             <td>
             <input type="button" value="Delete"
                        onClick={onDelete}/>
-            </td>
-            <td>
-                <input type="button" value="See Addresses" onClick={seeAddresses} />
-            </td>
-            <td>
-                <input type="button" value="See Orders" onClick={seeOrders} />
             </td>
         </tr>
     )

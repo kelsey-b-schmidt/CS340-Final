@@ -8,8 +8,8 @@ export default function OrderTableComponent(
             <thead>
                 <tr>
                     <th>Order ID</th>
-                    <th>Address ID</th>
                     <th>Customer ID</th>
+                    <th>Address ID</th>
                     <th>Ship Date and Time</th>
                     <th colSpan="4">Actions</th>
                 </tr>

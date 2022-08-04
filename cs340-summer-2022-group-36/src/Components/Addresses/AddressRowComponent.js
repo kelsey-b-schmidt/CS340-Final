@@ -1,5 +1,4 @@
 import React from 'react'
-import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function AddressRowComponent(
@@ -28,8 +27,8 @@ export default function AddressRowComponent(
             })
             const responseJson = await response.json()
             if (responseJson.request_received === "success") {
-                alert("Successfully deleted the Address!\nThe page will now refresh.")
-                window.location.reload()
+                alert("Successfully deleted the Address!\nThe page will now reload.")
+                window.location.reload(false)
             } else {
                 alert("Failed to delete Address, please try again!")
             }
@@ -38,16 +37,16 @@ export default function AddressRowComponent(
         if (answer) {
             deleteAddress()
                 .catch(error => {
-                    alert('This Address is in use with an Order. You cannot delete. Please try another Address')
-                }
-        )}
+                    alert('This Address is in use with an Order and cannot be deleted. Please try another Address')
+                })
+        }
     }
 
     const handleBoolean = (input) => {
         if(input === 0) {
             return <input type="checkbox" disabled/>
         }
-        else if (input ===1) {
+        else if (input === 1) {
             return <input type="checkbox" checked disabled/>
         }
     }
@@ -61,8 +60,8 @@ export default function AddressRowComponent(
             <td>{address.city}</td>
             <td>{address.state}</td>
             <td>{address.zip}</td>
-            <td>{handleBoolean(address.isActive)}</td>
             <td>{handleBoolean(address.isPrimary)}</td>
+            <td>{handleBoolean(address.isActive)}</td>
             <td>
                 <input type="button" value="Update" onClick={onUpdate}/>
             </td>

@@ -1,31 +1,67 @@
 import React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AddressIDDynamicSelectAddComponent from "../../Components/Addresses/AddressIDDynamicSelectAddComponent";
+import CustomerIDDynamicSelectAddComponent from "../../Components/Customers/CustomerIDDynamicSelectAddComponent";
+import {useEffect} from "react";
 
-export default function Orders() {
+export default function Orders({addresses, setAddresses, customers, setCustomers}) {
 
     const navigate = useNavigate()
 
     const [addressID, setAddressID] = useState('')
     const [customerID, setCustomerID] = useState('')
-    const [shipDateTime, setShipDateTime] = useState(null)
+    const [shipDateTime] = useState(null)
+
+    useEffect(() => {   // load customers for selection
+        const getCustomers = async() => {
+            const response = await fetch("/api/Customers")
+            const responseJson = await response.json()
+            setCustomers(responseJson)
+        }
+        getCustomers()
+            .catch(console.error)
+    }, [])
+
+    useEffect(() => {   // load addresses for selection
+        if (customerID !== "") {
+            const action = "Search"
+            const newAddressSearch = async () => {
+                const searchAddressValues = {
+                    action,
+                    customerID
+                }
+                const response = await fetch('/api/Addresses', {
+                    method: 'POST',
+                    body: JSON.stringify(searchAddressValues),
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                const responseJson = await response.json()
+                setAddresses(responseJson)
+            }
+            newAddressSearch()  // the new data has already loaded into the component
+                .catch(console.error)
+        }
+        else {
+            setAddresses([])
+        }
+
+    }, [customerID])
+
+
 
 
     const handleReset = () => {
-        setAddressID('')
         setCustomerID('')
-        setShipDateTime('')
+        setAddressID('')
     }
-
 
     const handleSubmit = () => {
         if (addressID === '' || customerID === '') {
-            alert("Please enter values!")
+            alert("Error: Missing fields. Please enter all values.")
         }
         else {
             const action = "Add"
-            // const addressID = orderToEdit.addressID
-            // const customerID = orderToEdit.customerID
             const newOrder = async () => {
                 const newOrderValues = {
                     action,
@@ -48,39 +84,28 @@ export default function Orders() {
             }
             const answer = window.confirm("This will create a new Order with the entered values.\nDo you wish to proceed?")
             if (answer) {
-                newOrder()
+                newOrder()  // the new data has already loaded into the component
                     .catch(console.error)
             }
         }
     }
 
-
-
     return (
         <fieldset class="form">
             <legend><strong>Add a new Order</strong></legend>
-            <label>Address ID:</label>
-            <input type="number"
-                id="addressID"
-                maxLength="100"
-                value={addressID}
-                onChange={e => setAddressID(e.target.value)}
-            />
             <label>Customer ID:</label>
-            <input type="number"
-                id="customerID"
-                maxLength="100"
-                value={customerID}
-                onChange={e => setCustomerID(e.target.value)}
+            <br/>
+            <CustomerIDDynamicSelectAddComponent
+                customers={customers}
+                setCustomerID={setCustomerID}
             />
-            <br />
-            <label>Ship Date Time:</label>
-            <br />
-            <input type="text"
-                id="shipDateTime"
-                value={shipDateTime}
-                onChange={(e) => setShipDateTime(e.target.value)}
-                disabled />
+            <br/>
+            <label>Address ID:</label>
+                <br/>
+                <AddressIDDynamicSelectAddComponent
+                    addresses={addresses}
+                    setAddressID={setAddressID}
+                />
             <br />
             <br />
             <button onClick={handleSubmit}>Submit</button>

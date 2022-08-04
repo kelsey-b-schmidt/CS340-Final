@@ -1,20 +1,7 @@
 import React from 'react'
 import CustomerTableComponent from "./CustomerTableComponent";
-import {useEffect, useState} from "react";
 
-export default function CustomerBrowseComponent({setCustomerToEdit}) {
-
-    const [customers, setCustomers] = useState([])
-
-    useEffect(() => {
-        const getResponse = async() => {
-            const response = await fetch("/api/Customers")
-            const responseJson = await response.json()
-            setCustomers(responseJson)
-        }
-        getResponse()
-            .catch(console.error)
-    }, [])
+export default function CustomerBrowseComponent({customers, setCustomerToEdit}) {
 
     return (
         <fieldset>

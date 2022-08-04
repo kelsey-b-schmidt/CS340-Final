@@ -16,13 +16,9 @@ export default function Customers({ customerToEdit }) {
         setPhoneNumberUpdate(customerToEdit.phoneNumber)
     }
 
-    const validatePhoneNumber = (input) =>{
-        if (Number(input) === Number(input)){
-            const correctInput = input.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
-            setPhoneNumberUpdate(correctInput)
-        } else {
-            return false
-        }
+    const validatePhoneNumber = (e) => {
+        const value = e.target.value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
+        setPhoneNumberUpdate(value)
     }
 
     const handleSubmit = () => {
@@ -89,7 +85,7 @@ export default function Customers({ customerToEdit }) {
                 maxLength="12"
                 value={phoneNumberUpdate}
                 placeholder='123-456-1254'
-                onChange={e => validatePhoneNumber(e.target.value)} />
+                onChange={validatePhoneNumber} />
             <br />
             <br />
             <button onClick={handleSubmit}>Submit</button>

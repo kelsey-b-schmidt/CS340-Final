@@ -11,7 +11,7 @@ export default function CustomerTableComponent(
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th colSpan="4">Actions</th>
+                <th colSpan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>

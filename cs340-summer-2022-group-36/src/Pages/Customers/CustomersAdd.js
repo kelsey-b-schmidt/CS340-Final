@@ -16,18 +16,17 @@ export default function Customers() {
         setPhoneNumber('')
     }
 
-    const validatePhoneNumber = (input) =>{
-        if (Number(input) === Number(input)){
-            const correctInput = input.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
-            setPhoneNumber(correctInput)
-        } else {
-            return false
-        }
+    const validatePhoneNumber = (e) => {
+        const value = e.target.value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
+        setPhoneNumber(value)
     }
 
     const handleSubmit = () => {
         if (customerName === '' || email === '' || phoneNumber === '') {
-            alert("Please enter values!")
+            alert("Error: Missing fields. Please enter all values.")
+        }
+        else if (phoneNumber.length !== 12 ){
+            alert("Error: Invalid phone number. Please correct the phone number value.")
         }
         else {
             const action = "Add"
@@ -53,13 +52,11 @@ export default function Customers() {
             }
             const answer = window.confirm("This will create a new Customer with the entered values.\nDo you wish to proceed?")
             if (answer) {
-                newCustomer()
+                newCustomer()    // the new data has already loaded into the component
                     .catch(console.error)
             }
         }
     }
-
-
 
     return (
         <fieldset class="form">
@@ -77,7 +74,7 @@ export default function Customers() {
                 id="email"
                 maxLength="100"
                 value={email}
-                placeholder='example@example.com'
+                title='Please enter in this format: example@example.com'
                 onChange={e => setEmail(e.target.value)} />
             <br />
             <label>Phone Number:</label>
@@ -85,8 +82,8 @@ export default function Customers() {
                 id="phoneNumber"
                 value={phoneNumber}
                 maxLength="12"
-                placeholder='123-456-1254'
-                onChange={e => validatePhoneNumber(e.target.value)} />
+                title='Please enter in this format: 123-456-1254'
+                onChange={validatePhoneNumber} />
             <br />
             <br />
             <button onClick={handleSubmit}>Submit</button>
