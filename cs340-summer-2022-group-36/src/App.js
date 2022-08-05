@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState} from "react";
 import HeaderComponent from "./Components/Header-Footer/HeaderComponent";
+import FooterComponent from "./Components/Header-Footer/FooterComponent";
 import Home from "./Pages/Home";
 import Customers from "./Pages/Customers/Customers";
 import Addresses from "./Pages/Addresses/Addresses";
@@ -10,15 +11,16 @@ import Orders from "./Pages/Orders/Orders";
 import Products from "./Pages/Products/Products";
 import ProductsAdd from "./Pages/Products/ProductsAdd";
 import ProductsUpdate from "./Pages/Products/ProductsUpdate";
-import FooterComponent from "./Components/Header-Footer/FooterComponent";
 import AddressesAdd from "./Pages/Addresses/AddressesAdd";
 import AddressesUpdate from "./Pages/Addresses/AddressesUpdate";
 import CustomersAdd from "./Pages/Customers/CustomersAdd";
 import CustomersUpdate from "./Pages/Customers/CustomersUpdate";
 import OrdersAdd from "./Pages/Orders/OrdersAdd";
+import OrdersUpdate from "./Pages/Orders/OrdersUpdate";
 import OrderDetails from "./Pages/OrderDetails/OrderDetails";
 import OrderDetailsAdd from "./Pages/OrderDetails/OrderDetailsAdd";
 import OrderDetailsUpdate from "./Pages/OrderDetails/OrderDetailsUpdate";
+
 
 
 export default function App() {
@@ -83,6 +85,10 @@ export default function App() {
 						setAddresses={setAddresses}
 						customers={customers}
 						setCustomers={setCustomers}/>} />
+					<Route path="/OrdersUpdate" element={<OrdersUpdate
+						orderToEdit={orderToEdit}
+						addresses={addresses}
+						setAddresses={setAddresses}/>} />
 
 
 

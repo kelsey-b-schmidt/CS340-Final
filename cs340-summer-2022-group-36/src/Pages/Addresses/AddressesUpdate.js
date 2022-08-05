@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import HandleBooleanActiveComponent from "../../Components/Addresses/HandleBooleanActiveComponent";
 import HandleBooleanPrimaryComponent from "../../Components/Addresses/HandleBooleanPrimaryComponent";
 
-export default function Address({ addressToEdit }) {
+export default function AddressesUpdate({ addressToEdit }) {
 
     const navigate = useNavigate()
 
@@ -64,14 +64,14 @@ export default function Address({ addressToEdit }) {
                     alert("Successfully updated the Address!\nYou will now be redirected to the Addresses Page.")
                     navigate("/Addresses")
                     window.location.reload() // need this to update the checkboxes, they're being difficult
-                } else {
-                    alert("Failed to update Address, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will update this Address with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newAddress()     // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to update Address, please check the input and try again!')
+                    })
             }
         }
     }

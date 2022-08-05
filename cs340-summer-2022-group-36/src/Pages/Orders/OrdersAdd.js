@@ -5,7 +5,7 @@ import AddressIDDynamicSelectAddComponent from "../../Components/Addresses/Addre
 import CustomerIDDynamicSelectAddComponent from "../../Components/Customers/CustomerIDDynamicSelectAddComponent";
 import {useEffect} from "react";
 
-export default function Orders({addresses, setAddresses, customers, setCustomers}) {
+export default function OrdersAdd({addresses, setAddresses, customers, setCustomers}) {
 
     const navigate = useNavigate()
 
@@ -49,8 +49,6 @@ export default function Orders({addresses, setAddresses, customers, setCustomers
     }, [customerID])
 
 
-
-
     const handleReset = () => {
         setCustomerID('')
         setAddressID('')
@@ -85,7 +83,9 @@ export default function Orders({addresses, setAddresses, customers, setCustomers
             const answer = window.confirm("This will create a new Order with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newOrder()  // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to add Order, please check the input and try again!')
+                    })
             }
         }
     }

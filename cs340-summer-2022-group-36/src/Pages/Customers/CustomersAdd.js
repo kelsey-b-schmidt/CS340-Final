@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Customers() {
+export default function CustomersAdd() {
 
     const navigate = useNavigate()
 
@@ -28,6 +28,9 @@ export default function Customers() {
         else if (phoneNumber.length !== 12 ){
             alert("Error: Invalid phone number. Please correct the phone number value.")
         }
+        else if (!email.includes("@") || !email.includes(".") || email.includes("@.")){
+            alert("Error: Invalid email address. Please correct the email value.")
+        }
         else {
             const action = "Add"
             const newCustomer = async () => {
@@ -46,14 +49,14 @@ export default function Customers() {
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Customer!\nYou will now be redirected to the Customers Page.")
                     navigate("/Customers")
-                } else {
-                    alert("Failed to add Customer, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will create a new Customer with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newCustomer()    // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to add Customer, please check the input and try again!')
+                    })
             }
         }
     }

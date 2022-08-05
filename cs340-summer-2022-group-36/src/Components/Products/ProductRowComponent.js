@@ -29,14 +29,14 @@ export default function ProductRowComponent(
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the Product!\nThe page will now reload.")
                 window.location.reload(false)
-            } else {
-                alert("Failed to delete Product, please try again!")
             }
         }
         const answer = window.confirm("This will delete the selected Product.\nDo you wish to proceed?")
         if (answer) {
             deleteProduct()
-                .catch(console.error)
+                .catch(error => {
+                    alert('This Product is in use with an Order Detail and cannot be deleted.')
+                })
         }
     }
 

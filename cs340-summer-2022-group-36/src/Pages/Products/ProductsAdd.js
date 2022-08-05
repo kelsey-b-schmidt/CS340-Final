@@ -2,7 +2,7 @@ import React from 'react'
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
-export default function Products() {
+export default function ProductsAdd() {
 
     const navigate = useNavigate()
 
@@ -61,14 +61,14 @@ export default function Products() {
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Product!\nYou will now be redirected to the Products Page.")
                     navigate("/Products")
-                } else {
-                    alert("Failed to add Product, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will create a new Product with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newProduct()    // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to add Product, please check the input and try again!')
+                    })
             }
         }
     }

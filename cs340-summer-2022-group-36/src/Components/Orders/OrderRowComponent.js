@@ -11,7 +11,7 @@ export default function OrderRowComponent(
 
     const onUpdate = () => {
         setOrderToEdit(order)
-        navigate("/OrderUpdate")
+        navigate("/OrdersUpdate")
     }
 
     //const seeOrderDetails = () => {
@@ -69,15 +69,13 @@ export default function OrderRowComponent(
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the Order!\nThe page will now refresh.")
                 window.location.reload(false)
-            } else {
-                alert("Failed to delete Order, please try again!")
             }
         }
         const answer = window.confirm("This will delete the selected Order.\nDo you wish to proceed?")
         if (answer) {
             deleteOrders()
                 .catch(error => {
-                    alert('This Order is in use with an Order Detail. You cannot delete. Please try another Order')
+                    alert('This Order is in use with an Order Detail and cannot be deleted.')
                 })
         }
     }
@@ -88,6 +86,15 @@ export default function OrderRowComponent(
         }
         else {
             return input
+        }
+    }
+
+    const updateAddressButton = (input) => {
+        if (input === null) {
+            return <input type="button" value="Change Address ID" onClick={onUpdate}/>
+        }
+        else {
+            return <input type="button" value="Change Address ID" disabled/>
         }
     }
 
@@ -119,13 +126,9 @@ export default function OrderRowComponent(
             <td>
                 <input type="button" value="See Order Details"/>
             </td>
-            <td>
-                <input type="button" value="Change Address ID"/>
-            </td>
+            <td>{updateAddressButton(order.shipDateTime)}</td>
             <td>{shipButton(order.shipDateTime)}</td>
-            <td>
-                {deleteButton(order.shipDateTime)}
-            </td>
+            <td>{deleteButton(order.shipDateTime)}</td>
         </tr>
     )
 }
