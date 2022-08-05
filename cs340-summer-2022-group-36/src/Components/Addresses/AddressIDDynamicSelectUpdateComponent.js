@@ -1,11 +1,11 @@
 import React from 'react'
 import AddressIDDynamicSelectOptionComponent from "./AddressIDDynamicSelectOptionComponent";
 
-export default function AddressIDDynamicSelectAddComponent(
-    {addresses, addressID, setAddressID}) {
+export default function AddressIDDynamicSelectUpdateComponent(
+    {addressIDUpdate, addresses, setAddressIDUpdate}) {
     return (
-        <select id="addressID" value={addressID} onChange={e => setAddressID(e.target.value)}>
-            <option value="" selected disabled hidden>Select</option>
+        <select id="addressID" value={addressIDUpdate} onChange={e => setAddressIDUpdate(e.target.value)}>
+            <option value={addressIDUpdate} selected disabled hidden>{addressIDUpdate}</option>
             {addresses.map((address, i) =>
                 <AddressIDDynamicSelectOptionComponent
                     address={address}

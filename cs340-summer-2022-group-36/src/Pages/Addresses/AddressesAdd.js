@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomerIDDynamicSelectAddComponent from "../../Components/Customers/CustomerIDDynamicSelectAddComponent";
 import {useEffect} from "react";
 
-export default function Address( {customers, setCustomers} ) {
+export default function AddressesAdd( {customers, setCustomers} ) {
 
     useEffect(() => {       // load customers for selection
         const getCustomers = async() => {
@@ -28,6 +28,7 @@ export default function Address( {customers, setCustomers} ) {
     const [isPrimary, setIsPrimary] = useState(0)
 
     const handleReset = () => {
+        setCustomerID('')
         setRecipient('')
         setStreet('')
         setCity('')
@@ -91,14 +92,14 @@ export default function Address( {customers, setCustomers} ) {
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Address!\nYou will now be redirected to the Addresses Page.")
                     navigate("/Addresses")
-                } else {
-                    alert("Failed to add Address, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will create a new Address with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newAddress()     // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to add Address, please check the input and try again!')
+                    })
             }
         }
     }
@@ -110,6 +111,7 @@ export default function Address( {customers, setCustomers} ) {
                 <br/>
                 <CustomerIDDynamicSelectAddComponent
                     customers={customers}
+                    customerID={customerID}
                     setCustomerID={setCustomerID}
                 />
                 <br/>
@@ -139,8 +141,8 @@ export default function Address( {customers, setCustomers} ) {
             <label>State:</label>
                 <br/>
                 <select id="state"
-                        onChange={e => setState(e.target.value)}>
-                    <option value="none" selected disabled hidden>Select</option>
+                        value={state} onChange={e => setState(e.target.value)}>
+                    <option value="" selected disabled hidden>Select</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>

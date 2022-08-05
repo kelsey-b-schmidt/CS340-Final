@@ -2,7 +2,7 @@ import React from 'react'
 import OrderDetailsRowComponent from "./OrderDetailsRowComponent";
 
 export default function OrderDetailsTableComponent(
-    { orderDetails, setOrderDetailsToEdit }) {
+    { orderDetails, setOrderDetailToEdit }) {
     return (
         <table>
             <thead>
@@ -21,7 +21,7 @@ export default function OrderDetailsTableComponent(
                     <OrderDetailsRowComponent
                     orderDetails={orderDetails}
                         key={i}
-                        setOrderDetailsToEdit={setOrderDetailsToEdit}
+                        setOrderDetailToEdit={setOrderDetailToEdit}
                     />)}
             </tbody>
         </table>

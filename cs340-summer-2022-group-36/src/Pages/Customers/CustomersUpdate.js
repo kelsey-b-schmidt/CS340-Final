@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Customers({ customerToEdit }) {
+export default function CustomersUpdate({ customerToEdit }) {
 
     const navigate = useNavigate()
 
@@ -25,6 +25,12 @@ export default function Customers({ customerToEdit }) {
         if (customerNameUpdate === '' || emailUpdate === '' || phoneNumberUpdate === '') {
             alert("Please enter values!")
         }
+        else if (phoneNumberUpdate.length !== 12 ){
+            alert("Error: Invalid phone number. Please correct the phone number value.")
+        }
+        else if (!emailUpdate.includes("@") || !emailUpdate.includes(".") || emailUpdate.includes("@.")){
+            alert("Error: Invalid email address. Please correct the email value.")
+        }
         else {
             const action = "Update"
             const customerID = customerToEdit.customerID
@@ -45,14 +51,14 @@ export default function Customers({ customerToEdit }) {
                 if (responseJson.request_received === "success") {
                     alert("Successfully updated the Customer!\nYou will now be redirected to the Customers Page.")
                     navigate("/Customers")
-                } else {
-                    alert("Failed to update Customer, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will update this Customer with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newCustomer()
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to update Customer, please check the input and try again!')
+                    })
             }
         }
     }

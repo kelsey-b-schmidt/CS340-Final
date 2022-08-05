@@ -2,8 +2,7 @@ import React from 'react'
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
-export default function Products({productToEdit}) {
-
+export default function ProductsUpdate({productToEdit}) {
 
     const navigate = useNavigate()
 
@@ -64,14 +63,14 @@ export default function Products({productToEdit}) {
                 if (responseJson.request_received === "success") {
                     alert("Successfully updated the Product!\nYou will now be redirected to the Products Page.")
                     navigate("/Products")
-                } else {
-                    alert("Failed to update Product, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will update this Product with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newProduct()    // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to update Product, please check the input and try again!')
+                    })
             }
         }
     }
@@ -114,7 +113,7 @@ export default function Products({productToEdit}) {
                 <br/>
             <label>Weight Unit:</label>
                 <br/>
-                <select id="weightUnit" onChange={e => setWeightUnitUpdate(e.target.value)}>
+                <select id="weightUnit" value={weightUnitUpdate} onChange={e => setWeightUnitUpdate(e.target.value)}>
                     <option value={weightUnitUpdate} selected disabled hidden>{weightUnitUpdate}</option>
                     <option value="lbs">lbs</option>
                     <option value="oz">oz</option>

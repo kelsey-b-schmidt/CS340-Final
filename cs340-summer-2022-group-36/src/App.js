@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState} from "react";
 import HeaderComponent from "./Components/Header-Footer/HeaderComponent";
+import FooterComponent from "./Components/Header-Footer/FooterComponent";
 import Home from "./Pages/Home";
 import Customers from "./Pages/Customers/Customers";
 import Addresses from "./Pages/Addresses/Addresses";
@@ -10,15 +11,16 @@ import Orders from "./Pages/Orders/Orders";
 import Products from "./Pages/Products/Products";
 import ProductsAdd from "./Pages/Products/ProductsAdd";
 import ProductsUpdate from "./Pages/Products/ProductsUpdate";
-import FooterComponent from "./Components/Header-Footer/FooterComponent";
 import AddressesAdd from "./Pages/Addresses/AddressesAdd";
 import AddressesUpdate from "./Pages/Addresses/AddressesUpdate";
 import CustomersAdd from "./Pages/Customers/CustomersAdd";
 import CustomersUpdate from "./Pages/Customers/CustomersUpdate";
 import OrdersAdd from "./Pages/Orders/OrdersAdd";
+import OrdersUpdate from "./Pages/Orders/OrdersUpdate";
 import OrderDetails from "./Pages/OrderDetails/OrderDetails";
 import OrderDetailsAdd from "./Pages/OrderDetails/OrderDetailsAdd";
 import OrderDetailsUpdate from "./Pages/OrderDetails/OrderDetailsUpdate";
+
 
 
 export default function App() {
@@ -27,11 +29,12 @@ export default function App() {
 	const [addressToEdit, setAddressToEdit] = useState("");
 	const [customerToEdit, setCustomerToEdit] = useState("");
 	const [orderToEdit, setOrderToEdit] = useState("");
-	const [orderDetailsToEdit, setOrderDetailsToEdit] = useState("");
+	const [orderDetailToEdit, setOrderDetailToEdit] = useState("");
 	const [products, setProducts] = useState([])
 	const [addresses, setAddresses] = useState([])
 	const [customers, setCustomers] = useState([])
 	const [orders, setOrders] = useState([])
+	const [orderDetails, setOrderDetails] = useState([])
 
 
 
@@ -83,15 +86,24 @@ export default function App() {
 						setAddresses={setAddresses}
 						customers={customers}
 						setCustomers={setCustomers}/>} />
+					<Route path="/OrdersUpdate" element={<OrdersUpdate
+						orderToEdit={orderToEdit}
+						addresses={addresses}
+						setAddresses={setAddresses}/>} />
 
 
 
 					<Route path="/OrderDetails" element={<OrderDetails
-						orderDetailsToEdit={orderDetailsToEdit}
-						setOrderDetailsToEdit={setOrderDetailsToEdit} />} />
-					<Route path="/OrderDetailsAdd" element={<OrderDetailsAdd />} />
+						orderDetails={orderDetails}
+						setOrderDetails={setOrderDetails}
+						setOrderDetailToEdit={setOrderDetailToEdit} />} />
+					<Route path="/OrderDetailsAdd" element={<OrderDetailsAdd
+						orders={orders}
+						setOrders={setOrders}
+						products={products}
+						setProducts={setProducts}/>} />
 					<Route path="/OrderDetailsUpdate" element={<OrderDetailsUpdate
-						orderDetailsToEdit={orderDetailsToEdit} />} />
+						orderDetailToEdit={orderDetailToEdit} />} />
 				</Routes>
 				<FooterComponent />
 			</BrowserRouter>

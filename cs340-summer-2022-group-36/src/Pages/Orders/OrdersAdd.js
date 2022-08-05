@@ -5,7 +5,7 @@ import AddressIDDynamicSelectAddComponent from "../../Components/Addresses/Addre
 import CustomerIDDynamicSelectAddComponent from "../../Components/Customers/CustomerIDDynamicSelectAddComponent";
 import {useEffect} from "react";
 
-export default function Orders({addresses, setAddresses, customers, setCustomers}) {
+export default function OrdersAdd({addresses, setAddresses, customers, setCustomers}) {
 
     const navigate = useNavigate()
 
@@ -49,8 +49,6 @@ export default function Orders({addresses, setAddresses, customers, setCustomers
     }, [customerID])
 
 
-
-
     const handleReset = () => {
         setCustomerID('')
         setAddressID('')
@@ -78,14 +76,14 @@ export default function Orders({addresses, setAddresses, customers, setCustomers
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Order!\nYou will now be redirected to the Orders Page.")
                     navigate("/Orders")
-                } else {
-                    alert("Failed to add Order, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will create a new Order with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newOrder()  // the new data has already loaded into the component
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to add Order, please check the input and try again!')
+                    })
             }
         }
     }
@@ -97,6 +95,7 @@ export default function Orders({addresses, setAddresses, customers, setCustomers
             <br/>
             <CustomerIDDynamicSelectAddComponent
                 customers={customers}
+                customerID={customerID}
                 setCustomerID={setCustomerID}
             />
             <br/>
@@ -104,6 +103,7 @@ export default function Orders({addresses, setAddresses, customers, setCustomers
                 <br/>
                 <AddressIDDynamicSelectAddComponent
                     addresses={addresses}
+                    addressID={addressID}
                     setAddressID={setAddressID}
                 />
             <br />

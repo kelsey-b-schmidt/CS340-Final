@@ -29,15 +29,13 @@ export default function AddressRowComponent(
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the Address!\nThe page will now reload.")
                 window.location.reload(false)
-            } else {
-                alert("Failed to delete Address, please try again!")
             }
         }
         const answer = window.confirm("This will delete the selected Address.\nDo you wish to proceed?")
         if (answer) {
             deleteAddress()
                 .catch(error => {
-                    alert('This Address is in use with an Order and cannot be deleted. Please try another Address')
+                    alert('This Address is in use with an Order and cannot be deleted.')
                 })
         }
     }

@@ -24,8 +24,7 @@ export default function Orders({ orders, setOrders, setOrderToEdit }) {
             <br />
             <OrderBrowseComponent
                 orders={orders}
-                setOrderToEdit={setOrderToEdit}
-            />
+                setOrderToEdit={setOrderToEdit}/>
         </div>
     )
 }

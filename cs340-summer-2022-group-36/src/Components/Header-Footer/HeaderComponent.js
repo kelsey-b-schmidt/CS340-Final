@@ -12,6 +12,7 @@ export default function HeaderComponent () {
                 <li><Link to="/Customers">Customers</Link></li>
                 <li><Link to="/Addresses">Addresses</Link></li>
                 <li><Link to="/Orders">Orders</Link></li>
+                <li><Link to="/OrderDetails">Order Details</Link></li>
                 <li><Link to="/Products">Products</Link></li>
             </ul>
         </div>

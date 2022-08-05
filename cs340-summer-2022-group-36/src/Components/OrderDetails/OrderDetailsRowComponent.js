@@ -1,16 +1,15 @@
 import React from 'react'
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function OrderDetailsRowComponent(
-    { orderDetails, setOrderDetailsToEdit }) {
+    { orderDetails, setOrderDetailToEdit }) {
 
     const navigate = useNavigate()
 
     const odID = orderDetails.odID
 
     const onUpdate = () => {
-        setOrderDetailsToEdit(orderDetails)
+        setOrderDetailToEdit(orderDetails)
         navigate("/OrderDetailsUpdate")
     }
 
@@ -29,15 +28,15 @@ export default function OrderDetailsRowComponent(
             const responseJson = await response.json()
             if (responseJson.request_received === "success") {
                 alert("Successfully deleted the OrderDetail!\nThe page will now refresh.")
-                window.location.reload()
-            } else {
-                alert("Failed to delete OrderDetail, please try again!")
+                window.location.reload(false)
             }
         }
         const answer = window.confirm("This will delete the selected OrderDetail.\nDo you wish to proceed?")
         if (answer) {
             deleteOrderDetails()
-                .catch(console.error)
+                .catch(error => {
+                    alert('Failed to delete Order Detail, please check the input and try again!')
+                })
         }
     }
 
