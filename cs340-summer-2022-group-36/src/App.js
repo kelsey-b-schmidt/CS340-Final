@@ -29,11 +29,12 @@ export default function App() {
 	const [addressToEdit, setAddressToEdit] = useState("");
 	const [customerToEdit, setCustomerToEdit] = useState("");
 	const [orderToEdit, setOrderToEdit] = useState("");
-	const [orderDetailsToEdit, setOrderDetailsToEdit] = useState("");
+	const [orderDetailToEdit, setOrderDetailToEdit] = useState("");
 	const [products, setProducts] = useState([])
 	const [addresses, setAddresses] = useState([])
 	const [customers, setCustomers] = useState([])
 	const [orders, setOrders] = useState([])
+	const [orderDetails, setOrderDetails] = useState([])
 
 
 
@@ -93,11 +94,16 @@ export default function App() {
 
 
 					<Route path="/OrderDetails" element={<OrderDetails
-						orderDetailsToEdit={orderDetailsToEdit}
-						setOrderDetailsToEdit={setOrderDetailsToEdit} />} />
-					<Route path="/OrderDetailsAdd" element={<OrderDetailsAdd />} />
+						orderDetails={orderDetails}
+						setOrderDetails={setOrderDetails}
+						setOrderDetailToEdit={setOrderDetailToEdit} />} />
+					<Route path="/OrderDetailsAdd" element={<OrderDetailsAdd
+						orders={orders}
+						setOrders={setOrders}
+						products={products}
+						setProducts={setProducts}/>} />
 					<Route path="/OrderDetailsUpdate" element={<OrderDetailsUpdate
-						orderDetailsToEdit={orderDetailsToEdit} />} />
+						orderDetailToEdit={orderDetailToEdit} />} />
 				</Routes>
 				<FooterComponent />
 			</BrowserRouter>

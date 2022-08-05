@@ -113,6 +113,7 @@ export default function AddressesUpdate({ addressToEdit }) {
             <label>State:</label>
                 <br/>
                 <select id="state"
+                        value={stateUpdate}
                         onChange={e => setStateUpdate(e.target.value)}>
                     <option value={stateUpdate} selected disabled hidden>{stateUpdate}</option>
                     <option value="AL">Alabama</option>

@@ -1,8 +1,11 @@
 import React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {useEffect} from "react";
+import OrderIDDynamicSelectAddComponent from "../../Components/Orders/OrderIDDynamicSelectAddComponent";
+import ProductIDDynamicSelectAddComponent from "../../Components/Products/ProductIDDynamicSelectAddComponent";
 
-export default function OrderDetails() {
+export default function OrderDetailsAdd({orders, setOrders, products, setProducts}) {
 
     const navigate = useNavigate()
 
@@ -10,6 +13,26 @@ export default function OrderDetails() {
     const [productID, setProductID] = useState('')
     const [productQuantity, setProductQuantity] = useState('')
     const [unitPrice, setUnitPrice] = useState('')
+
+    useEffect(() => {   // load orders for selection
+        const getOrders = async() => {
+            const response = await fetch("/api/Orders")
+            const responseJson = await response.json()
+            setOrders(responseJson)
+        }
+        getOrders()
+            .catch(console.error)
+    }, [])
+
+    useEffect(() => {   // load products for selection
+        const getProducts = async() => {
+            const response = await fetch("/api/Products")
+            const responseJson = await response.json()
+            setProducts(responseJson)
+        }
+        getProducts()
+            .catch(console.error)
+    }, [])
 
 
     const handleReset = () => {
@@ -22,7 +45,15 @@ export default function OrderDetails() {
     const handleSubmit = () => {
         if (orderID === '' || productID === '' || productQuantity === ''
             || unitPrice === '') {
-            alert("Please enter values!")
+            alert("Error: Missing fields. Please enter all values.")
+        }
+        else if (productQuantity < 1 || unitPrice < 0) {
+            alert("Error: Product Quantity cannot be less than 1." +
+                "\nUnit Price cannot be less than 0." +
+                "\nPlease enter new values.")
+        }
+        else if (productQuantity > 10000 || unitPrice > 10000) {
+            alert("Error: Numeric values cannot be more than than 10,000. Please enter new values.")
         }
         else {
             const action = "Add"
@@ -41,16 +72,16 @@ export default function OrderDetails() {
                 })
                 const responseJson = await response.json()
                 if (responseJson.request_received === "success") {
-                    alert("Successfully added the OrderDetail!\nYou will now be redirected to the OrderDetails Page.")
+                    alert("Successfully added the Order Detail!\nYou will now be redirected to the Order Details Page.")
                     navigate("/OrderDetails")
-                } else {
-                    alert("Failed to add OrderDetail, please check the input and try again!")
                 }
             }
-            const answer = window.confirm("This will create a new OrderDetail with the entered values.\nDo you wish to proceed?")
+            const answer = window.confirm("This will create a new Order Detail with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newOrderDetail()
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to add Order Detail, please check the input and try again!')
+                    })
             }
         }
     }
@@ -59,38 +90,44 @@ export default function OrderDetails() {
 
     return (
         <fieldset class="form">
-            <legend><strong>Add Order Details</strong></legend>
+            <legend><strong>Add a new Order Detail</strong></legend>
             <label>Order ID:</label>
-            <input type="text"
-                id="orderID"
-                maxLength="100"
-                value={orderID}
-                onChange={e => setOrderID(e.target.value)} />
+            <br/>
+            <OrderIDDynamicSelectAddComponent
+                orders={orders}
+                orderID={orderID}
+                setOrderID={setOrderID}
+            />
+            <br/>
             <label>Product ID:</label>
-            <input type="text"
-                id="productID"
-                maxLength="1000"
-                value={productID}
-                onChange={e => setProductID(e.target.value)} />
-            <br />
+            <br/>
+            <ProductIDDynamicSelectAddComponent
+                products={products}
+                productID={productID}
+                setProductID={setProductID}
+            />
+            <br/>
             <label>Product Quantity:</label>
             <br/>
             <input type="number"
-                id="productQuantity"
-                min="0"
-                max="10000"
-                value={productQuantity && Math.max(0, productQuantity)}
-                onChange={e => setProductQuantity(e.target.value)} />
+                   id="product quantity"
+                   min="0"
+                   max="10000"
+                   value={productQuantity}
+                   onChange={e => setProductQuantity(e.target.value)}/>
             <br/>
             <label>Unit Price:</label>
-            <br />
+            <br/>
+            <span>$ </span>
             <input type="number"
-                id="unitPrice"
-                min="0"
-                max="10000"
-                value={unitPrice && Math.max(0, unitPrice)}
-                onChange={e => setUnitPrice(e.target.value)} />
-            <br />
+                   id="sellPrice"
+                   title="What the customer pays for the product"
+                   step='0.01'
+                   min="0"
+                   max="10000"
+                   value={unitPrice}
+                   onChange={e => setUnitPrice(e.target.value)}/>
+            <br/>
             <br />
             <button onClick={handleSubmit}>Submit</button>
             <button onClick={handleReset}>Reset</button>

@@ -393,6 +393,8 @@ def orderDetails():
             return {"request_received": "success"}
 
         elif request.json["action"] == "Update":
+            query = request.json
+            print(query)
             new_list = list()
             for item in request.json:
                 if item == "action":
@@ -402,10 +404,11 @@ def orderDetails():
             cur = mysql.connection.cursor()
 
             update_stmt = (
-              "UPDATE OrderDetails SET productID = %s, productQuantity = %s, unitPrice = %s"
-              "WHERE odID = %s"
+              "UPDATE OrderDetails SET productQuantity = %s, unitPrice = %s "
+              "WHERE orderID = %s;"
             )
             data = tuple(new_list)
+            print("data", data)
             cur.execute(update_stmt, data)
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}

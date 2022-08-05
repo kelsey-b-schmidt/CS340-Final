@@ -107,8 +107,8 @@ export default function ProductsAdd() {
                 <br/>
             <label>Weight Unit:</label>
                 <br/>
-                <select id="weightUnit" onChange={e => setWeightUnit(e.target.value)}>
-                    <option value="none" selected disabled hidden>Select</option>
+                <select id="weightUnit" value={weightUnit} onChange={e => setWeightUnit(e.target.value)}>
+                    <option value="" selected disabled hidden>Select</option>
                     <option value="lbs">lbs</option>
                     <option value="oz">oz</option>
                 </select>

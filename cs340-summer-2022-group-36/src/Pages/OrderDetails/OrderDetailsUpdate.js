@@ -2,38 +2,41 @@ import React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function OrderDetails({ orderDetailsToEdit }) {
+export default function OrderDetails({ orderDetailToEdit }) {
 
     const navigate = useNavigate()
 
-    const [orderIDUpdate, setOrderIDUpdate] = useState(orderDetailsToEdit.orderID)
-    const [productIDUpdate, setProductIDUpdate] = useState(orderDetailsToEdit.productID)
-    const [productQuantityUpdate, setProductQuantityUpdate] = useState(orderDetailsToEdit.productQuantity)
-    const [unitPriceUpdate, setUnitPriceUpdate] = useState(orderDetailsToEdit.unitPrice)
+    const orderID = orderDetailToEdit.orderID
+    const [productQuantityUpdate, setProductQuantityUpdate] = useState(orderDetailToEdit.productQuantity)
+    const [unitPriceUpdate, setUnitPriceUpdate] = useState(orderDetailToEdit.unitPrice)
 
 
     const handleReset = () => {
-        setOrderIDUpdate(orderDetailsToEdit.orderID)
-        setProductIDUpdate(orderDetailsToEdit.productID)
-        setProductQuantityUpdate(orderDetailsToEdit.productQuantity)
-        setUnitPriceUpdate(orderDetailsToEdit.unitPrice)
+        setProductQuantityUpdate(orderDetailToEdit.productQuantity)
+        setUnitPriceUpdate(orderDetailToEdit.unitPrice)
     }
 
     const handleSubmit = () => {
-        if (orderIDUpdate === '' || productIDUpdate === '' || productQuantityUpdate === ''
+        if (productQuantityUpdate === ''
             || unitPriceUpdate === '') {
             alert("Please enter values!")
         }
+        else if (productQuantityUpdate < 1 || unitPriceUpdate < 0) {
+            alert("Error: Product Quantity cannot be less than 1." +
+                "\nUnit Price cannot be less than 0." +
+                "\nPlease enter new values.")
+        }
+        else if (productQuantityUpdate > 10000 || unitPriceUpdate > 10000) {
+            alert("Error: Numeric values cannot be more than than 10,000. Please enter new values.")
+        }
         else {
-            const action = "Add"
-            const orderID = orderDetailsToEdit.orderID
+            const action = "Update"
             const newOrderDetail = async () => {
                 const newOrderDetailValues = {
                     action,
-                    orderIDUpdate,
-                    productIDUpdate,
                     productQuantityUpdate,
-                    unitPriceUpdate
+                    unitPriceUpdate,
+                    orderID
                 }
                 const response = await fetch('/api/OrderDetails', {
                     method: 'POST',
@@ -42,16 +45,16 @@ export default function OrderDetails({ orderDetailsToEdit }) {
                 })
                 const responseJson = await response.json()
                 if (responseJson.request_received === "success") {
-                    alert("Successfully added the OrderDetail!\nYou will now be redirected to the OrderDetails Page.")
+                    alert("Successfully updated the OrderDetail!\nYou will now be redirected to the Order Details Page.")
                     navigate("/OrderDetails")
-                } else {
-                    alert("Failed to add OrderDetail, please check the input and try again!")
                 }
             }
-            const answer = window.confirm("This will create a new OrderDetail with the entered values.\nDo you wish to proceed?")
+            const answer = window.confirm("This will update this OrderDetail with the entered values.\nDo you wish to proceed?")
             if (answer) {
                 newOrderDetail()
-                    .catch(console.error)
+                    .catch(error => {
+                        alert('Failed to update Order Detail, please check the input and try again!')
+                    })
             }
         }
     }
@@ -64,31 +67,33 @@ export default function OrderDetails({ orderDetailsToEdit }) {
             <label>Order ID:</label>
             <input type="text"
                 id="orderID"
-                value={orderDetailsToEdit.orderID} disabled />
+                value={orderDetailToEdit.orderID} disabled />
             <label>Product ID:</label>
+            <br/>
             <input type="text"
-                id="productID"
-                maxLength="1000"
-                value={productIDUpdate}
-                onChange={e => setProductIDUpdate(e.target.value)} />
+                   id="productID"
+                   value={orderDetailToEdit.productID} disabled/>
             <br />
             <label>Product Quantity:</label>
-            <br />
+            <br/>
             <input type="number"
-                id="productQuantity"
-                min="0"
-                max="10000"
-                value={productQuantityUpdate && Math.max(0, productQuantityUpdate)}
-                onChange={e => setProductQuantityUpdate(e.target.value)} />
-            <br />
+                   id="product quantity"
+                   min="0"
+                   max="10000"
+                   value={productQuantityUpdate}
+                   onChange={e => setProductQuantityUpdate(e.target.value)}/>
+            <br/>
             <label>Unit Price:</label>
-            <br />
+            <br/>
+            <span>$ </span>
             <input type="number"
-                id="unitPrice"
-                min="0"
-                max="10000"
-                value={unitPriceUpdate && Math.max(0, unitPriceUpdate)}
-                onChange={e => setUnitPriceUpdate(e.target.value)} />
+                   id="sellPrice"
+                   title="What the customer pays for the product"
+                   step='0.01'
+                   min="0"
+                   max="10000"
+                   value={unitPriceUpdate}
+                   onChange={e => setUnitPriceUpdate(e.target.value)}/>
             <br />
             <br />
             <button onClick={handleSubmit}>Submit</button>

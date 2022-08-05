@@ -2,7 +2,7 @@ import React from 'react'
 import OrderDetailsTableComponent from "./OrderDetailsTableComponent";
 import { useEffect, useState } from "react";
 
-export default function OrderDetailsBrowseComponent({ setOrderDetailsToEdit }) {
+export default function OrderDetailsBrowseComponent({ setOrderDetailToEdit }) {
 
     const [orderDetails, setOrderDetails] = useState([])
 
@@ -21,7 +21,7 @@ export default function OrderDetailsBrowseComponent({ setOrderDetailsToEdit }) {
             <legend><strong>Browse OrderDetails</strong></legend>
             <OrderDetailsTableComponent
                 orderDetails={orderDetails}
-                setOrderDetailsToEdit={setOrderDetailsToEdit}
+                setOrderDetailToEdit={setOrderDetailToEdit}
             />
         </fieldset>
     )

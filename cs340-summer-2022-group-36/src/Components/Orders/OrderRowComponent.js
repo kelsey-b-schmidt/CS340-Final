@@ -14,10 +14,6 @@ export default function OrderRowComponent(
         navigate("/OrdersUpdate")
     }
 
-    //const seeOrderDetails = () => {
-//    navigate("/OrderDetails")
-//
-
     const markShipped = () => {
         const markOrderShipped = async () => {
             const action = "Update"
@@ -123,9 +119,6 @@ export default function OrderRowComponent(
             <td>{order.customerID}</td>
             <td>{order.addressID}</td>
             <td>{handleDateTime(order.shipDateTime)}</td>
-            <td>
-                <input type="button" value="See Order Details"/>
-            </td>
             <td>{updateAddressButton(order.shipDateTime)}</td>
             <td>{shipButton(order.shipDateTime)}</td>
             <td>{deleteButton(order.shipDateTime)}</td>

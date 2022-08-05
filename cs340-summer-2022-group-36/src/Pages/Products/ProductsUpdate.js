@@ -113,7 +113,7 @@ export default function ProductsUpdate({productToEdit}) {
                 <br/>
             <label>Weight Unit:</label>
                 <br/>
-                <select id="weightUnit" onChange={e => setWeightUnitUpdate(e.target.value)}>
+                <select id="weightUnit" value={weightUnitUpdate} onChange={e => setWeightUnitUpdate(e.target.value)}>
                     <option value={weightUnitUpdate} selected disabled hidden>{weightUnitUpdate}</option>
                     <option value="lbs">lbs</option>
                     <option value="oz">oz</option>

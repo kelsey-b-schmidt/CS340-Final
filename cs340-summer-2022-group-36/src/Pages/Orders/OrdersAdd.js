@@ -76,8 +76,6 @@ export default function OrdersAdd({addresses, setAddresses, customers, setCustom
                 if (responseJson.request_received === "success") {
                     alert("Successfully added the Order!\nYou will now be redirected to the Orders Page.")
                     navigate("/Orders")
-                } else {
-                    alert("Failed to add Order, please check the input and try again!")
                 }
             }
             const answer = window.confirm("This will create a new Order with the entered values.\nDo you wish to proceed?")
@@ -97,6 +95,7 @@ export default function OrdersAdd({addresses, setAddresses, customers, setCustom
             <br/>
             <CustomerIDDynamicSelectAddComponent
                 customers={customers}
+                customerID={customerID}
                 setCustomerID={setCustomerID}
             />
             <br/>
@@ -104,6 +103,7 @@ export default function OrdersAdd({addresses, setAddresses, customers, setCustom
                 <br/>
                 <AddressIDDynamicSelectAddComponent
                     addresses={addresses}
+                    addressID={addressID}
                     setAddressID={setAddressID}
                 />
             <br />

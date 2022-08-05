@@ -35,7 +35,7 @@ export default function CustomerRowComponent(
         if (answer) {
             deleteCustomer()
                 .catch(error => {
-                    alert('Failed to delete Customer, please check the input and try again! Error:')
+                    alert('Failed to delete Customer, please check the input and try again!')
                 })
         }
     }

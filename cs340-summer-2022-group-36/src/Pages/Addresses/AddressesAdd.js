@@ -28,6 +28,7 @@ export default function AddressesAdd( {customers, setCustomers} ) {
     const [isPrimary, setIsPrimary] = useState(0)
 
     const handleReset = () => {
+        setCustomerID('')
         setRecipient('')
         setStreet('')
         setCity('')
@@ -110,6 +111,7 @@ export default function AddressesAdd( {customers, setCustomers} ) {
                 <br/>
                 <CustomerIDDynamicSelectAddComponent
                     customers={customers}
+                    customerID={customerID}
                     setCustomerID={setCustomerID}
                 />
                 <br/>
@@ -139,8 +141,8 @@ export default function AddressesAdd( {customers, setCustomers} ) {
             <label>State:</label>
                 <br/>
                 <select id="state"
-                        onChange={e => setState(e.target.value)}>
-                    <option value="none" selected disabled hidden>Select</option>
+                        value={state} onChange={e => setState(e.target.value)}>
+                    <option value="" selected disabled hidden>Select</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
