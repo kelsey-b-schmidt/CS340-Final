@@ -1,41 +1,43 @@
 import React from 'react'
 import {useState} from 'react'
 
-export default function ProductSearchComponent (){
+export default function ProductSearchComponent ({setProducts}){
 
     const [query, setQuery] = useState("")
-    const [lastSearch, setLastSearch] = useState("Testing")
 
     const handleSubmit = () => {
-        const searchProducts = async () => {
-            const response = await fetch('/api/Products', {
-                method: 'POST',
-                body: JSON.stringify({"query": query}),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            const responseJson = await response.json()
-            setLastSearch(responseJson.request_received)
-            setQuery("")
+        if (query !== "") {
+            const action = "Searchbar"
+            const newProductSearch = async () => {
+                const searchProductValues = {
+                    action,
+                    query
+                }
+                const response = await fetch('/api/Products', {
+                    method: 'POST',
+                    body: JSON.stringify(searchProductValues),
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                const responseJson = await response.json()
+                setProducts(responseJson)
+            }
+            newProductSearch()  // the new data has already loaded into the component
+                .catch(console.error)
         }
-        searchProducts()
-            .catch(console.error)
+        else {
+            alert("Please enter at least one search term!")
+        }
     }
 
-
     return (
-        <div><h3>Query:</h3>
-            <h3>{query}</h3>
-            <h3>Last search:</h3>
-            <h3>{lastSearch}</h3>
+        <div>
             <input
                 type="text"
                 id="query"
                 placeholder="Search..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                required/>
+            />
             <button onClick={() => setQuery("")}>Reset</button>
             <button onClick={handleSubmit}>Submit</button>
         </div>

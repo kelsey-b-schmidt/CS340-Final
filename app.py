@@ -2,6 +2,7 @@
 # referenced heroku setup code from this tutorial https://www.youtube.com/watch?v=h96KP3JMX7Q
 # referenced 404 error handler from this post https://stackoverflow.com/questions/48060556/flask-serving-a-react-application-cannot-refresh-pages
 # referenced code snippets from previous coursework in CS290 from both authors, Andy Chen and Kelsey Schmidt
+# referenced w3schools for SQL LIKE operators https://www.w3schools.com/sql/sql_like.asp
 
 from flask import Flask, send_from_directory, request
 from flask_cors import CORS, cross_origin
@@ -175,6 +176,49 @@ def products():
             cur.execute(delete_stmt, data)
             mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
             return {"request_received": "success"}
+
+        elif request.json["action"] == "Searchbar":
+            new_list = list()
+            for item in request.json:
+                if item == "action":
+                    pass
+                else:
+                    search_term_list = request.json[item].split()
+                    for i in range(9):
+                        for item in search_term_list:
+                            new_list.append("%"+item+"%")
+            print("new_list", new_list)
+            cur = mysql.connection.cursor()
+
+            search_stmt = (
+                "SELECT * FROM Products WHERE productID LIKE %s"
+            )
+
+            for i in range((len(new_list)//9)-1):
+                search_stmt = search_stmt + " OR productID LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR productName LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR description LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR brand LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR weightVal LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR weightUnit LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR sellPrice LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR replenishCost LIKE %s"
+            for i in range((len(new_list)//9)):
+                search_stmt = search_stmt + " OR numberInStock LIKE %s"
+
+            print("search_stmt",search_stmt)
+            data = tuple(new_list)
+            print("data",data)
+            cur.execute(search_stmt, data)
+            mysql.connection.commit() # this line is absolutely essential, do not delete!!!!
+            return json.dumps(cur.fetchall(), cls=json_encoder)
 
         return {"request_received": "error"}
 

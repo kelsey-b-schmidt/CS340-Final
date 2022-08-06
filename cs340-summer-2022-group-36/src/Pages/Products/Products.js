@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import ProductBrowseComponent from "../../Components/Products/ProductBrowseComponent";
 import {useEffect} from "react";
-//import ProductSearchComponent from "../Components/ProductSearchComponent";
+import ProductSearchComponent from "../../Components/Products/ProductSearchComponent";
 
 export default function Products({products, setProducts, setProductToEdit}) {
 
@@ -16,11 +16,20 @@ export default function Products({products, setProducts, setProductToEdit}) {
             .catch(console.error)
     }, [])
 
+    const reloadTable = () => {
+        window.location.reload(false)
+    }
+
     return (
         <div>
             <h2>Products</h2>
             <Link to="/ProductsAdd"><button>Add a new Product</button></Link>
             <br/>
+            <br/>
+            <button onClick={reloadTable}>Reload all Products</button>
+            <br/>
+            <br/>
+            <ProductSearchComponent setProducts={setProducts}/>
             <br/>
             <ProductBrowseComponent
                 products={products}
@@ -30,4 +39,4 @@ export default function Products({products, setProducts, setProductToEdit}) {
     )
 }
 
-//<ProductSearchComponent/>
+//<ProductSearchComponent setProducts={setProducts}/>
