@@ -100,18 +100,6 @@ def customers():
 
         return {"request_received": "error"}
 
-        # Query to grab Customers ID and name for dropdown selection
-        # cur = mysql.connection.cursor()
-        # cur.execute(dml.selectCustomersKeys)
-        # customerIDs = json.dumps(cur.fetchall())
-
-        # Query for Customers search function
-        # cur = mysql.connection.cursor()
-        # cur.execute(dml.customersSearchFunction)
-        # customerSearch = json.dumps(cur.fetchall())
-
-
-
 # ----------------------------------- Products -------------------------------------
 @app.route("/api/Products", methods = ["GET", "POST"])
 @cross_origin()
@@ -223,11 +211,6 @@ def products():
         return {"request_received": "error"}
 
 
-    # # Query for Products search functionality
-    # cur = mysql.connection.cursor()
-    # cur.execute(dml.productsSearchFunction)
-    # productSearch = json.dumps(cur.fetchall())
-
 # ----------------------------------- Addresses -------------------------------------
 
 @app.route("/api/Addresses", methods = ["GET", "POST"])
@@ -308,16 +291,6 @@ def addresses():
 
         return {"request_received": "error"}
 
-#     # Query to grab all Addresses
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.selectAllAddresses)
-#     results = json.dumps(cur.fetchall())
-    
-#     # Query for Addresses search functionality
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.addressesSearchFunction)
-#     addressSearch = json.dumps(cur.fetchall())
-
 
 # ----------------------------------- Orders -------------------------------------
 @app.route("/api/Orders", methods = ["GET", "POST"])
@@ -383,21 +356,6 @@ def orders():
                 return {"request_received": "success"}
             
         return {"request_received": "error"}
-
-#     # Query to grab all Orders
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.selectAllOrders)
-#     results = json.dumps(cur.fetchall())
-    
-#     # Query for Orders search functionality
-#     cur = mysql.connection.cursor()
-#     cur.execute(dml.ordersSearchFunction)
-#     orderSearch = json.dumps(cur.fetchall())
-
-
-#     # Query for creating order invoices
-
-#     # Query for updating shipdatetime
 
 
 # ----------------------------------- OrderDetails -------------------------------------
@@ -469,15 +427,6 @@ def orderDetails():
              return {"request_received": "success"}
 
         return {"request_received": "error"}
-
-
-
-
-
-
-
-
-
 
 
 

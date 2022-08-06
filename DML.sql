@@ -54,6 +54,15 @@ DELETE FROM Orders WHERE :orderID_selected_from_orders_page;
 -- Allowing deletion of OrderDetails and does not affect Orders or Products entity table 
 DELETE FROM OrderDetails WHERE :orderID_selected_from_OrdersDetails_page;
 
+-- Delete Products
+DELETE FROM Products WHERE :productID_is_selected;
+
+-- Delete Customers
+DELETE FROM Customers WHERE customerID = :customerID_is_selected
+
+-- Delete Addresses
+DELETE FROM Addresses WHERE addressID = :addressID_is_selected
+
 --------------------------------------------------------------- Update from tables -----------------------------------------------------------------------------
 -- update a Products data based on submission of the Update product form 
 UPDATE Products SET sellPrice = :sellPriceInput, replenishCost = :replenishCostInput, numberInStock = :numberInStockInput WHERE productID = :productID_from_update_form
@@ -75,7 +84,7 @@ UPDATE OrderDetails SET productQuantity = :productQuantityInput, unitPrice = :un
 
 -- update command for update shipdate time when button is clicked from null to a set date 
 
-
+UPDATE Orders SET shipDateTime = :dateVariable
 
 ------------------------------------------------------- Query for Inserts for each entity ----------------------------------------------------------------------
 

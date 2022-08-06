@@ -66,7 +66,6 @@ updateOrders = 'UPDATE Orders SET shipDateTime = :shipDateTimeMarkedShipped WHER
 updateOrderDetails = 'UPDATE OrderDetails SET productID = :productIDInput, productQuantity = :productQuantityInput, unitPrice = :unitPriceInput WHERE odID = :odID_from_update_form'
 
 # update command for update shipdate time when button is clicked from null to a set date 
-# Need to implement
 updateShipdateTime = 'UPDATE Orders SET shipDateTime = :dateVariable'
 
 
